@@ -1,0 +1,19 @@
+{
+  "name": "aphelion",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chick3n",
+  "license": "ISC",
+  "dependencies": {
+    "data-store": "^3.1.0",
+    "discord.js": "^13.3.0",
+    "distube": "^2.8.13",
+    "dotenv": "^10.0.0",
+    "mongoose": "^6.0.12",
+    "node-cron": "^3.0.0"
+  }
+}

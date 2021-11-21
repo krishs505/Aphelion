@@ -1,0 +1,68 @@
+{
+  "777982758311034950": {
+    "824157000190656532": {
+      "p1": "252980043511234560",
+      "state": "game",
+      "p2": "457643046268436482",
+      "ba": [
+        "❌",
+        "⭕",
+        ":three:",
+        "⭕",
+        "⭕",
+        ":six:",
+        ":seven:",
+        ":eight:",
+        "❌"
+      ],
+      "turn": "252980043511234560",
+      "sign": "⭕",
+      "sentmsg": {
+        "channelID": "824157000190656532",
+        "deleted": false,
+        "id": "870800573019082752",
+        "type": "DEFAULT",
+        "system": false,
+        "content": "The TicTacToe game between undefined and undefined has begun!\n\n**Current Turn:** ❌ <@457643046268436482>",
+        "authorID": "822456953501646849",
+        "pinned": false,
+        "tts": false,
+        "nonce": null,
+        "embeds": [],
+        "attachments": [],
+        "createdTimestamp": 1627685435300,
+        "editedTimestamp": 1627685481471,
+        "webhookID": null,
+        "applicationID": null,
+        "activity": null,
+        "flags": 0,
+        "reference": null,
+        "guildID": "777982758311034950",
+        "cleanContent": "The TicTacToe game between undefined and undefined has begun!\n\n**Current Turn:** ❌ @​pepperpiper"
+      },
+      "gamemsg": {
+        "channelID": "824157000190656532",
+        "deleted": false,
+        "id": "870800573522395136",
+        "type": "DEFAULT",
+        "system": false,
+        "content": "❌⭕:three:\n⭕⭕:six:\n:seven::eight::nine:",
+        "authorID": "822456953501646849",
+        "pinned": false,
+        "tts": false,
+        "nonce": null,
+        "embeds": [],
+        "attachments": [],
+        "createdTimestamp": 1627685435420,
+        "editedTimestamp": 1627685481384,
+        "webhookID": null,
+        "applicationID": null,
+        "activity": null,
+        "flags": 0,
+        "reference": null,
+        "guildID": "777982758311034950",
+        "cleanContent": "❌⭕:three:\n⭕⭕:six:\n:seven::eight::nine:"
+      }
+    }
+  }
+}
