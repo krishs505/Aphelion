@@ -2,8 +2,8 @@ const { Client, Intents, MessageActionRow, MessageSelectMenu, NewsChannel } = re
 const { bot } = require('../..');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
-const sSchema = require('../../schemas/salad-session');
-const dSchema = require('../../schemas/salad-data');
+//const sSchema = require('../../schemas/salad-session');
+//const dSchema = require('../../schemas/salad-data');
 
 let data_store = require('data-store');
 let database = new data_store({ path: process.cwd() + '/salad_data.json' });

@@ -4,14 +4,14 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 const { TOKEN, MONGO_URI, prefix } = require('./config.json')
 const fs = require('fs')
 const wait = require('util').promisify(setTimeout);
-require('./invisdetection');
+// require('./invisdetection');
 
 let data_store = require('data-store');
 let settings = new data_store({ path: process.cwd() + '/settings.json' });
 
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 // require('dotenv').config();
-const userSchema = require('./schemas/user-schema');
+// const userSchema = require('./schemas/user-schema');
 
 const BotDev = 'Chick3n#0001';
 const BotName = 'Aphelion';
