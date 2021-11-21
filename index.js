@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const { Client, Intents, MessageActionRow, MessageButton } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MEMBERS] });
-const { prefix, token } = require('./config.json')
+const { TOKEN, MONGO_URI, prefix } = require('./config.json')
 const fs = require('fs')
 const wait = require('util').promisify(setTimeout);
 require('./invisdetection');
@@ -10,7 +10,7 @@ let data_store = require('data-store');
 let settings = new data_store({ path: process.cwd() + '/settings.json' });
 
 const mongoose = require('mongoose');
-require('dotenv').config();
+// require('dotenv').config();
 const userSchema = require('./schemas/user-schema');
 
 const BotDev = 'Chick3n#0001';
@@ -19,7 +19,7 @@ const BotSupportLink = 'https://discord.gg/zJWVYmqfgv';
 
 client.on('ready', async () => {
     await mongoose.connect(
-        process.env.MONGO_URI,
+        MONGO_URI,
         {
             keepAlive: true
         }
@@ -510,4 +510,4 @@ client.on('messageCreate', async message => {
     }
 })
 
-client.login(process.env.TOKEN);
+client.login(TOKEN);
