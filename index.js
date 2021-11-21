@@ -18,7 +18,7 @@ const BotName = 'Aphelion';
 const BotSupportLink = 'https://discord.gg/zJWVYmqfgv';
 
 client.on('ready', async () => {
-    await mongoose.connect(
+    /*await mongoose.connect(
         MONGO_URI,
         {
             keepAlive: true
@@ -29,7 +29,7 @@ client.on('ready', async () => {
         } catch (error) {
             console.log(error);
         }
-    })
+    })*/
 
     /*setTimeout(async () => {
         await new testSchema({
