@@ -21,7 +21,7 @@ const mongoose = require('mongoose');
 
 const BotDev = 'Chick3n#0001';
 var BotName = 'Aphelion';
-if (devMode) BotName = 'Aphelion Dev';
+if (!push) BotName = 'Aphelion Dev';
 const BotSupportLink = 'https://discord.gg/zJWVYmqfgv';
 
 client.on('ready', async () => {
