@@ -5,6 +5,10 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 const sSchema = require('../../schemas/salad-session');
 const dSchema = require('../../schemas/salad-data');
 
+const sData = await sSchema.findById("619aa71c205febd1b301f48d");
+const dID = "619ab24439dcc364047a01a9";
+const data = await dSchema.findById(dID);
+
 let data_store = require('data-store');
 let database = new data_store({ path: process.cwd() + '/salad_data.json' });
 
@@ -38,6 +42,52 @@ function adp(loc, value) { // array data push
     database.set(loc, arr);
 }
 
+function cdb(m, bAmt, bT, bM) { // check data beginning
+    var errors = [];
+    if (sData.m !== m) {
+        errors.push('- Mining boolean set incorrectly.');
+    } else if (sData.bAmt !== bAmt) {
+        errors.push('- Amount set incorrectly.');
+    } else if (sData.bT !== bT) {
+        errors.push('- Time set incorrectly.');
+    } else if (sData.bM !== bM) {
+        errors.push('- Month set incorrectly.');
+    }
+
+    if (!errors.length) {
+        return ":thumbsup: All data is valid!";
+    } else {
+        return `:x: ${errors.length-1} error${bot.plural(errors.length-1)} spotted!\n${errors.join('\n')}\n**Please check the database and/or console!**`;
+    }
+}
+
+function cde(m, mph, inc, hrs, dts) { // check data ending
+    var errors = [];
+    if (
+        data.mph.length !== data.inc.length
+        || data.mph.length !== data.hrs.length
+        || data.mph.length !== data.dts.length
+    ) {
+        errors.push('Mismatched data amounts!');
+    } else if (sData.m !== m) {
+        errors.push('- Mining boolean set incorrectly.');
+    } else if (sData.mph !== mph) {
+        errors.push('- MPH data set incorrectly.');
+    } else if (sData.inc !== inc) {
+        errors.push('- Income data set incorrectly.');
+    } else if (sData.hrs !== hrs) {
+        errors.push('- Hours data set incorrectly.');
+    } else if (sData.dts !== dts) {
+        errors.push('- Dates data set incorrectly.');
+    }
+
+    if (!errors.length) {
+        return ":thumbsup: All data is set correctly!";
+    } else {
+        return `:x: ${errors.length-1} error${bot.plural(errors.length-1)} spotted!\n${errors.join('\n')}\n**Please check the database and/or console!**`;
+    }
+}
+
 module.exports = {
     name: 'salad',
     description: 'Add Salad earning data to the database.',
@@ -47,18 +97,9 @@ module.exports = {
         (async () => {
             if (!bot.isChick3n(message.author.id)) return
 
-            const sData = await sSchema.findById("619aa71c205febd1b301f48d");
-            const dID = "619ab24439dcc364047a01a9";
-            const data = await dSchema.findById(dID);
-
             if (args[0] === 'stats') {
                 
             } else if (args[0] === 'dls') {
-                var times = 1;
-
-                if (args[1]) times = parseInt(args[1]);
-
-                for (var i = 0; i < times; i++) {}
                 data.mph.pop();
                 data.inc.pop();
                 data.hrs.pop();
@@ -67,9 +108,6 @@ module.exports = {
                 await dSchema.findByIdAndUpdate(dID, { $set: { inc: data.inc }, }); 
                 await dSchema.findByIdAndUpdate(dID, { $set: { hrs: data.hrs }, });
                 await dSchema.findByIdAndUpdate(dID, { $set: { dts: data.dts }, });
-
-                console.log(data.mph.length);
-                console.log(data.mph[data.mph.length-1]);
 
                 await message.channel.send('Successfully deleted the last mining session!');
             } else if (args[0] === 'cancel') {
@@ -104,7 +142,7 @@ module.exports = {
                     await dSchema.findByIdAndUpdate(dID, { $push: { dts: `${sData.bM} ${t[0]}` }, });
 
                     var moosage = await message.channel.send('<a:loading_forever:822539925786329149> Checking data..');
-                    await moosage.edit('[insert check function]');
+                    await moosage.edit(cde(false, parseFloat((inc / diff).toFixed(2)), parseFloat(inc.toFixed(2)), parseFloat(diff.toFixed(2)), `${sData.bM} ${t[0]}`));
 
                     await message.channel.send(`You have ended the mining session with **$${args[0]}**!\nHere are the stats:\n\n**Income:** $${inc.toFixed(2)}\n**Time Mined:** ${diff.toFixed(2)} hours\n\n**Money/hr:** ${(inc / diff).toFixed(2)}`);
                 }
