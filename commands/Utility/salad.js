@@ -54,10 +54,13 @@ module.exports = {
             if (args[0] === 'stats') {
                 
             } else if (args[0] === 'dls') {
-                await dSchema.findByIdAndUpdate(dID, { $pull: { mph: data.mph[data.mph.length-1] }, });
+                /*await dSchema.findByIdAndUpdate(dID, { $pull: { mph: data.mph[data.mph.length-1] }, });
                 await dSchema.findByIdAndUpdate(dID, { $pull: { inc: data.inc[data.inc.length-1] }, });
                 await dSchema.findByIdAndUpdate(dID, { $pull: { hrs: data.hrs[data.hrs.length-1] }, });
-                await dSchema.findByIdAndUpdate(dID, { $pull: { dts: data.dts[data.dts.length-1] }, });
+                await dSchema.findByIdAndUpdate(dID, { $pull: { dts: data.dts[data.dts.length-1] }, });*/
+
+                console.log(data.mph.length);
+                console.log(data.mph[data.mph.length-1]);
 
                 await message.channel.send('Successfully deleted the last mining session!');
             } else if (args[0] === 'cancel') {
