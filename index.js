@@ -9,16 +9,15 @@ const wait = require('util').promisify(setTimeout);
 let data_store = require('data-store');
 let settings = new data_store({ path: process.cwd() + '/settings.json' });
 
-// const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 // require('dotenv').config();
-// const userSchema = require('./schemas/user-schema');
 
 const BotDev = 'Chick3n#0001';
 const BotName = 'Aphelion';
 const BotSupportLink = 'https://discord.gg/zJWVYmqfgv';
 
 client.on('ready', async () => {
-    /*await mongoose.connect(
+    await mongoose.connect(
         MONGO_URI,
         {
             keepAlive: true
@@ -29,13 +28,7 @@ client.on('ready', async () => {
         } catch (error) {
             console.log(error);
         }
-    })*/
-
-    /*setTimeout(async () => {
-        await new testSchema({
-            message: 'hello world',
-        }).save()
-    }, 1000);*/
+    })
 
     console.log(BotName + ` is online!`);
     client.user.setPresence({ activities: [{ type: 'WATCHING', name: "Chick3n's brain fry!" }], status: 'online' });
