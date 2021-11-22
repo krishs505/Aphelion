@@ -1,7 +1,14 @@
+var devMode = true;
+
 const Discord = require('discord.js');
 const { Client, Intents, MessageActionRow, MessageButton } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MEMBERS] });
-const { TOKEN, MONGO_URI, prefix } = require('./config.json')
+
+const { MONGO_URI, prefix } = require('./config.json');
+const config = require('./config.json');
+var token = config.token;
+if (!devMode) token = config.dtoken;
+
 const fs = require('fs')
 const wait = require('util').promisify(setTimeout);
 // require('./invisdetection');
@@ -503,4 +510,4 @@ client.on('messageCreate', async message => {
     }
 })
 
-client.login(TOKEN);
+client.login(token);
