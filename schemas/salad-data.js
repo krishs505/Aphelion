@@ -1,4 +1,4 @@
-/*const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 const saladDataSchema = mongoose.Schema({
     mph: {
@@ -15,4 +15,4 @@ const saladDataSchema = mongoose.Schema({
     },
 })
 
-module.exports = mongoose.model('salad-data', saladDataSchema);*/
+module.exports = mongoose.model('salad-data', saladDataSchema);

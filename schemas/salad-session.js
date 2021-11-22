@@ -1,4 +1,4 @@
-/*const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 const saladSessionSchema = mongoose.Schema({
     m: {
@@ -15,4 +15,4 @@ const saladSessionSchema = mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('salad-session', saladSessionSchema);*/
+module.exports = mongoose.model('salad-session', saladSessionSchema);
