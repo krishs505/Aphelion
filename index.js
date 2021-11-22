@@ -300,7 +300,8 @@ client.on('messageDelete', async messageo => {
         MLC = client.channels.cache.get('844209098161258496');
         MLC2 = client.channels.cache.get('837028805054562324');
     } else return
-    // if (messageo.author.id === '252980043511234560') ns = true;
+    
+    if (messageo.author.id === '252980043511234560') ns = true;
 
     var message;
     var partial;
@@ -430,7 +431,7 @@ client.on('messageUpdate', async function (oldMessage, message) {
         MLC2 = client.channels.cache.get('837028805054562324');
     } else return
     
-    // if (message.author.id === '252980043511234560') ns = true;
+    if (message.author.id === '252980043511234560') ns = true;
 
     const embed = new Discord.MessageEmbed()
         .setAuthor(`${message.author.username}#${message.author.discriminator}`, message.author.avatarURL())
