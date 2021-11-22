@@ -53,9 +53,16 @@ module.exports = {
 
             if (args[0] === 'stats') {
                 
+            } else if (args[0] === 'dls') {
+                await dSchema.findByIdAndUpdate(dID, { $pull: { mph: data.mph[data.mph.length-1] }, });
+                await dSchema.findByIdAndUpdate(dID, { $pull: { inc: data.inc[data.inc.length-1] }, });
+                await dSchema.findByIdAndUpdate(dID, { $pull: { hrs: data.hrs[data.hrs.length-1] }, });
+                await dSchema.findByIdAndUpdate(dID, { $pull: { dts: data.dts[data.dts.length-1] }, });
+
+                await message.channel.send('Successfully deleted the last mining session!');
             } else if (args[0] === 'cancel') {
                 await sSchema.updateOne({ m: sData.m }, { m: false });
-                message.channel.send('Successfully cancelled the current mining session!')
+                await message.channel.send('Successfully cancelled the current mining session!');
             } else {
                 var d = new Date();
                 var dA = [d.getDate(), d.getHours(), d.getMinutes()];
@@ -69,16 +76,10 @@ module.exports = {
                     await sSchema.updateOne({ bT: sData.bT }, { bT: dA });
                     await sSchema.updateOne({ bM: sData.bM }, { bM: d.getMonth() + 1 });
 
-                    /*database.set('mining', true);
-                    database.set('session.bAmount', parseFloat(args[0]));
-                    database.set('session.bTime', dA);
-                    database.set('session.bMonth', d.getMonth() + 1)*/
-
                     await message.channel.send(`You have begun mining with **$${args[0]}** at ${d.getHours()}:${d.getMinutes()} on ${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}!`);
                 } else {
                     if (!args[0]) return message.channel.send('You must include an ending amount!');
 
-                    // database.set('mining', false);
                     await sSchema.updateOne({ m: sData.m }, { m: false });
 
                     var diff = timeDiff(sData.bT, dA);
@@ -89,12 +90,6 @@ module.exports = {
                     await dSchema.findByIdAndUpdate(dID, { $push: { inc: parseFloat(inc.toFixed(2)) }, });
                     await dSchema.findByIdAndUpdate(dID, { $push: { hrs: parseFloat(diff.toFixed(2)) }, });
                     await dSchema.findByIdAndUpdate(dID, { $push: { dts: `${sData.bM} ${t[0]}` }, });
-
-                    /*adp('mph', parseFloat((inc / diff).toFixed(2)));
-                    adp('inc', parseFloat(inc.toFixed(2)));
-                    adp('hrs', parseFloat(diff.toFixed(2)));
-                    var t = database.get('session.bTime');
-                    adp('dts', `${database.get('session.bMonth')} ${t[0]}`);*/
 
                     await message.channel.send(`You have ended the mining session with **$${args[0]}**!\nHere are the stats:\n\n**Income:** $${inc.toFixed(2)}\n**Time Mined:** ${diff.toFixed(2)} hours\n\n**Money/hr:** ${(inc / diff).toFixed(2)}`);
                 }

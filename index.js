@@ -7,7 +7,7 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 const { MONGO_URI, prefix } = require('./config.json');
 const config = require('./config.json');
 var token = config.token;
-if (!devMode) token = config.dtoken;
+if (devMode) token = config.dtoken;
 
 const fs = require('fs')
 const wait = require('util').promisify(setTimeout);
@@ -20,7 +20,8 @@ const mongoose = require('mongoose');
 // require('dotenv').config();
 
 const BotDev = 'Chick3n#0001';
-const BotName = 'Aphelion';
+var BotName = 'Aphelion';
+if (devMode) BotName = 'Aphelion Dev';
 const BotSupportLink = 'https://discord.gg/zJWVYmqfgv';
 
 client.on('ready', async () => {
