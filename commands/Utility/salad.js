@@ -54,8 +54,10 @@ module.exports = {
             if (args[0] === 'stats') {
                 
             } else if (args[0] === 'dls') {
-                /*await dSchema.findByIdAndUpdate(dID, { $pull: { mph: data.mph[data.mph.length-1] }, });
-                await dSchema.findByIdAndUpdate(dID, { $pull: { inc: data.inc[data.inc.length-1] }, });
+                var mph = data.mph;
+                mph.pop();
+                await dSchema.findByIdAndUpdate(dID, { $set: { mph: mph }, });
+                /*await dSchema.findByIdAndUpdate(dID, { $pull: { inc: data.inc[data.inc.length-1] }, });
                 await dSchema.findByIdAndUpdate(dID, { $pull: { hrs: data.hrs[data.hrs.length-1] }, });
                 await dSchema.findByIdAndUpdate(dID, { $pull: { dts: data.dts[data.dts.length-1] }, });*/
 
