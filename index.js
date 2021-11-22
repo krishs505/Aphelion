@@ -1,4 +1,4 @@
-var devMode = true;
+var push = true;
 
 const Discord = require('discord.js');
 const { Client, Intents, MessageActionRow, MessageButton } = require('discord.js');
@@ -6,8 +6,8 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 
 const { MONGO_URI, prefix } = require('./config.json');
 const config = require('./config.json');
-var token = config.token;
-if (devMode) token = config.dtoken;
+var token = config.dtoken;
+if (push) token = config.token;
 
 const fs = require('fs')
 const wait = require('util').promisify(setTimeout);
