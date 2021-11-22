@@ -54,14 +54,19 @@ module.exports = {
             if (args[0] === 'stats') {
                 
             } else if (args[0] === 'dls') {
-                //data.mph.pop();
-                //data.inc.pop();
+                var times = 1;
+
+                if (args[1]) times = parseInt(args[1]);
+
+                for (var i = 0; i < times; i++) {}
+                data.mph.pop();
+                data.inc.pop();
                 data.hrs.pop();
-                //data.dts.pop();
-                //wait dSchema.findByIdAndUpdate(dID, { $set: { mph: data.mph }, });
-                //await dSchema.findByIdAndUpdate(dID, { $set: { inc: data.inc }, }); 
+                data.dts.pop();
+                await dSchema.findByIdAndUpdate(dID, { $set: { mph: data.mph }, });
+                await dSchema.findByIdAndUpdate(dID, { $set: { inc: data.inc }, }); 
                 await dSchema.findByIdAndUpdate(dID, { $set: { hrs: data.hrs }, });
-                //await dSchema.findByIdAndUpdate(dID, { $set: { dts: data.dts }, });
+                await dSchema.findByIdAndUpdate(dID, { $set: { dts: data.dts }, });
 
                 console.log(data.mph.length);
                 console.log(data.mph[data.mph.length-1]);
@@ -97,6 +102,9 @@ module.exports = {
                     await dSchema.findByIdAndUpdate(dID, { $push: { inc: parseFloat(inc.toFixed(2)) }, });
                     await dSchema.findByIdAndUpdate(dID, { $push: { hrs: parseFloat(diff.toFixed(2)) }, });
                     await dSchema.findByIdAndUpdate(dID, { $push: { dts: `${sData.bM} ${t[0]}` }, });
+
+                    var moosage = await message.channel.send('<a:loading_forever:822539925786329149> Checking data..');
+                    await moosage.edit('[insert check function]');
 
                     await message.channel.send(`You have ended the mining session with **$${args[0]}**!\nHere are the stats:\n\n**Income:** $${inc.toFixed(2)}\n**Time Mined:** ${diff.toFixed(2)} hours\n\n**Money/hr:** ${(inc / diff).toFixed(2)}`);
                 }
