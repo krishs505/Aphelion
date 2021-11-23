@@ -5,9 +5,9 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 const sSchema = require('../../schemas/salad-session');
 const dSchema = require('../../schemas/salad-data');
 
-const sData = await sSchema.findById("619aa71c205febd1b301f48d");
+const sData = sSchema.findById("619aa71c205febd1b301f48d");
 const dID = "619ab24439dcc364047a01a9";
-const data = await dSchema.findById(dID);
+const data = dSchema.findById(dID);
 
 let data_store = require('data-store');
 let database = new data_store({ path: process.cwd() + '/salad_data.json' });
