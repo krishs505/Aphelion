@@ -5,9 +5,9 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 const sSchema = require('../../schemas/salad-session');
 const dSchema = require('../../schemas/salad-data');
 
-const sData = sSchema.findById("619aa71c205febd1b301f48d");
+/*const sData = sSchema.findById("619aa71c205febd1b301f48d");
 const dID = "619ab24439dcc364047a01a9";
-const data = dSchema.findById(dID);
+const data = dSchema.findById(dID);*/
 
 let data_store = require('data-store');
 let database = new data_store({ path: process.cwd() + '/salad_data.json' });
@@ -97,6 +97,10 @@ module.exports = {
         (async () => {
             if (!bot.isChick3n(message.author.id)) return
 
+            const sData = sSchema.findById("619aa71c205febd1b301f48d");
+            const dID = "619ab24439dcc364047a01a9";
+            const data = dSchema.findById(dID);
+
             if (args[0] === 'stats') {
                 
             } else if (args[0] === 'dls') {
@@ -141,8 +145,8 @@ module.exports = {
                     await dSchema.findByIdAndUpdate(dID, { $push: { hrs: parseFloat(diff.toFixed(2)) }, });
                     await dSchema.findByIdAndUpdate(dID, { $push: { dts: `${sData.bM} ${t[0]}` }, });
 
-                    var moosage = await message.channel.send('<a:loading_forever:822539925786329149> Checking data..');
-                    await moosage.edit(cde(false, parseFloat((inc / diff).toFixed(2)), parseFloat(inc.toFixed(2)), parseFloat(diff.toFixed(2)), `${sData.bM} ${t[0]}`));
+                    // var moosage = await message.channel.send('<a:loading_forever:822539925786329149> Checking data..');
+                    // await moosage.edit(cde(false, parseFloat((inc / diff).toFixed(2)), parseFloat(inc.toFixed(2)), parseFloat(diff.toFixed(2)), `${sData.bM} ${t[0]}`));
 
                     await message.channel.send(`You have ended the mining session with **$${args[0]}**!\nHere are the stats:\n\n**Income:** $${inc.toFixed(2)}\n**Time Mined:** ${diff.toFixed(2)} hours\n\n**Money/hr:** ${(inc / diff).toFixed(2)}`);
                 }
