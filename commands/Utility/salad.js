@@ -45,15 +45,10 @@ async function cdb(m, bAmt, bT, bM) { // check data beginning
     let data = await dSchema.findById(dID);
     var errors = [];
 
-    if (sData.m !== m) {
-        errors.push('- Mining boolean set incorrectly.');
-    } else if (sData.bAmt !== bAmt) {
-        errors.push('- Amount set incorrectly.');
-    } else if (sData.bT !== bT) {
-        errors.push('- Time set incorrectly.');
-    } else if (sData.bM !== bM) {
-        errors.push('- Month set incorrectly.');
-    }
+    if (sData.m !== m) errors.push('- Mining boolean set incorrectly.');
+    if (sData.bAmt !== bAmt) errors.push('- Amount set incorrectly.');
+    if (sData.bT !== bT) errors.push('- Time set incorrectly.');
+    if (sData.bM !== bM) errors.push('- Month set incorrectly.');
 
     if (!errors.length) {
         return ":thumbsup: All data is valid!";
@@ -67,23 +62,12 @@ async function cde(m, mph, inc, hrs, dts) { // check data ending
     let data = await dSchema.findById(dID);
     var errors = [];
 
-    if (
-        data.mph.length !== data.inc.length
-        || data.mph.length !== data.hrs.length
-        || data.mph.length !== data.dts.length
-    ) {
-        errors.push('Mismatched data amounts!');
-    } else if (sData.m !== m) {
-        errors.push('- Mining boolean set incorrectly.');
-    } else if (data.mph !== mph) {
-        errors.push('- MPH data set incorrectly.');
-    } else if (data.inc !== inc) {
-        errors.push('- Income data set incorrectly.');
-    } else if (data.hrs !== hrs) {
-        errors.push('- Hours data set incorrectly.');
-    } else if (data.dts !== dts) {
-        errors.push('- Dates data set incorrectly.');
-    }
+    if (data.mph.length !== data.inc.length || data.mph.length !== data.hrs.length || data.mph.length !== data.dts.length) errors.push('Mismatched data amounts!');
+    if (sData.m !== m) errors.push('- Mining boolean set incorrectly.');
+    if (data.mph !== mph) errors.push('- MPH data set incorrectly.');
+    if (data.inc !== inc) errors.push('- Income data set incorrectly.');
+    if (data.hrs !== hrs) errors.push('- Hours data set incorrectly.');
+    if (data.dts !== dts) errors.push('- Dates data set incorrectly.');
 
     if (!errors.length) {
         return ":thumbsup: All data is set correctly!";
