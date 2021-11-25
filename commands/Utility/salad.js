@@ -117,6 +117,10 @@ module.exports = {
                     await sSchema.updateOne({ bT: sData.bT }, { bT: dA });
                     await sSchema.updateOne({ bM: sData.bM }, { bM: d.getMonth() + 1 });
 
+                    var moosage = await message.channel.send('<a:loading_forever:822539925786329149> Checking data..');
+                    var q = await cdb(true, parseFloat(args[0]), dA, d.getMonth() + 1);
+                    await moosage.edit(q);
+
                     await message.channel.send(`You have begun mining with **$${args[0]}** at ${d.getHours()}:${d.getMinutes()} on ${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}!`);
                 } else {
                     if (!args[0]) return message.channel.send('You must include an ending amount!');
@@ -133,12 +137,10 @@ module.exports = {
                     await dSchema.findByIdAndUpdate(dID, { $push: { dts: `${sData.bM} ${t[0]}` }, });
 
                     var moosage = await message.channel.send('<a:loading_forever:822539925786329149> Checking data..');
-                    //setTimeout(async () =>{
-                        var q = await cde(false, parseFloat((inc / diff).toFixed(2)), parseFloat(inc.toFixed(2)), parseFloat(diff.toFixed(2)), `${sData.bM} ${t[0]}`);
-                        await moosage.edit(q);
-                    //}, 5000);
+                    var q = await cde(false, parseFloat((inc / diff).toFixed(2)), parseFloat(inc.toFixed(2)), parseFloat(diff.toFixed(2)), `${sData.bM} ${t[0]}`);
+                    await moosage.edit(q);
 
-                    await message.channel.send(`You have ended the mining session with **$${args[0]}**!\nHere are the stats:\n\n**Income:** $${inc.toFixed(2)}\n**Time Mined:** ${diff.toFixed(2)} hours\n\n**Money/hr:** ${(inc / diff).toFixed(2)}`);
+                    if (q.startsWith(':t')) await message.channel.send(`You have ended the mining session with **$${args[0]}**!\nHere are the stats:\n\n**Income:** $${inc.toFixed(2)}\n**Time Mined:** ${diff.toFixed(2)} hours\n\n**Money/hr:** ${(inc / diff).toFixed(2)}`);
                 }
             }
         })();
