@@ -63,15 +63,6 @@ async function cde(m, mph, inc, hrs, dts) { // check data ending
     let data = await dSchema.findById(dID);
     var errors = [];
 
-    console.log(data.mph)
-    console.log(data.inc)
-    console.log(data.hrs)
-    console.log(data.dts)
-    console.log(mph)
-    console.log(inc)
-    console.log(hrs)
-    console.log(dts)
-
     if (data.mph.length !== data.inc.length || data.mph.length !== data.hrs.length || data.mph.length !== data.dts.length) errors.push('Mismatched data amounts!');
     if (sData.m !== m) errors.push('- Mining boolean set incorrectly.');
     if (data.mph[data.mph.length-1] !== mph) errors.push('- MPH data set incorrectly.');
@@ -142,10 +133,10 @@ module.exports = {
                     await dSchema.findByIdAndUpdate(dID, { $push: { dts: `${sData.bM} ${t[0]}` }, });
 
                     var moosage = await message.channel.send('<a:loading_forever:822539925786329149> Checking data..');
-                    setTimeout(async () =>{
+                    //setTimeout(async () =>{
                         var q = await cde(false, parseFloat((inc / diff).toFixed(2)), parseFloat(inc.toFixed(2)), parseFloat(diff.toFixed(2)), `${sData.bM} ${t[0]}`);
                         await moosage.edit(q);
-                    }, 5000);
+                    //}, 5000);
 
                     await message.channel.send(`You have ended the mining session with **$${args[0]}**!\nHere are the stats:\n\n**Income:** $${inc.toFixed(2)}\n**Time Mined:** ${diff.toFixed(2)} hours\n\n**Money/hr:** ${(inc / diff).toFixed(2)}`);
                 }
