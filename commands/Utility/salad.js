@@ -133,7 +133,7 @@ module.exports = {
                     await dSchema.findByIdAndUpdate(dID, { $push: { dts: `${sData.bM} ${t[0]}` }, });
 
                     var moosage = await message.channel.send('<a:loading_forever:822539925786329149> Checking data..');
-                    wait(1000);
+                    wait(5000);
                     var q = await cde(false, parseFloat((inc / diff).toFixed(2)), parseFloat(inc.toFixed(2)), parseFloat(diff.toFixed(2)), `${sData.bM} ${t[0]}`);
                     await moosage.edit(q);
 
