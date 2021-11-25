@@ -101,6 +101,8 @@ module.exports = {
                 await dSchema.findByIdAndUpdate(dID, { $set: { hrs: data.hrs }, });
                 await dSchema.findByIdAndUpdate(dID, { $set: { dts: data.dts }, });
 
+                
+
                 await message.channel.send('Successfully deleted the last mining session!');
             } else if (args[0] === 'cancel') {
                 await sSchema.updateOne({ m: sData.m }, { m: false });
