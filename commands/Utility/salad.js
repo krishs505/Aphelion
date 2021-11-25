@@ -46,11 +46,6 @@ async function cdb(m, bAmt, bT, bM) { // check data beginning
     let data = await dSchema.findById(dID);
     var errors = [];
 
-    console.log(sData.m)
-    console.log(bAmt)
-    console.log(bT)
-    console.log(bM)
-
     if (sData.m !== m) errors.push('- Mining boolean set incorrectly.');
     if (sData.bAmt !== bAmt) errors.push('- Amount set incorrectly.');
     if (sData.bT !== bT) errors.push('- Time set incorrectly.');
@@ -67,6 +62,15 @@ async function cde(m, mph, inc, hrs, dts) { // check data ending
     let sData = await sSchema.findById("619aa71c205febd1b301f48d");
     let data = await dSchema.findById(dID);
     var errors = [];
+
+    console.log(data.mph)
+    console.log(data.inc)
+    console.log(data.hrs)
+    console.log(data.dts)
+    console.log(mph)
+    console.log(inc)
+    console.log(hrs)
+    console.log(dts)
 
     if (data.mph.length !== data.inc.length || data.mph.length !== data.hrs.length || data.mph.length !== data.dts.length) errors.push('Mismatched data amounts!');
     if (sData.m !== m) errors.push('- Mining boolean set incorrectly.');
