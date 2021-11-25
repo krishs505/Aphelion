@@ -4,6 +4,7 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 
 const sSchema = require('../../schemas/salad-session');
 const dSchema = require('../../schemas/salad-data');
+const wait = require('util').promisify(setTimeout);
 
 const dID = "619ab24439dcc364047a01a9";
 
@@ -132,6 +133,7 @@ module.exports = {
                     await dSchema.findByIdAndUpdate(dID, { $push: { dts: `${sData.bM} ${t[0]}` }, });
 
                     var moosage = await message.channel.send('<a:loading_forever:822539925786329149> Checking data..');
+                    wait(1000);
                     var q = await cde(false, parseFloat((inc / diff).toFixed(2)), parseFloat(inc.toFixed(2)), parseFloat(diff.toFixed(2)), `${sData.bM} ${t[0]}`);
                     await moosage.edit(q);
 
