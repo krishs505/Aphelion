@@ -46,6 +46,11 @@ async function cdb(m, bAmt, bT, bM) { // check data beginning
     let data = await dSchema.findById(dID);
     var errors = [];
 
+    console.log(sData.m)
+    console.log(bAmt)
+    console.log(bT)
+    console.log(bM)
+
     if (sData.m !== m) errors.push('- Mining boolean set incorrectly.');
     if (sData.bAmt !== bAmt) errors.push('- Amount set incorrectly.');
     if (sData.bT !== bT) errors.push('- Time set incorrectly.');
