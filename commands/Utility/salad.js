@@ -74,10 +74,10 @@ async function cde(m, mph, inc, hrs, dts) { // check data ending
 
     if (data.mph.length !== data.inc.length || data.mph.length !== data.hrs.length || data.mph.length !== data.dts.length) errors.push('Mismatched data amounts!');
     if (sData.m !== m) errors.push('- Mining boolean set incorrectly.');
-    if (data.mph !== mph) errors.push('- MPH data set incorrectly.');
-    if (data.inc !== inc) errors.push('- Income data set incorrectly.');
-    if (data.hrs !== hrs) errors.push('- Hours data set incorrectly.');
-    if (data.dts !== dts) errors.push('- Dates data set incorrectly.');
+    if (data.mph[data.mph.length-1] !== mph) errors.push('- MPH data set incorrectly.');
+    if (data.inc[data.inc.length-1] !== inc) errors.push('- Income data set incorrectly.');
+    if (data.hrs[data.hrs.length-1] !== hrs) errors.push('- Hours data set incorrectly.');
+    if (data.dts[data.dts.length-1] !== dts) errors.push('- Dates data set incorrectly.');
 
     if (!errors.length) {
         return ":thumbsup: All data is set correctly!";
