@@ -12,7 +12,10 @@ const saladSessionSchema = mongoose.Schema({
     },
     bM: {
         type: Number
-    }
+    },
+    wfd: {
+        type: Boolean
+    },
 })
 
 module.exports = mongoose.model('salad-session', saladSessionSchema);

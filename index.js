@@ -154,28 +154,28 @@ client.on('interactionCreate', async interaction => {
 
     function row(d1, d2, d3, d4) {
         return new MessageActionRow()
-        .addComponents(
-            new MessageButton()
-                .setCustomId('leftMHelp')
-                .setLabel('⏮️')
-                .setStyle('PRIMARY')
-                .setDisabled(d1),
-            new MessageButton()
-                .setCustomId('leftHelp')
-                .setLabel('⬅️')
-                .setStyle('PRIMARY')
-                .setDisabled(d2),
-            new MessageButton()
-                .setCustomId('rightHelp')
-                .setLabel('➡️')
-                .setStyle('PRIMARY')
-                .setDisabled(d3),
-            new MessageButton()
-                .setCustomId('rightMHelp')
-                .setLabel('⏭️')
-                .setStyle('PRIMARY')
-                .setDisabled(d4)
-        )
+            .addComponents(
+                new MessageButton()
+                    .setCustomId('leftMHelp')
+                    .setLabel('⏮️')
+                    .setStyle('PRIMARY')
+                    .setDisabled(d1),
+                new MessageButton()
+                    .setCustomId('leftHelp')
+                    .setLabel('⬅️')
+                    .setStyle('PRIMARY')
+                    .setDisabled(d2),
+                new MessageButton()
+                    .setCustomId('rightHelp')
+                    .setLabel('➡️')
+                    .setStyle('PRIMARY')
+                    .setDisabled(d3),
+                new MessageButton()
+                    .setCustomId('rightMHelp')
+                    .setLabel('⏭️')
+                    .setStyle('PRIMARY')
+                    .setDisabled(d4)
+            )
     }
 
     if (interaction.isSelectMenu() && interaction.customId === 'selectHelp') {
@@ -202,42 +202,86 @@ client.on('interactionCreate', async interaction => {
 
     } else if (interaction.isButton()) {
 
-        fs.readdirSync(`./commands/${interaction.message.embeds[0].title.split(' ')[0]}`).filter(file => file.endsWith('.js')).forEach(cf => {
-            var n = cf.replace('.js', '');
-            var cmd = commands.get(n) || commands.find(c => c.aliases && c.aliases.includes(n));
-            if (cmd.oc) return
-            categoryCommands.push(cmd);
-        });
+        var id = interaction.customId;
+        var ids = ['13', '15', '16', '17', '18', '22', '23', '24']
 
-        var lcn; // LAST COMMAND'S NUMBER
-        var e;
+        if (id === '13' || id === '15' || id === '16' || id === '17' || id === '18' || id === '22' || id === '23' || id === '24') {
 
-        if (interaction.customId === 'rightHelp') {
-            lcn = parseInt(interaction.message.embeds[0].footer.text.split('/')[0]);
-        } else if (interaction.customId === 'leftHelp') {
-            lcn = parseInt(interaction.message.embeds[0].footer.text.split('/')[0]) - 2;
-        } else if (interaction.customId === 'leftMHelp') {
-            lcn = 0;
-        } else if (interaction.customId === 'rightMHelp') {
-            lcn = categoryCommands.length - 1;
-        } else return;
+            let settings = new data_store({ path: process.cwd() + '/settings.json' });
 
-        var command = categoryCommands[lcn];
+            var arr = settings.get('users');
+            var votes = settings.get('votes');
+            var pvi;
+            var num = settings.get(id);
+            /*if (arr.includes(interaction.user.id)) {
+                pvi = arr.indexOf(interaction.user.id);
+                votes[pvi] = id;
 
-        e = new Discord.MessageEmbed()
-            .setTitle(`${interaction.message.embeds[0].title.split(' ')[0]} - ${command.name}`)
-            .setColor('#009dff')
-            .setFooter(`${lcn + 1}/${categoryCommands.length}`);
+                var pnum = parseInt(settings.get(votes[pvi]));
+                pnum--;
+                num++;
+                await settings.set(id, num);
+                await settings.set(, pnum);
+                await settings.set('votes', votes);
 
-        if (command.description) e.addField('Description', command.description)
-        if (command.usage) e.addField('Usage', `\`${prefix}${command.name} ${command.usage}\``)
-        if (command.aliases) e.addField('Aliases', command.aliases.join(', '))
+                return
+            }*/
+            
+            if (arr.includes(interaction.user.id)) return
 
-        var bts = row(false, false, false, false);
-        if (lcn + 1 === categoryCommands.length) bts = row(false, false, true, true);
-        if (lcn === 0) bts = row(true, true, false, false);
+            // console.log(id);
+            arr.push(interaction.user.id);
+            settings.set('users', arr);
 
-        await interaction.update({ embeds: [e], components: [bts] });
+            votes.push(id);
+            settings.set('votes', votes);
+
+            num++;
+            // console.log(num);
+            await settings.set(id, num);
+
+        }
+
+        if (id === 'rightHelp' || id === 'leftHelp' || id === 'leftMHelp' || id === 'rightMHelp') {
+
+            fs.readdirSync(`./commands/${interaction.message.embeds[0].title.split(' ')[0]}`).filter(file => file.endsWith('.js')).forEach(cf => {
+                var n = cf.replace('.js', '');
+                var cmd = commands.get(n) || commands.find(c => c.aliases && c.aliases.includes(n));
+                if (cmd.oc) return
+                categoryCommands.push(cmd);
+            });
+
+            var lcn; // LAST COMMAND'S NUMBER
+            var e;
+
+            if (interaction.customId === 'rightHelp') {
+                lcn = parseInt(interaction.message.embeds[0].footer.text.split('/')[0]);
+            } else if (interaction.customId === 'leftHelp') {
+                lcn = parseInt(interaction.message.embeds[0].footer.text.split('/')[0]) - 2;
+            } else if (interaction.customId === 'leftMHelp') {
+                lcn = 0;
+            } else if (interaction.customId === 'rightMHelp') {
+                lcn = categoryCommands.length - 1;
+            } else return;
+
+            var command = categoryCommands[lcn];
+
+            e = new Discord.MessageEmbed()
+                .setTitle(`${interaction.message.embeds[0].title.split(' ')[0]} - ${command.name}`)
+                .setColor('#009dff')
+                .setFooter(`${lcn + 1}/${categoryCommands.length}`);
+
+            if (command.description) e.addField('Description', command.description)
+            if (command.usage) e.addField('Usage', `\`${prefix}${command.name} ${command.usage}\``)
+            if (command.aliases) e.addField('Aliases', command.aliases.join(', '))
+
+            var bts = row(false, false, false, false);
+            if (lcn + 1 === categoryCommands.length) bts = row(false, false, true, true);
+            if (lcn === 0) bts = row(true, true, false, false);
+
+            await interaction.update({ embeds: [e], components: [bts] });
+
+        }
     }
 })
 
@@ -300,7 +344,7 @@ client.on('messageDelete', async messageo => {
         MLC = client.channels.cache.get('844209098161258496');
         MLC2 = client.channels.cache.get('837028805054562324');
     } else return
-    
+
     if (messageo.author.id === '252980043511234560') ns = true;
 
     var message;
@@ -359,7 +403,7 @@ client.on('messageDelete', async messageo => {
         var fts = attachment.name.split('.');
         // do something with the attachment
         var sf = ['PNG', 'JPG', 'JPEG', 'WEBP', 'GIF', 'MP3', 'MP4']
-        aturl += `\n[Attachment (${fts[fts.length - 1].toUpperCase().trim()} File, ${parseInt(attachment.size)/1000000} MB)](${attachment.url})`;
+        aturl += `\n[Attachment (${fts[fts.length - 1].toUpperCase().trim()} File, ${parseInt(attachment.size) / 1000000} MB)](${attachment.url})`;
         if (sf.indexOf(fts[fts.length - 1].toUpperCase().trim()) > -1) {
             aa.push(attachment.url);
         }
@@ -399,21 +443,21 @@ client.on('messageDelete', async messageo => {
         MLC.send({
             embeds: [embed],
             files: aa
-        }).catch(a => {});
+        }).catch(a => { });
         if (ns === false) {
             MLC2.send({
                 embeds: [embed],
                 files: aa
-            }).catch(a => {});
+            }).catch(a => { });
         }
     } else {
         MLC.send({
             embeds: [embed]
-        }).catch((a) => {});
+        }).catch((a) => { });
         if (ns === false) {
             MLC2.send({
                 embeds: [embed]
-            }).catch((a) => {});
+            }).catch((a) => { });
         }
     }
 });
@@ -430,7 +474,7 @@ client.on('messageUpdate', async function (oldMessage, message) {
         MLC = client.channels.cache.get('844209098161258496');
         MLC2 = client.channels.cache.get('837028805054562324');
     } else return
-    
+
     if (message.author.id === '252980043511234560') ns = true;
 
     const embed = new Discord.MessageEmbed()
@@ -450,8 +494,8 @@ client.on('messageUpdate', async function (oldMessage, message) {
         })
         .setTimestamp(new Date().toISOString()).setFooter(`Message ID: ${message.id}`);
 
-    MLC.send({ embeds: [embed] }).catch(a => {});
-    if (ns === false) MLC2.send({ embeds: [embed] }).catch(a => {});
+    MLC.send({ embeds: [embed] }).catch(a => { });
+    if (ns === false) MLC2.send({ embeds: [embed] }).catch(a => { });
 });
 
 client.commands = new Discord.Collection()
@@ -500,7 +544,7 @@ client.on('messageCreate', async message => {
     }
 
     timestamps.set(message.author.id, now);
-    setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+    (() => timestamps.delete(message.author.id), cooldownAmount);
 
     if (command.oc && !bot.isChick3n(message.author.id)) return
 
