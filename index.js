@@ -1,13 +1,14 @@
-var push = true;
-
 const Discord = require('discord.js');
 const { Client, Intents, MessageActionRow, MessageButton } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MEMBERS] });
 
-const { MONGO_URI, prefix } = require('./config.json');
+var devMode = false;
+
+const { MONGO_URI } = require('./config.json');
 const config = require('./config.json');
-var token = config.dtoken;
-if (push) token = config.token;
+var token = config.token;
+var prefix = config.prefix;
+if (devMode) { token = config.token; prefix = config.dprefix }
 
 const fs = require('fs')
 const wait = require('util').promisify(setTimeout);
@@ -21,7 +22,7 @@ const mongoose = require('mongoose');
 
 const BotDev = 'Chick3n#0001';
 var BotName = 'Aphelion';
-if (!push) BotName = 'Aphelion Dev';
+if (devMode) BotName = 'Aphelion Dev';
 const BotSupportLink = 'https://discord.gg/zJWVYmqfgv';
 
 client.on('ready', async () => {
