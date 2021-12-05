@@ -131,7 +131,7 @@ module.exports = {
 };
 
 client.on('messageCreate', async message => {
-    // if ((message.channel.id === '587717563446722633' || message.channel.id === '837028805054562324') && message.embeds[0].footer.text.includes('252980043511234560')) message.delete();
+    if (message.channel.id === '916919202105946142' && message.embeds[0].footer.text.includes('252980043511234560')) message.delete();
 
     /*
     if (message.channel.id == '') {
@@ -348,6 +348,7 @@ client.on('messageDelete', async messageo => {
     } else return
 
     if (messageo.author.id === '252980043511234560') ns = true;
+    if (messageo.channel.id === '751565931746033745' || messageo.channel.id === '806331336616706063') ns = true;
 
     var message;
     var partial;
@@ -478,6 +479,7 @@ client.on('messageUpdate', async function (oldMessage, message) {
     } else return
 
     if (message.author.id === '252980043511234560') ns = true;
+    if (message.channel.id === '751565931746033745' || message.channel.id === '806331336616706063') ns = true;
 
     const embed = new Discord.MessageEmbed()
         .setAuthor(`${message.author.username}#${message.author.discriminator}`, message.author.avatarURL())
