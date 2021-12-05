@@ -131,9 +131,10 @@ module.exports = {
 };
 
 client.on('messageCreate', async message => {
+    console.log(message.content)
     if (message.embeds.length !== 0) {
         if (message.channel.id === '916919202105946142' && message.embeds[0].footer.text.includes('252980043511234560')) message.delete();
-        console.log(message.embeds[0].footer.text);
+        // console.log(message.embeds[0].footer.text);
         if (message.channel.id === '916919202105946142' && (message.embeds[0].description.includes('751565931746033745')) || message.embeds[0].description.includes('751565931746033745')) message.delete();
         
     }
