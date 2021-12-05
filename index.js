@@ -2,13 +2,14 @@ const Discord = require('discord.js');
 const { Client, Intents, MessageActionRow, MessageButton } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MEMBERS] });
 
+// PUSHING CODE? MAKE SURE THIS IS FALSE!!
 var devMode = false;
 
 const { MONGO_URI } = require('./config.json');
 const config = require('./config.json');
 var token = config.token;
 var prefix = config.prefix;
-if (devMode) { token = config.token; prefix = config.dprefix }
+if (devMode) { token = config.dtoken; prefix = config.dprefix }
 
 const fs = require('fs')
 const wait = require('util').promisify(setTimeout);
@@ -343,7 +344,7 @@ client.on('messageDelete', async messageo => {
 
     if (messageo.guild.id == '447561485674348544') {
         MLC = client.channels.cache.get('844209098161258496');
-        MLC2 = client.channels.cache.get('837028805054562324');
+        MLC2 = client.channels.cache.get('916920967937286164');
     } else return
 
     if (messageo.author.id === '252980043511234560') ns = true;
@@ -473,7 +474,7 @@ client.on('messageUpdate', async function (oldMessage, message) {
 
     if (message.guild.id == '447561485674348544') {
         MLC = client.channels.cache.get('844209098161258496');
-        MLC2 = client.channels.cache.get('837028805054562324');
+        MLC2 = client.channels.cache.get('916920967937286164');
     } else return
 
     if (message.author.id === '252980043511234560') ns = true;
