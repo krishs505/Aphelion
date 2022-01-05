@@ -1,7 +1,5 @@
 const { CommandInteraction } = require("discord.js");
-const { bot } = require("../../index")
-
-// function throot ()
+const { bot } = require("../../index");
 
 module.exports = {
     name: 'root',
@@ -10,6 +8,8 @@ module.exports = {
     cooldown: 0,
     execute(message, args) {
         (async () => {
+            if (!args[0] || !args[1]) return message.channel.send('Please include the necessary values! See `+help root` for more info.');
+
             if (parseInt(args[1]) > 25000000 && !bot.isChick3n(message.author.id)) {
                 return message.channel.send('Sorry, but numbers above 25,000,000 are not permitted to be calculated as they slow down Aphelion for longer periods of time!')
             }
