@@ -13,8 +13,8 @@ module.exports = {
 
             let processing;
 
-            if (!Number.isInteger(args[0])) {
-                message.channel.send('Please include an integer!');
+            if (!Number.isInteger(parseInt(args[0]))) {
+                return message.channel.send('Please include an integer!');
             } else {
                 processing = await message.channel.send('<a:loading_forever:822539925786329149> Processing...')
             }

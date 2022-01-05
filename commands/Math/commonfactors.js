@@ -21,52 +21,38 @@ module.exports = {
             var factors1 = '';
             // var factors2 = '';
             var cf = '';
-            var done1 = false;
-            var done2 = false;
 
             for (let i = 1; i <= num1; i++) {
                 if (num1 % i == 0) {
                     factors1 = factors1 + ',' + i + ',';
                 }
-                if (i == num1) {
-                    done1 = true;
-                }
             }
 
-            if (done1) {
-                for (let i = 1; i <= num2; i++) {
-                    if (num2 % i == 0) {
-                        // factors2 = factors2 + ',' + i;
-                        if (factors1.includes(',' + i + ',')) {
-                            if (cf === '') {
-                                cf = i;
-                            } else {
-                                cf = cf + ', ' + i;
-                            }
+            for (let i = 1; i <= num2; i++) {
+                if (num2 % i == 0) {
+                    // factors2 = factors2 + ',' + i;
+                    if (factors1.includes(',' + i + ',')) {
+                        if (cf === '') {
+                            cf = i;
+                        } else {
+                            cf = cf + ', ' + i;
                         }
                     }
-                    if (i == num2) {
-                        done2 = true;
-                    }
                 }
             }
 
-            if (done2) {
-                if (cf === '' || cf === '1') {
-                    var sent = await message.channel.send('No common factors found between the two numbers!')
-                } else {
-                    var sent = await message.channel.send(`Common Factors between **${args[0]}** and **${args[1]}**:\n${cf}`)
-                }
-                processing.delete();
+            if (cf === '' || cf === '1') {
+                var sent = await message.channel.send('No common factors found between the two numbers!')
+            } else {
+                var sent = await message.channel.send(`Common Factors between **${args[0]}** and **${args[1]}**:\n${cf}`)
+            }
+            processing.delete();
 
-                const latency = sent.createdTimestamp - message.createdTimestamp;
-                if (latency > 1000) {
-                    message.channel.send('Time Taken: **' + latency / 1000 + ' seconds**');
-                } else {
-                    message.channel.send('Time Taken: **' + latency + 'ms**');
-                }
-
-                done = false;
+            const latency = sent.createdTimestamp - message.createdTimestamp;
+            if (latency > 1000) {
+                message.channel.send('Time Taken: **' + latency / 1000 + ' seconds**');
+            } else {
+                message.channel.send('Time Taken: **' + latency + 'ms**');
             }
         })();
     }

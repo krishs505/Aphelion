@@ -71,9 +71,6 @@ var bot = {
         }
         return result.join('');
     },
-    generateId: function () {
-        return this.makeId(15);
-    },
     plural: function (num) {
         if (parseInt(num) == 1) {
             return '';
@@ -120,6 +117,34 @@ var bot = {
         var avurl = avurl1.join('.').trim();
         return `${avurl}.${fot}`;
     },
+    findFactors: function (n) {
+        var int = parseInt(n);
+        var f = [];
+        for (let i = 1; i <= int; i++) {
+            if (int % i === 0) f.push(i);
+        }
+        return f;
+    },
+    organizeFactors: function (arr) {
+        var Um = Math.floor(arr.length / 2); // upper median OR center if odd set
+        var Lm; // lower median OR center if odd set
+        var f = [[], []];
+
+        if (arr.length % 2) { // testing for odd set ( remainder = true, 0 = false )
+            Lm = Um;
+        } else {
+            Lm = Um - 1;
+        }
+
+        for (var i = 0; i <= Lm; i++) {
+            f[0].push(arr[i]);
+        }
+        for (var i = arr.length - 1; i >= Um; i--) {
+            f[1].push(arr[i]);
+        }
+
+        return f;
+    }
 }
 module.exports = {
     bot: bot,

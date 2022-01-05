@@ -12,8 +12,6 @@ module.exports = {
     oc: true,
     execute(message, args) {
         (async () => {
-            await message.delete();
-
             var row1 = new MessageActionRow()
                 .addComponents(
                     new MessageButton()
@@ -50,7 +48,7 @@ module.exports = {
                 );
 
             
-            await message.channel.send({ content: "**They are all in EST (UTC-5). Please convert them to your timezone.**", components: [row1] });
+            // await message.channel.send({ content: "**They are all in EST (UTC-5). Please convert them to your timezone.**", components: [row1] });
         })();
     }
 }

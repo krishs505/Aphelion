@@ -1,4 +1,7 @@
+const { CommandInteraction } = require("discord.js");
 const { bot } = require("../../index")
+
+// function throot ()
 
 module.exports = {
     name: 'root',
@@ -15,75 +18,76 @@ module.exports = {
     
             if (!Number.isInteger(parseInt(args[0])) || parseInt(args[0]) < 2) {
                 return message.channel.send('`' + args[0] + '` is not a valid root! Please enter 2 or higher.');
-            } else if (isNaN(args[1])) {
+            } else if (isNaN(parseInt(args[1]))) {
                 return message.channel.send('`' + args[1] + '` is not a valid number!');
             } else {
                 processing = await message.channel.send('<a:loading_forever:822539925786329149> Processing...')
             }
     
-            var num = args[1];
-            var result = '';
-            var roottype = '';
-            var done = false;
-    
-            for (let i = 1; i <= num; i += 1) {
-                if (Math.pow(i, args[0]) == num) {
-                    if (result == '') {
-                        result = i;
-                        done = true;
-                        break;
+            var rad = parseInt(args[1]); // radicand - the number under the root
+            var index = parseInt(args[0]); // nth root
+            var result;
+            var roottype;
+
+            result = Math.pow(rad, 1 / index);
+            
+            if (index === 2) {
+                roottype = 'square';
+            } else if (index === 3) {
+                roottype = 'cube';
+            } else {
+                roottype = index + 'th';
+            }
+
+            if (!Number.isInteger(result)) {
+
+                var factors = bot.findFactors(rad);
+                var out;
+                var inside;
+
+                // console.log(factors);
+                // console.log(bot.organizeFactors(bot.findFactors(rad)));
+
+                for (var i = 0; i < factors.length - 1; i++) {
+                    if (Number.isInteger(Math.pow(factors[i], 1 / index))) {
+                        out = factors[i];
+                        // console.log(factors[i]);
                     }
                 }
-            }
-    
-            switch (args[0]) {
-                case '2':
-                    roottype = 'square';
-                    break;
-                case '3':
-                    roottype = 'cube';
-                    break;
-                case '4':
-                    roottype = 'fourth';
-                    break;
-                case '5':
-                    roottype = 'fifth';
-                    break;
-                case '6':
-                    roottype = 'sixth';
-                    break;
-                case '7':
-                    roottype = 'seventh';
-                    break;
-                case '8':
-                    roottype = 'eighth';
-                    break;
-                case '9':
-                    roottype = 'ninth';
-                    break;
-                case '10':
-                    roottype = 'tenth';
-                    break;
-            }
-    
-            if (done) {
-                if (result == '') {
-                    message.channel.send('There is no ' + roottype + ' root of ' + num + '!');
+
+                if (out !== 1) { // there is at least one perfect Nth root
+                    var oF = bot.organizeFactors(factors);
+
+                    var ind = oF[0].indexOf(out);
+                    if (ind !== -1) { // number is in the left
+                        inside = oF[1][ind];
+                    } else {
+                        inside = oF[0][oF[1].indexOf(out)];
+                    }
+
+                    out = Math.pow(out, 1 / index);
+
+                    result.toString();
+                    result = `${out}√${inside}** or **${result}...`;
                 } else {
-                    message.channel.send('The ' + roottype + ' root of ' + num + ' is **' + result + '**');
+                    result += "...";
                 }
-    
-                processing.delete();
-    
-                const latency = sent.createdTimestamp - message.createdTimestamp;
-                if (latency > 1000) {
-                    message.channel.send('Time Taken: **' + latency / 1000 + ' seconds**');
-                } else {
-                    message.channel.send('Time Taken: **' + latency + 'ms**');
-                }
-    
-                done = false;
             }
+
+            message.channel.send(`The ${roottype} root of ${rad} is **${result}**`);
+    
+            processing.delete();
+    
+            /*
+            const latency = processing.createdTimestamp - message.createdTimestamp;
+            if (latency > 1000) {
+                message.channel.send('Time Taken: **' + latency / 1000 + ' seconds**');
+            } else {
+                message.channel.send('Time Taken: **' + latency + 'ms**');
+            }
+            */
+            
+            // console.log('------')
         })();
     }
 }

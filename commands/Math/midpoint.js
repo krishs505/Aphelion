@@ -17,10 +17,10 @@ module.exports = {
             return message.channel.send(':x: `' + args[3] + '` is not a number!');
         }
 
-        var x1 = parseInt(args[0])
-        var y1 = parseInt(args[1])
-        var x2 = parseInt(args[2])
-        var y2 = parseInt(args[3])
+        var x1 = parseInt(args[0]);
+        var y1 = parseInt(args[1]);
+        var x2 = parseInt(args[2]);
+        var y2 = parseInt(args[3]);
 
         message.channel.send(`Result: **(${(x1 + x2) / 2}, ${(y1 + y2) / 2})**`)
     }

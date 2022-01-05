@@ -14,6 +14,7 @@ module.exports = {
     aliases: ['qe', 'factor'],
     usage: '<equation>',
     cooldown: 0,
+    oc: true,
     execute(message, args) {
         (async () => {
             // if (parseInt(args[0]) > 25000000 && !bot.isChick3n(message.author.id)) return message.channel.send('Sorry, but numbers above 25,000,000 are not permitted to be calculated as they slow down Aphelion for longer periods of time!')

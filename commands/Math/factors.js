@@ -13,33 +13,22 @@ module.exports = {
             if (Number.isInteger(args[0])) return message.channel.send(args[0] + ' is not an integer!')
 
             const processing = await message.channel.send('<a:loading_forever:822539925786329149> Processing...')
-            var num = args[0];
-            var factors = '';
-            var done = false;
+            var num = parseInt(args[0]);
+            var factors = [];
 
             for (let i = 1; i <= num; i++) {
-                if (num % i === 0) {
-                    if (factors === '') {
-                        factors = i;
-                    } else {
-                        factors = factors + ', ' + i;
-                    }
-                }
-
-                // if (i === num) done = true;
+                if (num % i === 0) factors.push(i);
             }
 
-            // if (done) {
-                const sent = await message.channel.send(`Factors of **${args[0]}**:\n${factors}`)
-                processing.delete();
+            const sent = await message.channel.send(`Factors of **${args[0]}**:\n${factors.join(", ")}`)
+            processing.delete();
 
-                const latency = sent.createdTimestamp - message.createdTimestamp;
-                if (latency > 1000) {
-                    message.channel.send('Time Taken: **' + latency / 1000 + ' seconds**');
-                } else {
-                    message.channel.send('Time Taken: **' + latency + 'ms**');
-                }
-            // }
+            const latency = sent.createdTimestamp - message.createdTimestamp;
+            if (latency > 1000) {
+                message.channel.send('Time Taken: **' + latency / 1000 + ' seconds**');
+            } else {
+                message.channel.send('Time Taken: **' + latency + 'ms**');
+            }
         })();
     }
 }
