@@ -12,7 +12,7 @@ module.exports = {
     description: 'UHH',
     usage: ' ',
     cooldown: 0,
-    oc: true,
+    od: true,
     execute(message, args) {
         try {
             const code = args.join(" ");

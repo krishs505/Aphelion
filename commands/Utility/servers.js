@@ -8,7 +8,7 @@ module.exports = {
     usage: '[user mention]',
     cooldown: 0,
     execute(message) {
-        if (!bot.isChick3n(message.author.id)) return
+        if (!bot.isKihei(message.author.id)) return
 
         var servers = `**Aphelion is in **\`` + client.guilds.cache.size + `\`** servers!**`;
 

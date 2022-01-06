@@ -1,5 +1,4 @@
-const { BotDev, BotName, BotSupportLink, client } = require("../../index")
-const Discord = require('discord.js')
+const { BotDev, BotName, DJSVersion, BotSupportLink, client } = require("../../index")
 
 module.exports = {
     name: 'botinfo',
@@ -8,6 +7,9 @@ module.exports = {
     usage: ' ',
     cooldown: 0,
     execute(message) {
-        message.channel.send('__**' + BotName + '**__\n\n**Developer:** ' + BotDev + '\n**Date of Creation:** March 19, 2021\n**Number of Servers:** ' + client.guilds.cache.size + '\n**Hosted on:** Chick3n\'s PC (for now!)\n**Programmed with:** Discord.js\n**Support Server:** ' + BotSupportLink);
+        (async () => {
+            var fetched = await message.client.users.fetch(BotDev);
+            await message.channel.send(`__**${BotName}**__\n\n**Developer:** ${fetched.username}#${fetched.discriminator} (<@${BotDev}>)\n**Date of Creation:** March 19, 2021\n**Number of Servers:** ${client.guilds.cache.size}\n**Host:** Heroku\n**Discord.js Version:** ${DJSVersion}`);
+        })();
     }
 }

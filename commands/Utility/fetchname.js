@@ -8,7 +8,7 @@ module.exports = {
     aliases: ['name', 'findname'],
     cooldown: 2,
     description: 'Fetch a guild member using their name.',
-    oc: true,
+    od: true,
     execute(message, args) {
         (async () => {
             if (!args[0]) return message.channel.send('Please provide a name!');

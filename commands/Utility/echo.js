@@ -6,7 +6,7 @@ module.exports = {
     aliases: ['e'],
     usage: ' ',
     cooldown: 0,
-    oc: true,
+    od: true,
     execute(message, args) {
         message.channel.send(args.join(" "));
         message.delete();

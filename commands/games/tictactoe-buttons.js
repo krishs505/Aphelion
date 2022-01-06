@@ -82,7 +82,7 @@ module.exports = {
     aliases: ['qwer'],
     usage: '[user mention/ID]',
     cooldown: 0,
-    oc: true,
+    od: true,
     execute(message, args) {
         (async () => {
             var g = message.guild.id;

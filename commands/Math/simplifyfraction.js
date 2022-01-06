@@ -16,7 +16,7 @@ module.exports = {
                 type = 2;
             }
 
-            // if ((parseInt(args[0]) > 25000000 || parseInt(args[1]) > 25000000) && !bot.isChick3n(message.author.id)) return message.channel.send('Sorry, but numbers above 25,000,000 are not permitted to be calculated as they slow down Aphelion for longer periods of time!')
+            // if ((parseInt(args[0]) > 25000000 || parseInt(args[1]) > 25000000) && !bot.isKihei(message.author.id)) return message.channel.send('Sorry, but numbers above 25,000,000 are not permitted to be calculated as they slow down Aphelion for longer periods of time!')
             if (type === 1 && (!args[0] || !args[1])) return message.channel.send('That is not a valid fraction!');
             if (type === 2 && (!args[0] || !args[1] || !args[2])) return message.channel.send('That is not a valid fraction!');
             if (Number.isInteger(args[0])) return message.channel.send(args[0] + ' is not an integer!')

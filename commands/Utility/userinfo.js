@@ -9,8 +9,6 @@ module.exports = {
     description: 'Get info about any user or guild member using their ID / mention.',
     execute(message, args) {
         (async () => {
-            if (!bot.isChick3n(message.author.id)) return
-            
             let member;
             if (!args[0]) {
                 member = message.guild.members.cache.get(message.author.id);

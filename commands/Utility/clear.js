@@ -7,7 +7,7 @@ module.exports = {
     aliases: ['c'],
     cooldown: 0,
     description: 'Clear a specified number of messages with this command.',
-    oc: true,
+    od: true,
     execute(message, args) {
         (async () => {
             if (!args[0]) return message.channel.send('Please provide a number of messages you would like to clear!');

@@ -14,10 +14,10 @@ module.exports = {
     aliases: ['qe', 'factor'],
     usage: '<equation>',
     cooldown: 0,
-    oc: true,
+    od: true,
     execute(message, args) {
         (async () => {
-            // if (parseInt(args[0]) > 25000000 && !bot.isChick3n(message.author.id)) return message.channel.send('Sorry, but numbers above 25,000,000 are not permitted to be calculated as they slow down Aphelion for longer periods of time!')
+            // if (parseInt(args[0]) > 25000000 && !bot.isKihei(message.author.id)) return message.channel.send('Sorry, but numbers above 25,000,000 are not permitted to be calculated as they slow down Aphelion for longer periods of time!')
             if (!args[0]) return message.channel.send('Please include an equation!');
             // if (Number.isInteger(args[0])) return message.channel.send(args[0] + ' is not an integer!')
 

@@ -12,7 +12,7 @@ module.exports = {
     usage: ' ',
     // aliases: ['av', 'pfp', 'icon'],
     cooldown: 2,
-    oc: true,
+    od: true,
     execute(message, args) {
         (async () => {
             // if (message.channel.id !== '806331336616706063' && message.channel.id !== '824157000190656532') return

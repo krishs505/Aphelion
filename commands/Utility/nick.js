@@ -5,7 +5,7 @@ module.exports = {
     description: 'Set a nickname of another user.',
     usage: ' ',
     cooldown: 0,
-    oc: true,
+    od: true,
     execute(message, args) {
         const member = message.guild.members.cache.get(message.mentions.users.first().id)
         args.shift()

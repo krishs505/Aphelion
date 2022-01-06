@@ -10,7 +10,7 @@ module.exports = {
         (async () => {
             if (!args[0] || !args[1]) return message.channel.send('Please include the necessary values! See `+help root` for more info.');
 
-            if (parseInt(args[1]) > 25000000 && !bot.isChick3n(message.author.id)) {
+            if (parseInt(args[1]) > 25000000 && !bot.isKihei(message.author.id)) {
                 return message.channel.send('Sorry, but numbers above 25,000,000 are not permitted to be calculated as they slow down Aphelion for longer periods of time!')
             }
     

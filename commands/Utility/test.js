@@ -9,9 +9,10 @@ module.exports = {
     usage: ' ',
     // aliases: ['av', 'pfp', 'icon'],
     cooldown: 0,
-    oc: true,
+    od: true,
     execute(message, args) {
         (async () => {
+
             var row1 = new MessageActionRow()
                 .addComponents(
                     new MessageButton()

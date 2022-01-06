@@ -7,12 +7,11 @@ module.exports = {
     description: 'Turns on the status log!',
     aliases: ['statuslogs'],
     cooldown: 0,
-    oc: true,
+    od: true,
     execute(message) {
         (async () => {
-            if (!bot.isChick3n(message.author.id)) return
-            
             message.delete();
+            
             var sl = `settings.status_log`;
             var oo;
             if (!settings.hasOwn(sl)) {

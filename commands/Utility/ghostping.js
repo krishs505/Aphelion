@@ -7,10 +7,10 @@ module.exports = {
     aliases: ['gp', 'ghost'],
     usage: '[user mention / ID]',
     cooldown: 0,
-    oc: true,
+    od: true,
     execute(message, args) {
         (async () => {
-            if (!bot.isChick3n(message.author.id)) return
+            if (!bot.isKihei(message.author.id)) return
             if (!args[0]) return message.channel.send('You must include a user to ping!')
 
             message.delete();

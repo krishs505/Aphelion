@@ -51,7 +51,7 @@ module.exports = {
 			var n = args[0].toLowerCase();
 			var command = commands.get(n) || commands.find(c => c.aliases && c.aliases.includes(n));
 
-			if (!command || command.oc) return message.channel.send("That's not a valid command!");
+			if (!command || command.od) return message.channel.send("That's not a valid command!");
 
 			var e = new Discord.MessageEmbed()
                 .setTitle(`Help - ${command.name}`)

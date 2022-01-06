@@ -15,7 +15,7 @@ module.exports = {
     usage: '<code length>',
     aliases: ['st'],
     cooldown: 0,
-    oc: true,
+    od: true,
     execute(message, args) {
         (async () => {
 

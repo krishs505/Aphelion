@@ -115,10 +115,10 @@ module.exports = {
     description: 'Add Salad earning data to the database.',
     usage: '[start/stop/stats]',
     cooldown: 0,
-    oc: true,
+    od: true,
     execute(message, args) {
         (async () => {
-            if (!bot.isChick3n(message.author.id)) return
+            if (!bot.isKihei(message.author.id)) return
 
             const sData = await sSchema.findById(sdID);
             const data = await dSchema.findById(dID);

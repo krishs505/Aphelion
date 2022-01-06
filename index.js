@@ -3,7 +3,9 @@ const { Client, Intents, MessageActionRow, MessageButton } = require('discord.js
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MEMBERS] });
 
 // PUSHING CODE? MAKE SURE THIS IS FALSE!!
-var devMode = false;
+var devMode = true;
+
+const DJSVersion = '13.5';
 
 const { MONGO_URI } = require('./config.json');
 const config = require('./config.json');
@@ -21,7 +23,7 @@ let settings = new data_store({ path: process.cwd() + '/settings.json' });
 const mongoose = require('mongoose');
 // require('dotenv').config();
 
-const BotDev = 'Chick3n#0001';
+const BotDev = '252980043511234560';
 var BotName = 'Aphelion';
 if (devMode) BotName = 'Aphelion Dev';
 const BotSupportLink = 'https://discord.gg/zJWVYmqfgv';
@@ -41,14 +43,14 @@ client.on('ready', async () => {
     })
 
     console.log(BotName + ` is online!`);
-    client.user.setPresence({ activities: [{ type: 'WATCHING', name: "Chick3n's brain fry!" }], status: 'online' });
+    client.user.setPresence({ activities: [{ type: 'WATCHING', name: "Kihei's brain fry!" }], status: 'online' });
 });
 
 var bot = {
     loadSettings: function () {
         settings = new data_store({ path: process.cwd() + '/settings.json' });
     },
-    isChick3n: function (id) {
+    isKihei: function (id) {
         if (id == '252980043511234560') {
             return true;
         } else return false
@@ -152,6 +154,7 @@ module.exports = {
     client: client,
     BotDev: BotDev,
     BotName: BotName,
+    DJSVersion: DJSVersion,
     BotSupportLink: BotSupportLink
 };
 
@@ -321,9 +324,13 @@ client.on('typingStart', async (channel, user) => {
 });
 
 client.on('guildMemberUpdate', async (oldMember, newMember) => {
-    if (newMember.id === '822456953501646849' && newMember.nickname !== 'Aphelion') {
-        newMember.setNickname('Aphelion')
-    }
+
+    if (newMember.nickname === null) return;
+
+    if (newMember.id === '822456953501646849' && newMember.nickname !== 'Aphelion') newMember.setNickname('Aphelion');
+    
+    if (newMember.id !== '252980043511234560' && newMember.nickname.toLowerCase().includes('chick3n')) newMember.setNickname(newMember.user.username);
+
 });
 
 client.on('messageReactionRemove', async (reaction, user) => {
@@ -355,7 +362,7 @@ client.on('presenceUpdate', async (oldPresence, newPresence) => {
         if (ns !== os) {
             var C = client.channels.cache.get('860174499181101058');
             var u = `<@${user.id}>`;
-            if (user.id === '252980043511234560') u = '**Chick3n**';
+            if (user.id === '252980043511234560') u = '**Kihei**';
             var t = new Date();
             t = t.toString().replace('GMT-0400 (Eastern Daylight Time)', 'EDT')
             C.send(`${u} | ${status(os)} **-->** ${status(ns)} | ${t}`);
@@ -553,8 +560,6 @@ client.on('messageCreate', async message => {
 
     if (!command) return
 
-    if (command.onlychick3n && !bot.isChick3n(message.author.id)) return
-
     const {
         cooldowns
     } = client;
@@ -567,7 +572,7 @@ client.on('messageCreate', async message => {
     const timestamps = cooldowns.get(command.name);
     const cooldownAmount = (command.cooldown || 0) * 1000;
 
-    if (timestamps.has(message.author.id) && !bot.isChick3n(message.author.id)) {
+    if (timestamps.has(message.author.id) && !bot.isKihei(message.author.id)) {
         const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
 
         if (now < expirationTime) {
@@ -579,7 +584,7 @@ client.on('messageCreate', async message => {
     timestamps.set(message.author.id, now);
     (() => timestamps.delete(message.author.id), cooldownAmount);
 
-    if (command.oc && !bot.isChick3n(message.author.id)) return
+    if (command.od && !bot.isKihei(message.author.id)) return
 
     try {
         command.execute(message, args);
