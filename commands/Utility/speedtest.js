@@ -13,7 +13,6 @@ module.exports = {
     name: 'speedtest',
     description: "Computer attempts to guess a randomly generated code in the fastest speed possible.",
     usage: '<code length>',
-    aliases: ['st'],
     cooldown: 0,
     od: true,
     execute(message, args) {

@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const { Client, Intents, MessageActionRow, MessageButton } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MEMBERS] });
 
-var devMode = false;
+var devMode = true;
 var connectToMongo = true;
 
 const DJSVersion = '13.5';
@@ -16,6 +16,9 @@ if (devMode) { token = config.dtoken; prefix = config.dprefix }
 const fs = require('fs')
 const wait = require('util').promisify(setTimeout);
 // require('./invisdetection');
+const Schema = require('./schemas/settings-schema');
+
+const sID = '61d8b1ae44c5fc5637085070';
 
 let data_store = require('data-store');
 let settings = new data_store({ path: process.cwd() + '/settings.json' });
@@ -341,34 +344,38 @@ client.on('messageReactionRemove', async (reaction, user) => {
 
 function status(status) {
     switch (status) {
-        case 'online': status = '<:online:849769635296313374>'; break;
-        case 'offline': status = '<:offline:849769635032465408>'; break;
-        case 'idle': status = '<:idle:849769635007692810>'; break;
-        case 'dnd': status = '<:dnd:849769635062874162>'; break;
+        case 'online': status = '<:online:912099878275022860>'; break;
+        case 'offline': status = '<:offline:912099878111424583>'; break;
+        case 'idle': status = '<:idle:912099878174359582>'; break;
+        case 'dnd': status = '<:dnd:912099878140801074>'; break;
     }
     return status;
 }
 client.on('presenceUpdate', async (oldPresence, newPresence) => {
-    bot.loadSettings();
-    if (!settings.hasOwn(`settings.status_log`)) return
-    if (newPresence.user.bot) return
-    if (newPresence.guild.id === '447561485674348544') {
-        var { user } = newPresence;
-        try {
-            var os = oldPresence.status;
-            var ns = newPresence.status;
-        } catch {
-            return;
-        }
 
-        if (ns !== os) {
-            var C = client.channels.cache.get('860174499181101058');
-            var u = `<@${user.id}>`;
-            if (user.id === '252980043511234560') u = '**Kihei**';
-            var t = new Date();
-            t = t.toString().replace('GMT-0400 (Eastern Daylight Time)', 'EDT')
-            C.send(`${u} | ${status(os)} **-->** ${status(ns)} | ${t}`);
-        }
+    if (newPresence.user.bot) return
+
+    const s = await Schema.findById(sID);
+    if (!s.statuses.length === 0) return
+
+    var tracking = s.statuses;
+    if (tracking[0] !== 'ta' && tracking.indexOf(newPresence.user.id) === -1) return
+
+    var { user } = newPresence;
+    try {
+        var os = oldPresence.status;
+        var ns = newPresence.status;
+    } catch {
+        return;
+    }
+
+    if (ns !== os) {
+        var C = client.channels.cache.get('860174499181101058');
+        var u = `<@${user.id}>`;
+        if (user.id === '252980043511234560') u = '**Kihei**';
+        var t = new Date();
+        t = t.toString().replace('GMT-0400 (Eastern Daylight Time)', 'EDT')
+        C.send(`${u} | ${status(os)} **-->** ${status(ns)} | ${t}`);
     }
 });
 

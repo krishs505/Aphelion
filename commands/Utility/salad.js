@@ -3,8 +3,8 @@ const { bot } = require('../..');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const Discord = require('discord.js')
 
-const sSchema = require('../../schemas/salad-session');
-const dSchema = require('../../schemas/salad-data');
+const sSchema = require('../../schemas/salad-session-schema');
+const dSchema = require('../../schemas/salad-data-schema');
 const wait = require('util').promisify(setTimeout);
 
 const sdID = "619aa71c205febd1b301f48d";
@@ -118,8 +118,6 @@ module.exports = {
     od: true,
     execute(message, args) {
         (async () => {
-            if (!bot.isKihei(message.author.id)) return
-
             const sData = await sSchema.findById(sdID);
             const data = await dSchema.findById(dID);
 
