@@ -2,8 +2,8 @@ const Discord = require('discord.js');
 const { Client, Intents, MessageActionRow, MessageButton } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MEMBERS] });
 
-// PUSHING CODE? MAKE SURE THIS IS FALSE!
 var devMode = false;
+var connectToMongo = true;
 
 const DJSVersion = '13.5';
 
@@ -29,18 +29,20 @@ if (devMode) BotName = 'Aphelion Dev';
 const BotSupportLink = 'https://discord.gg/zJWVYmqfgv';
 
 client.on('ready', async () => {
-    await mongoose.connect(
-        MONGO_URI,
-        {
-            keepAlive: true
-        }
-    ).then(async (mongoose) => {
-        try {
-            console.log('Connected to MongoDB!');
-        } catch (error) {
-            console.log(error);
-        }
-    })
+    if (connectToMongo) {
+        await mongoose.connect(
+            MONGO_URI,
+            {
+                keepAlive: true
+            }
+        ).then(async (mongoose) => {
+            try {
+                console.log('Connected to MongoDB!');
+            } catch (error) {
+                console.log(error);
+            }
+        })
+    }
 
     console.log(BotName + ` is online!`);
     client.user.setPresence({ activities: [{ type: 'WATCHING', name: "Kihei's brain fry!" }], status: 'online' });
@@ -161,7 +163,7 @@ module.exports = {
 client.on('messageCreate', async message => {
     if (message.embeds.length !== 0) {
         if (message.channel.id === '916919202105946142' &&
-        (message.embeds[0].footer.text.includes('252980043511234560') || (message.embeds[0].description.includes('751565931746033745')) || message.embeds[0].description.includes('751565931746033745'))) {
+            (message.embeds[0].footer.text.includes('252980043511234560') || (message.embeds[0].description.includes('751565931746033745')) || message.embeds[0].description.includes('751565931746033745'))) {
             message.delete();
         }
     }
@@ -260,7 +262,7 @@ client.on('interactionCreate', async interaction => {
 
                 return
             }*/
-            
+
             if (arr.includes(interaction.user.id)) return
 
             // console.log(id);
@@ -328,7 +330,7 @@ client.on('guildMemberUpdate', async (oldMember, newMember) => {
     if (newMember.nickname === null) return;
 
     if (newMember.id === '822456953501646849' && newMember.nickname !== 'Aphelion') newMember.setNickname('Aphelion');
-    
+
     if (newMember.id !== '252980043511234560' && newMember.nickname.toLowerCase().includes('chick3n')) newMember.setNickname(newMember.user.username);
 
 });
