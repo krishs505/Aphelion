@@ -29,7 +29,7 @@ module.exports = {
             if (fot == 'gif')
                 ge = ` | [GIF](${avurl}.gif)`;
     
-            var te = new Discord.MessageEmbed().setTitle("Avatar").setDescription(`Avatar of <@!${user.id}>:`).setImage(`${avurl}.${fot}`).addField("Links", `[PNG](${avurl}.png) | [JPG](${avurl}.png) | [WEBP](${avurl}.webp)${ge}`).setColor('#0099FF').setAuthor(user.tag, avurl + '.' + fot).setFooter('We are not responsible for any content on the user\'s avatar.');
+            var te = new Discord.MessageEmbed().setTitle("Avatar").setDescription(`Avatar of <@!${user.id}>:`).setImage(`${avurl}.${fot}`).addField("Links", `[PNG](${avurl}.png) | [JPG](${avurl}.png) | [WEBP](${avurl}.webp)${ge}`).setColor('#0099FF').setAuthor(user.tag, avurl + '.' + fot).setFooter({ text: 'We are not responsible for any content on the user\'s avatar.' });
             message.channel.send({ embeds: [te] });
         })();
     }

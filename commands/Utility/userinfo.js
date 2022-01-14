@@ -42,7 +42,7 @@ module.exports = {
                     .addField('User Creation Date', `${new Date(member.user.createdAt).toUTCString()}`)
                     .addField('Joined Server', `${new Date(member.joinedAt).toUTCString()}`)
                     .addField('Roles', rm1)
-                    .setTimestamp(new Date().toISOString()).setFooter(`User ID: ${member.id}`);
+                    .setTimestamp(new Date().toISOString()).setFooter({ text: `User ID: ${member.id}` });
 
                 if (member.user.bot) { embed.addField('Is Bot', 'True') } else { embed.addField('Badges', `${bot.getBadges(member.user)}`) }
             } else if (type === 'user') {
@@ -52,7 +52,7 @@ module.exports = {
                     .setColor('#009dff')
                     .setDescription(`<@${user.id}>`)
                     .addField('User Creation Date', `${new Date(user.createdAt).toUTCString()}`)
-                    .setTimestamp(new Date().toISOString()).setFooter(`User ID: ${user.id}`);
+                    .setTimestamp(new Date().toISOString()).setFooter({ text: `User ID: ${user.id}` });
 
                 if (user.bot) { embed.addField('Is Bot', 'True') } else { embed.addField('Badges', `${bot.getBadges(user)}`) }
             }

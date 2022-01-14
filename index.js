@@ -2,10 +2,10 @@ const Discord = require('discord.js');
 const { Client, Intents, MessageActionRow, MessageButton } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MEMBERS] });
 
-var devMode = false; //
+var devMode = false;
 var connectToMongo = true;
 
-const DJSVersion = '13.5';
+const DJSVersion = '13.6';
 
 const { MONGO_URI } = require('./config.json');
 const config = require('./config.json');
@@ -231,7 +231,7 @@ client.on('interactionCreate', async interaction => {
         var e = new Discord.MessageEmbed()
             .setTitle(`${interaction.values[0]} - ${command.name}`)
             .setColor('#009dff')
-            .setFooter(`1/${categoryCommands.length}`);
+            .setFooter({ text: `1/${categoryCommands.length}` });
 
         if (command.description) e.addField('Description', command.description)
         if (command.usage) e.addField('Usage', `\`${prefix}${command.name} ${command.usage}\``)
@@ -308,7 +308,7 @@ client.on('interactionCreate', async interaction => {
             e = new Discord.MessageEmbed()
                 .setTitle(`${interaction.message.embeds[0].title.split(' ')[0]} - ${command.name}`)
                 .setColor('#009dff')
-                .setFooter(`${lcn + 1}/${categoryCommands.length}`);
+                .setFooter({ text: `${lcn + 1}/${categoryCommands.length}` });
 
             if (command.description) e.addField('Description', command.description)
             if (command.usage) e.addField('Usage', `\`${prefix}${command.name} ${command.usage}\``)
@@ -477,7 +477,7 @@ client.on('messageDelete', async messageo => {
         embed.setAuthor(message.author.id);
         foot += ` | Partial Message (Not All Info Displayed)`;
     }
-    embed.setFooter(foot);
+    embed.setFooter({ text: foot });
 
     if (ait) {
         // More setting up embeds..
@@ -485,7 +485,7 @@ client.on('messageDelete', async messageo => {
             name: `Attachment Link${bot.plural(message.attachments.size)} | Attachment Previews Also Shown Above`,
             value: aturl
         })
-        embed.setFooter(`Message ID: ${message.id}${fp2} | View or Download The Attachments/Images At Your Own Risk. | Partial Message (Not All Info Displayed)`);
+        embed.setFooter({ text: `Message ID: ${message.id}${fp2} | View or Download The Attachments/Images At Your Own Risk. | Partial Message (Not All Info Displayed)` });
 
         // Launch!
         MLC.send({
@@ -541,7 +541,7 @@ client.on('messageUpdate', async function (oldMessage, message) {
             value: message.content,
             inline: false,
         })
-        .setTimestamp(new Date().toISOString()).setFooter(`Message ID: ${message.id}`);
+        .setTimestamp(new Date().toISOString()).setFooter({ text: `Message ID: ${message.id}` });
 
     MLC.send({ embeds: [embed] }).catch(a => { });
     if (ns === false) MLC2.send({ embeds: [embed] }).catch(a => { });
