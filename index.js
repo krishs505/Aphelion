@@ -466,7 +466,7 @@ client.on('messageDelete', async messageo => {
     // Set up embeds for launch!
     var foot;
     var embed = new Discord.MessageEmbed()
-        .setAuthor(message.author.tag, message.author.avatarURL())
+        .setAuthor({ name: message.author.tag, iconURL: message.author.avatarURL() })
         .setColor('0xBA1206')
         .setDescription(dts)
         .setTimestamp(new Date().toISOString());
@@ -474,7 +474,7 @@ client.on('messageDelete', async messageo => {
         foot = `Message ID: ${message.id}${fp2}`;
     }
     if (partial) {
-        embed.setAuthor(message.author.id);
+        embed.setAuthor({ name: message.author.id });
         foot += ` | Partial Message (Not All Info Displayed)`;
     }
     embed.setFooter({ text: foot });
@@ -527,7 +527,7 @@ client.on('messageUpdate', async function (oldMessage, message) {
     if (message.channel.id === '751565931746033745' || message.channel.id === '806331336616706063') ns = true;
 
     const embed = new Discord.MessageEmbed()
-        .setAuthor(`${message.author.username}#${message.author.discriminator}`, message.author.avatarURL())
+        .setAuthor({ name: `${message.author.username}#${message.author.discriminator}`, iconURL: message.author.avatarURL() })
         .setColor('#b029ff')
         .setDescription(
             `**Message sent by <@${message.author.id}> edited in <#${message.channel.id}>**: [Jump to Message](https://discord.com/channels/${message.guild.id}/${message.channel.id}/${message.id})`

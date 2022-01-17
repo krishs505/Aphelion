@@ -34,7 +34,7 @@ module.exports = {
                 if (rm1.length > 1024) rm1 = member.roles.cache.size;
 
                 embed = new Discord.MessageEmbed()
-                    .setAuthor(`${member.user.username}#${member.user.discriminator}`, bot.getPFP(member.user))
+                    .setAuthor({ name: `${member.user.username}#${member.user.discriminator}`, iconURL: bot.getPFP(member.user) })
                     .setThumbnail(bot.getPFP(member.user))
                     .setColor('#009dff')
                     .setDescription(`<@${member.user.id}>`)
@@ -47,7 +47,7 @@ module.exports = {
                 if (member.user.bot) { embed.addField('Is Bot', 'True') } else { embed.addField('Badges', `${bot.getBadges(member.user)}`) }
             } else if (type === 'user') {
                 embed = new Discord.MessageEmbed()
-                    .setAuthor(`${user.username}#${user.discriminator}`, bot.getPFP(user))
+                    .setAuthor({ name: `${user.username}#${user.discriminator}`, iconURL: bot.getPFP(user) })
                     .setThumbnail(bot.getPFP(user))
                     .setColor('#009dff')
                     .setDescription(`<@${user.id}>`)
