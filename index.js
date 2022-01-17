@@ -29,7 +29,7 @@ const mongoose = require('mongoose');
 const BotDev = '252980043511234560';
 var BotName = 'Aphelion';
 if (devMode) BotName = 'Aphelion Dev';
-const BotSupportLink = 'https://discord.gg/zJWVYmqfgv';
+const BotSupportLink = 'https://discord.gg/';
 
 client.on('ready', async () => {
     if (connectToMongo) {
