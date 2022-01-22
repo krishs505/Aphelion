@@ -60,6 +60,11 @@ var bot = {
             return true;
         } else return false
     },
+    isStaff: function (id) {
+        if (id === '252980043511234560' || id === '258265415770177536' || id === '572927730707071006') {
+            return true;
+        } else return false
+    },
     isDevTester: function (id) {
         if (id == '252980043511234560') {
             return true;
@@ -171,7 +176,7 @@ client.on('messageCreate', async message => {
         }
     }
 
-    if (message.channel.id === '934571108198387753' && message.content.toLowerCase() !== 'f') message.delete();
+    if (!bot.isStaff(message.author.id) && message.channel.id === '934571108198387753' && message.content.toLowerCase() !== 'f') message.delete();
 
     /*
     if (message.channel.id == '') {
@@ -190,7 +195,7 @@ client.on('messageCreate', async message => {
 });
 
 client.on('messageUpdate', async (oldMessage, message) => {
-    if (message.channel.id === '934571108198387753' && message.content.toLowerCase() !== 'f') message.delete();
+    if (!bot.isStaff(message.author.id) && message.channel.id === '934571108198387753' && message.content.toLowerCase() !== 'f') message.delete();
 });
 
 client.on('interactionCreate', async interaction => {
