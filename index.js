@@ -169,12 +169,14 @@ module.exports = {
 };
 
 client.on('messageCreate', async message => {
-    if (message.embeds.length !== 0 && message.embeds[0].description.length !== 0) { // check if it's an embed
-        if (message.channel.id === '916919202105946142' && // dyno messages log
+    if (message.embeds.length !== 0) { // check if it's an embed
+        try {
+            if (message.channel.id === '916919202105946142' && // dyno messages log
             // check if it's my message OR from a manager channel and then delete
             (message.embeds[0].footer.text.includes('252980043511234560') || (message.embeds[0].description.includes('751565931746033745')) || message.embeds[0].description.includes('806331336616706063'))) {
-            message.delete();
-        }
+                message.delete();
+            }
+        } catch { }
     }
 
     if (!bot.isStaff(message.author.id) && message.channel.id === '934571108198387753' && message.content.toLowerCase() !== 'f') message.delete();
