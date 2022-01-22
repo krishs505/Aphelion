@@ -593,7 +593,11 @@ client.on('messageCreate', async message => {
     timestamps.set(message.author.id, now);
     (() => timestamps.delete(message.author.id), cooldownAmount);
 
-    if (command.od && !bot.isKihei(message.author.id)) return
+    if (!bot.isKihei(message.author.id)) {
+        if (!command.odp) {
+            if (command.od) return
+        } else if (message.author.id !== '457643046268436482') return
+    }
 
     try {
         command.execute(message, args);
