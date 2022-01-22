@@ -171,7 +171,7 @@ client.on('messageCreate', async message => {
         }
     }
 
-    if (message.channel.id === '934571108198387753' && message.content.toLowerCase() !== 'f') return
+    if (message.channel.id === '934571108198387753' && message.content.toLowerCase() !== 'f') message.delete();
 
     /*
     if (message.channel.id == '') {
@@ -190,7 +190,7 @@ client.on('messageCreate', async message => {
 });
 
 client.on('messageUpdate', async (oldMessage, message) => {
-    if (message.channel.id === '934571108198387753' && message.content.toLowerCase() !== 'f') return
+    if (message.channel.id === '934571108198387753' && message.content.toLowerCase() !== 'f') message.delete();
 });
 
 client.on('interactionCreate', async interaction => {
