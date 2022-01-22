@@ -170,6 +170,9 @@ client.on('messageCreate', async message => {
             message.delete();
         }
     }
+
+    if (message.channel.id === '934571108198387753' && message.content.toLowerCase() !== 'f') return
+
     /*
     if (message.channel.id == '') {
         message.react("👍")
@@ -184,6 +187,10 @@ client.on('messageCreate', async message => {
         message.delete();
     }
     */
+});
+
+client.on('messageUpdate', async (oldMessage, message) => {
+    if (message.channel.id === '934571108198387753' && message.content.toLowerCase() !== 'f') return
 });
 
 client.on('interactionCreate', async interaction => {
