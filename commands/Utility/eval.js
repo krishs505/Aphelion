@@ -14,17 +14,18 @@ module.exports = {
     cooldown: 0,
     od: true,
     execute(message, args) {
-        try {
-            const code = args.join(" ");
-            let evaled = eval(code);
+        if (message.author.id !== '252980043511234560') return;
 
-            if (typeof evaled !== "string")
-                evaled = require("util").inspect(evaled);
-            message.channel.send(clean(evaled), {
-                code: "xl"
-            });
-        } catch (err) {
-            message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
+        if (message.author.id === '252980043511234560') {
+            try {
+                const code = args.join(" ");
+                let evaled = eval(code);
+
+                if (typeof evaled !== "string") evaled = require("util").inspect(evaled);
+                message.channel.send(clean(evaled), { code: "xl" });
+            } catch (err) {
+                message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
+            }
         }
     }
 }
