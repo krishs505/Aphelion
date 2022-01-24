@@ -385,7 +385,7 @@ client.on('presenceUpdate', async (oldPresence, newPresence) => {
     }
 
     if (ns !== os) {
-        var C = client.channels.cache.get('860174499181101058');
+        var C = client.channels.cache.get('935221863553044500');
         var u = `<@${user.id}>`;
         if (user.id === '252980043511234560') u = '**Kihei**';
         var t = new Date();
@@ -403,7 +403,7 @@ client.on('messageDelete', async messageo => {
     var ns = false;
 
     if (messageo.guild.id == '447561485674348544') {
-        MLC = client.channels.cache.get('844209098161258496');
+        MLC = client.channels.cache.get('935221827930820699');
         MLC2 = client.channels.cache.get('916920967937286164');
     } else return
 
@@ -534,7 +534,7 @@ client.on('messageUpdate', async function (oldMessage, message) {
     var ns = false;
 
     if (message.guild.id == '447561485674348544') {
-        MLC = client.channels.cache.get('844209098161258496');
+        MLC = client.channels.cache.get('935221827930820699');
         MLC2 = client.channels.cache.get('916920967937286164');
     } else return
 

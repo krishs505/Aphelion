@@ -51,7 +51,7 @@ module.exports = {
     aliases: ['c4'],
     usage: '[user mention/ID]',
     cooldown: 0,
-    od: true,
+    odp: true,
     execute(message, args) {
         (async () => {
             var g = message.guild.id;
@@ -86,14 +86,15 @@ module.exports = {
                 settings.set(`${g}.${c}.state`, 'game');
 
                 ba = [
+                    [1, 0, 0, 0, 0, 0],
                     [0, 0, 0, 0, 0, 0],
-                    [0, 0, 0, 0, 0, 0],
-                    [0, 0, 0, 0, 0, 0],
-                    [0, 0, 0, 0, 0, 0],
+                    [0, 0, 2, 0, 0, 0],
+                    [0, 0, 0, 2, 0, 0],
                     [0, 0, 0, 0, 0, 0],
                     [0, 0, 0, 0, 0, 0],
                     [0, 0, 0, 0, 0, 0],
                 ];
+                var generated = generateBoard(ba);
 
                 settings.set(`${g}.${c}.ba`, ba);
                 p1id = settings.get(`${g}.${c}.p1`);
@@ -121,7 +122,7 @@ module.exports = {
                 settings.set(`${g}.${c}.sign`, sign);
 
                 sent = await message.channel.send(`__**Connect4** - ${p1m} vs ${p2m}__\n\n**Current Turn:** ${settings.get(`${g}.${c}.sign`)} <@${settings.get(`${g}.${c}.turn`)}>`)
-                game = await message.channel.send(generateBoard(ba));
+                game = await message.channel.send(generated);
 
                 settings.set(`${g}.${c}.sentmsg`, sent);
                 settings.set(`${g}.${c}.gamemsg`, game);

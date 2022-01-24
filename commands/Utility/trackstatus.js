@@ -7,14 +7,14 @@ const ID = '61d8b1ae44c5fc5637085070';
 module.exports = {
     name: 'trackstatus',
     description: 'Track the status of user(s)!',
-    aliases: ['ts', 'st'],
+    aliases: ['ts'],
     cooldown: 0,
     od: true,
     execute(message, args) {
         (async () => {
 
             const s = await Schema.findById(ID);
-            var C = message.client.channels.cache.get('860174499181101058');
+            var C = message.client.channels.cache.get('935221863553044500');
 
             if (!args[0]) {
                 if (s.statuses.length === 0) return message.channel.send("No users are being status tracked!");
