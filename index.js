@@ -60,6 +60,11 @@ var bot = {
             return true;
         } else return false
     },
+    isLab: function (thing) {
+        var IL = false;
+        if (thing.guild.id === '931971550528290886' && thing.channel.id === '931971550528290889') IL = true;
+        return IL;
+    },
     isStaff: function (id) {
         if (id === '252980043511234560' || id === '258265415770177536' || id === '572927730707071006') {
             return true;
@@ -205,6 +210,8 @@ client.on('interactionCreate', async interaction => {
 
     const { commands } = client;
     const categoryCommands = [];
+    
+    var IL = bot.isLab(interaction);
 
     function row(d1, d2, d3, d4) {
         return new MessageActionRow()
@@ -237,7 +244,7 @@ client.on('interactionCreate', async interaction => {
         fs.readdirSync(`./commands/${interaction.values[0]}`).filter(file => file.endsWith('.js')).forEach(cf => {
             var n = cf.replace('.js', '');
             var cmd = commands.get(n) || commands.find(c => c.aliases && c.aliases.includes(n));
-            if (cmd.oc) return
+            if (!IL && (cmd.od || cmd.odp)) return
             categoryCommands.push(cmd);
         });
 
@@ -257,51 +264,13 @@ client.on('interactionCreate', async interaction => {
     } else if (interaction.isButton()) {
 
         var id = interaction.customId;
-        var ids = ['13', '15', '16', '17', '18', '22', '23', '24']
-
-        if (id === '13' || id === '15' || id === '16' || id === '17' || id === '18' || id === '22' || id === '23' || id === '24') {
-
-            let settings = new data_store({ path: process.cwd() + '/settings.json' });
-
-            var arr = settings.get('users');
-            var votes = settings.get('votes');
-            var pvi;
-            var num = settings.get(id);
-            /*if (arr.includes(interaction.user.id)) {
-                pvi = arr.indexOf(interaction.user.id);
-                votes[pvi] = id;
-
-                var pnum = parseInt(settings.get(votes[pvi]));
-                pnum--;
-                num++;
-                await settings.set(id, num);
-                await settings.set(, pnum);
-                await settings.set('votes', votes);
-
-                return
-            }*/
-
-            if (arr.includes(interaction.user.id)) return
-
-            // console.log(id);
-            arr.push(interaction.user.id);
-            settings.set('users', arr);
-
-            votes.push(id);
-            settings.set('votes', votes);
-
-            num++;
-            // console.log(num);
-            await settings.set(id, num);
-
-        }
 
         if (id === 'rightHelp' || id === 'leftHelp' || id === 'leftMHelp' || id === 'rightMHelp') {
 
             fs.readdirSync(`./commands/${interaction.message.embeds[0].title.split(' ')[0]}`).filter(file => file.endsWith('.js')).forEach(cf => {
                 var n = cf.replace('.js', '');
                 var cmd = commands.get(n) || commands.find(c => c.aliases && c.aliases.includes(n));
-                if (cmd.oc) return
+                if (!IL && (cmd.od || cmd.odp)) return
                 categoryCommands.push(cmd);
             });
 
