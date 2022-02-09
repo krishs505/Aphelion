@@ -1,12 +1,4 @@
-function factors (num) {
-    var f = [];
-    for (let i = 1; i <= num; i++) {
-        if (num % i === 0) {
-            f.push(i);
-        }
-    }
-    return f;
-}
+const { bot } = require("../../index");
 
 module.exports = {
     name: 'quadform',
@@ -15,9 +7,7 @@ module.exports = {
     usage: '<a> <b> <c>',
     cooldown: 0,
     execute(message, args) {
-        if (!args[0] || !args[1] || !args[2]) {
-            return message.channel.send('Please include all values for the syntax! Use +quadform help for more information.')
-        }
+        if (!args[0] || !args[1] || !args[2]) return message.channel.send('Please include all values for the syntax! Use +help quadform for more information.');
 
         if (isNaN(args[0])) {
             return message.channel.send(':x: `' + args[0] + '` is not a number!');
@@ -40,9 +30,9 @@ module.exports = {
             var s = Math.sqrt(discrim / -1);
             var t = 2 * a;
 
-            var f1 = factors(Math.abs(b));
-            var f2 = factors(s);
-            var f3 = factors(Math.abs(t));
+            var f1 = bot.findFactors(Math.abs(b));
+            var f2 = bot.findFactors(s);
+            var f3 = bot.findFactors(Math.abs(t));
             var cf;
             
             for (var i = 0; i <= f1.length; i++) {

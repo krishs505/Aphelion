@@ -2,11 +2,10 @@ module.exports = {
     name: 'slope',
     description: 'Calculate the slope of between two points on a coordinate plane.',
     usage: '<x1> <y1> <x2> <y2>',
+    aliases: ['rateofchange'],
     cooldown: 0,
     execute(message, args) {
-        if (!args[0] || !args[1] || !args[2] || !args[3]) {
-            return message.channel.send('Please include all values for the syntax! Use +slope help for more information.')
-        }
+        if (!args[0] || !args[1] || !args[2] || !args[3]) return message.channel.send('Please include all values for the syntax! Use +help slope for more information.')
 
         if (isNaN(args[0])) {
             return message.channel.send(':x: `' + args[0] + '` is not a number!');
@@ -18,19 +17,19 @@ module.exports = {
             return message.channel.send(':x: `' + args[3] + '` is not a number!');
         }
 
-        var x1 = parseInt(args[0])
-        var y1 = parseInt(args[1])
-        var x2 = parseInt(args[2])
-        var y2 = parseInt(args[3])
-        var nume = y2 - y1
-        var deno = x2 - x1
+        var x1 = parseInt(args[0]);
+        var y1 = parseInt(args[1]);
+        var x2 = parseInt(args[2]);
+        var y2 = parseInt(args[3]);
+        var nume = y2 - y1;
+        var deno = x2 - x1;
 
-        if (deno == 1) {
-            return message.channel.send(`Result: **${nume}**`)
-        } else if (nume % deno == 0) {
-            message.channel.send(`Result: **${nume / deno}**`)
+        if (deno === 1) {
+            return message.channel.send(`Result: **${nume}**`);
+        } else if (nume % deno === 0) {
+            message.channel.send(`Result: **${nume / deno}**`);
         } else {
-            message.channel.send(`Result: **${nume} / ${deno}**`)
+            message.channel.send(`Result: **${nume} / ${deno}**`);
         }
     }
 }

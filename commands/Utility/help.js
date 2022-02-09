@@ -1,11 +1,7 @@
 const { prefix } = require('../../config.json');
-const { Client, Intents, MessageActionRow, MessageSelectMenu } = require('discord.js');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const { MessageActionRow, MessageSelectMenu } = require('discord.js');
 const Discord = require('discord.js')
-const fs = require('fs');
-let data_store = require('data-store');
 const { bot } = require('../../index');
-let settings = new data_store({ path: process.cwd() + '/settings.json' });
 
 module.exports = {
 	name: 'help',

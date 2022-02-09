@@ -5,7 +5,7 @@ module.exports = {
     name: 'crypto',
     description: 'Calculate crypto profits OR required selling price for a specified profit.',
     usage: '<user mention or ping>',
-    aliases: ['av', 'pfp', 'icon'],
+    // aliases: [],
     cooldown: 2,
     od: true,
     execute(message, args) {

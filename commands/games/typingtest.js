@@ -1,7 +1,4 @@
-const { bot } = require("../../index")
-//const Discord = require("discord.js");
-//const StopWatch = require("timer-stopwatch-dev");
-//const moment = require('moment');
+const { bot } = require("../../index");
 
 module.exports = {
     name: 'typingtest',

@@ -1,40 +1,39 @@
 const Discord = require('discord.js');
-const { Client, Intents, MessageActionRow, MessageButton } = require('discord.js');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MEMBERS] });
 
-var devMode = false;
-var connectToMongo = true;
+const devMode = true;
+const connectToMongo = true;
 
 const DJSVersion = '13.6';
 
-const { MONGO_URI } = require('./config.json');
+const { Client, Intents, MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MEMBERS] });
 const config = require('./config.json');
+
 var token = config.token;
 var prefix = config.prefix;
 if (devMode) { token = config.dtoken; prefix = config.dprefix }
 
-const fs = require('fs')
-const wait = require('util').promisify(setTimeout);
 // require('./invisdetection');
-const Schema = require('./schemas/settings-schema');
 
+const fs = require('fs');
+const mongoose = require('mongoose');
+const data_store = require('data-store');
+// const wait = require('util').promisify(setTimeout);
+
+const Schema = require('./schemas/settings-schema');
 const sID = '61d8b1ae44c5fc5637085070';
 
-let data_store = require('data-store');
 let settings = new data_store({ path: process.cwd() + '/settings.json' });
 
-const mongoose = require('mongoose');
-// require('dotenv').config();
-
 const BotDev = '252980043511234560';
-var BotName = 'Aphelion';
+let BotName = 'Aphelion';
 if (devMode) BotName = 'Aphelion Dev';
 const BotSupportLink = 'https://discord.gg/';
 
 client.on('ready', async () => {
     if (connectToMongo) {
         await mongoose.connect(
-            MONGO_URI,
+            config.MONGO_URI,
             {
                 keepAlive: true
             }
@@ -118,13 +117,12 @@ var bot = {
 
         return flags1;
     },
-    getStatus: function (member) {
-        var status = member.presence.status;
+    getStatus: function (status) {
         switch (status) {
-            case 'online': status = '<:online:912099878275022860> Online'; break
-            case 'dnd': status = '<:dnd:912099878140801074> Do Not Disturb'; break
-            case 'idle': status = '<:idle:912099878174359582> Idle'; break
-            case 'offline': status = '<:offline:912099878111424583> Offline / Invisible'; break
+            case 'online': status = '<:online:912099878275022860>'; break;
+            case 'offline': status = '<:offline:912099878111424583>'; break;
+            case 'idle': status = '<:idle:912099878174359582>'; break;
+            case 'dnd': status = '<:dnd:912099878140801074>'; break;
         }
         return status;
     },
@@ -138,6 +136,22 @@ var bot = {
         var int = parseInt(n);
         var f = [];
         for (let i = 1; i <= int; i++) {
+            if (int % i === 0) f.push(i);
+        }
+        return f;
+    },
+    findFactorsProgress: function (n) {
+        var int = parseInt(n);
+        var f = [];
+        var percent;
+        var percent2;
+        for (let i = 1; i <= int; i++) {
+            console.log(Math.floor(i / int * 100));
+            /*if (percent2 !== percent) {
+                console.log(percent2);
+                percent = percent2;
+            }*/
+
             if (int % i === 0) f.push(i);
         }
         return f;
@@ -161,6 +175,42 @@ var bot = {
         }
 
         return f;
+    },
+    simplifyFraction: function (num, den) {
+        var factors = [];
+        var cf = [];
+
+        for (let i = 1; i <= num; i++) {
+            if (num % i === 0) {
+                factors.push(i);
+            }
+        }
+
+        for (let i = 1; i <= den; i++) {
+            if (den % i === 0 && factors.indexOf(i) !== -1) {
+                cf.push(i);
+            }
+        }
+
+        var gcf = cf[cf.length - 1];
+        var newNum = num / gcf;
+        var newDen = den / gcf;
+        var result = `**${newNum}/${newDen}**`;
+        if (newNum / newDen > 1) {
+            result = `**${newNum}/${newDen}** or **${Math.round(newNum / newDen)} ${newNum % newDen}/${newDen}**`;
+        }
+
+        return result;
+    },
+    findLatency: function (s, e) {
+        let latency = e - s;
+        if (latency > 1000) {
+            latency = `${latency / 1000} seconds`;
+        } else {
+            latency = `${latency}ms`;
+        }
+
+        return `Time Taken: **${latency}**`;
     }
 }
 module.exports = {
@@ -250,7 +300,7 @@ client.on('interactionCreate', async interaction => {
 
         var command = categoryCommands[0];
 
-        var e = new Discord.MessageEmbed()
+        var e = new MessageEmbed()
             .setTitle(`${interaction.values[0]} - ${command.name}`)
             .setColor('#009dff')
             .setFooter({ text: `1/${categoryCommands.length}` });
@@ -289,7 +339,7 @@ client.on('interactionCreate', async interaction => {
 
             var command = categoryCommands[lcn];
 
-            e = new Discord.MessageEmbed()
+            e = new MessageEmbed()
                 .setTitle(`${interaction.message.embeds[0].title.split(' ')[0]} - ${command.name}`)
                 .setColor('#009dff')
                 .setFooter({ text: `${lcn + 1}/${categoryCommands.length}` });
@@ -326,17 +376,11 @@ client.on('messageReactionRemove', async (reaction, user) => {
 
 })
 
-function status(status) {
-    switch (status) {
-        case 'online': status = '<:online:912099878275022860>'; break;
-        case 'offline': status = '<:offline:912099878111424583>'; break;
-        case 'idle': status = '<:idle:912099878174359582>'; break;
-        case 'dnd': status = '<:dnd:912099878140801074>'; break;
-    }
-    return status;
-}
+// Status Log
 client.on('presenceUpdate', async (oldPresence, newPresence) => {
 
+    if (devMode) return
+    if (newPresence.guild.id !== '447561485674348544') return;
     if (newPresence.user.bot) return
 
     const s = await Schema.findById(sID);
@@ -358,11 +402,13 @@ client.on('presenceUpdate', async (oldPresence, newPresence) => {
         var u = `<@${user.id}>`;
         if (user.id === '252980043511234560') u = '**Kihei**';
         var t = new Date();
-        t = t.toString().replace('GMT-0400 (Eastern Daylight Time)', 'EDT')
-        C.send(`${u} | ${status(os)} **-->** ${status(ns)} | ${t}`);
+        t = t.toString().replace('GMT-0400 (Eastern Daylight Time)', 'ET');
+        t = t.toString().replace('GMT-0500 (Eastern Standard Time)', 'ET');
+        C.send(`${u} | ${bot.getStatus(os)} **-->** ${bot.getStatus(ns)} | ${t}`);
     }
 });
 
+// Message Logs
 client.on('messageDelete', async messageo => {
     if (messageo.channel.type === 'dm') return
     if (messageo.author.bot) return;
@@ -449,7 +495,7 @@ client.on('messageDelete', async messageo => {
 
     // Set up embeds for launch!
     var foot;
-    var embed = new Discord.MessageEmbed()
+    var embed = new MessageEmbed()
         .setAuthor({ name: message.author.tag, iconURL: message.author.avatarURL() })
         .setColor('0xBA1206')
         .setDescription(dts)
@@ -493,7 +539,6 @@ client.on('messageDelete', async messageo => {
         }
     }
 });
-
 client.on('messageUpdate', async function (oldMessage, message) {
     if (message.channel.type === 'dm') return
     if (message.author.bot) return;
@@ -510,7 +555,7 @@ client.on('messageUpdate', async function (oldMessage, message) {
     if (message.author.id === '252980043511234560') ns = true;
     if (message.channel.id === '751565931746033745' || message.channel.id === '806331336616706063') ns = true;
 
-    const embed = new Discord.MessageEmbed()
+    const embed = new MessageEmbed()
         .setAuthor({ name: `${message.author.username}#${message.author.discriminator}`, iconURL: message.author.avatarURL() })
         .setColor('#b029ff')
         .setDescription(
@@ -531,6 +576,7 @@ client.on('messageUpdate', async function (oldMessage, message) {
     if (ns === false) MLC2.send({ embeds: [embed] }).catch(a => { });
 });
 
+// Store commands in a Collection
 client.commands = new Discord.Collection()
 client.cooldowns = new Discord.Collection()
 const commandFolders = fs.readdirSync('./commands');
@@ -542,6 +588,7 @@ for (const folder of commandFolders) {
     }
 }
 
+// Command Handler
 client.on('messageCreate', async message => {
     if (!message.content.startsWith(prefix) || message.author.bot) return
 

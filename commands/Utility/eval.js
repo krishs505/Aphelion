@@ -16,16 +16,14 @@ module.exports = {
     execute(message, args) {
         if (message.author.id !== '252980043511234560') return;
 
-        if (message.author.id === '252980043511234560') {
-            try {
-                const code = args.join(" ");
-                let evaled = eval(code);
+        try {
+            const code = args.join(" ");
+            let evaled = eval(code);
 
-                if (typeof evaled !== "string") evaled = require("util").inspect(evaled);
-                message.channel.send(clean(evaled), { code: "xl" });
-            } catch (err) {
-                message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
-            }
+            if (typeof evaled !== "string") evaled = require("util").inspect(evaled);
+            message.channel.send(clean(evaled), { code: "xl" });
+        } catch (err) {
+            message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
         }
     }
 }

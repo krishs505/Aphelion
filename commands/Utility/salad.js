@@ -207,7 +207,6 @@ module.exports = {
             } else {
                 let d = new Date();
                 let dA = [d.getDate(), d.getHours(), d.getMinutes()];
-                await console.log(sData.m)
                 
                 if (sData.m === false) {
                     if (!args[0]) return message.channel.send('You must include a starting amount!');
