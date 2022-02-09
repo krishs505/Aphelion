@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 
-const devMode = true;
+const devMode = false;
 const connectToMongo = true;
 
 const DJSVersion = '13.6';
