@@ -1,6 +1,4 @@
-const { Client, Intents, MessageActionRow, MessageSelectMenu, NewsChannel } = require('discord.js');
 const { bot } = require('../..');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const Discord = require('discord.js')
 
 const sSchema = require('../../schemas/salad-session-schema');
