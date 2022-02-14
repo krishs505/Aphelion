@@ -124,7 +124,7 @@ module.exports = {
                 let moosage = await message.channel.send('<a:loading_forever:822539925786329149> Checking data..');
                 let q = await cdl();
                 if (q === true) {
-                    await moosage.delete();
+                    await moosage.delete().catch(a => {});
                 } else {
                     await moosage.edit(q);
                 }

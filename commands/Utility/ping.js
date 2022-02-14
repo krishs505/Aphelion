@@ -1,4 +1,4 @@
-const { cw } = require("../../index")
+const { cw, bot } = require("../../index");
 
 module.exports = {
     name: 'ping',
@@ -8,14 +8,13 @@ module.exports = {
     cooldown: 0,
     execute(message) {
         (async () => {
-            const sent = await message.channel.send('**Pong!**');
-            const botlatency = sent.createdTimestamp - message.createdTimestamp;
+            var now = Date.now();
+            var l = Math.abs(message.createdTimestamp - now);
 
-            if (botlatency > 0 && botlatency < 1000) {
-                sent.edit('**Pong!**\nBot Latency: **' + botlatency + 'ms**\nAPI Latency: **' + cw.ping + 'ms**');
-            } else if (botlatency < 0) {
-                sent.edit('**Pong!**\nBot Latency: **' + botlatency * -1 + 'ms**\nAPI Latency: **' + cw.ping + 'ms**');
-            }
+            var m = `**Pong!** ${l.toString()}ms`;
+            if (bot.isLab(message)) m += `\nDAPI: ${cw.ping}ms`;
+            
+            await message.channel.send(m);
         })();
     }
 }

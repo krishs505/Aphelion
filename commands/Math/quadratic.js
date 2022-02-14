@@ -101,7 +101,7 @@ module.exports = {
 
             return
 
-            // processing.delete();
+            // processing.delete().catch(a => {});
 
             const latency = sent.createdTimestamp - message.createdTimestamp;
             if (latency > 1000) {

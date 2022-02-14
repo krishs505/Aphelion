@@ -41,7 +41,7 @@ module.exports = {
 
             if (done) {
                 const sent = await message.channel.send('Roots:\n' + factors)
-                processing.delete();
+                processing.delete().catch(a => {});
 
                 const latency = sent.createdTimestamp - message.createdTimestamp;
                 if (latency > 1000) {

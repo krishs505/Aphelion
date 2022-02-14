@@ -10,11 +10,10 @@ module.exports = {
     od: true,
     execute(message, args) {
         (async () => {
-            if (!bot.isKihei(message.author.id)) return
             if (!args[0]) return message.channel.send('You must include a user to ping!')
 
-            message.delete();
-            message.channel.send(`<@!${args[0].trim().replace('<', '').replace('@', '').replace('!', '').replace('>', '')}>`).then(msg => { msg.delete(); })
+            await message.delete().catch(a => {});
+            await message.channel.send(`<@!${args[0].trim().replace('<', '').replace('@', '').replace('!', '').replace('>', '')}>`).then(msg => { msg.delete().catch(a => {}); })
         })();
     }
 }

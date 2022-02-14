@@ -76,7 +76,7 @@ module.exports = {
 
             message.channel.send(`The ${roottype} root of ${rad} is **${result}**`);
     
-            processing.delete();
+            processing.delete().catch(a => {});
     
             /*
             const latency = processing.createdTimestamp - message.createdTimestamp;

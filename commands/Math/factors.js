@@ -15,16 +15,43 @@ module.exports = {
             const processing = await message.channel.send('<a:loading_forever:822539925786329149> Processing...');
             var num = parseInt(args[0]);
             var factors = [];
+            var factors2 = [];
 
-            var s = Date.now();
+            /*var s = Date.now();
             // factors = bot.findFactorsProgress(num);
             for (let i = 1; i <= num; i++) {
                 if (num % i === 0) factors.push(i);
             }
-            var e = Date.now();
+            var e = Date.now();*/
 
-            await message.channel.send(`Factors of **${args[0]}**:\n${factors.join(", ")}\n${bot.findLatency(s, e)}`);
-            processing.delete();
+            var s2 = Date.now();
+            factors2 = bot.findFactorsNew(num);
+            var e2 = Date.now();
+
+            // await message.channel.send(`Factors of **${args[0]}**:\n${factors.join(", ")}\n${bot.findLatency(s, e)}`);
+            await message.channel.send(`Factors 2.0 of **${args[0]}**:\n${factors2.join(", ")}\n${bot.findLatency(s2, e2)}`);
+
+            await processing.delete().catch(a => {});
+
+            /*var check = true;
+
+            if (factors.length !== factors2.length) {
+                check = false;
+                console.log('leng')
+                return;
+            }
+
+            for (var i = 0; i < factors.length; i++) {
+                if (factors[i] !== factors2[i]) {
+                    check = false;
+                }
+            }
+            
+            if (check === false)
+                await message.channel.send(':x: Resulted different factors!');
+            else
+                await message.channel.send(':white_check_mark: Resulted same factors!');*/
+            
         })();
     }
 }

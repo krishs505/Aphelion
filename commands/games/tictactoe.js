@@ -198,7 +198,7 @@ module.exports = {
                 settings.set(`${g}.${c}.ba`, ba);
                 ba = settings.get(`${g}.${c}.ba`);
 
-                await settings.get(`${g}.${c}.gamemsg`).edit(`${ba[0]}${ba[1]}${ba[2]}\n${ba[3]}${ba[4]}${ba[5]}\n${ba[6]}${ba[7]}${ba[8]}`);
+                await settings.get(`${g}.${c}.gamemsg`).edit(`${ba[0]}${ba[1]}${ba[2]}\n${ba[3]}${ba[4]}${ba[5]}\n${ba[6]}${ba[7]}${ba[8]}`).catch(a => {});
 
                 if (XWins(ba)) {
                     winner = p1id;
@@ -212,7 +212,7 @@ module.exports = {
                     var moosage = `**GG, <@${winner}> won the TicTacToe game!**`;
                     if (winner === 'draw') moosage = `**GG, the TicTacToe game was a draw!**`;
                     message.channel.send(moosage);
-                    // sent.edit(`The TicTacToe game between ${p1m} and ${p2m} has begun!`);
+                    // sent.edit(`The TicTacToe game between ${p1m} and ${p2m} has begun!`).catch(a => {});
                     // winner = undefined;
                     settings.del(`${g}.${c}`);
                     return;
@@ -232,7 +232,7 @@ module.exports = {
                     settings.set(`${g}.${c}.turn`, np);
                     settings.set(`${g}.${c}.sign`, ns);
 
-                    await settings.get(`${g}.${c}.sentmsg`).edit(`The TicTacToe game between ${p1m} and ${p2m} has begun!\n\n**Current Turn:** ${settings.get(`${g}.${c}.sign`)} <@${settings.get(`${g}.${c}.turn`)}>`);
+                    await settings.get(`${g}.${c}.sentmsg`).edit(`The TicTacToe game between ${p1m} and ${p2m} has begun!\n\n**Current Turn:** ${settings.get(`${g}.${c}.sign`)} <@${settings.get(`${g}.${c}.turn`)}>`).catch(a => {});
                 }  
             } else return message.channel.send('Sorry, there is already a TicTacToe game in progress in this channel! Please wait for it to finish!')
         })();

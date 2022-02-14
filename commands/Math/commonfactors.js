@@ -46,7 +46,7 @@ module.exports = {
             } else {
                 var sent = await message.channel.send(`Common Factors between **${args[0]}** and **${args[1]}**:\n${cf}`)
             }
-            processing.delete();
+            processing.delete().catch(a => {});
 
             const latency = sent.createdTimestamp - message.createdTimestamp;
             if (latency > 1000) {

@@ -46,7 +46,7 @@ client.on('ready', async () => {
         })
     }
 
-    console.log(BotName + ` is online!`);
+    console.log(`${BotName} is online! ${client.ws.ping}ms`);
     client.user.setPresence({ activities: [{ type: 'WATCHING', name: "Kihei's brain fry!" }], status: 'online' });
 });
 
@@ -140,6 +140,15 @@ var bot = {
         }
         return f;
     },
+    findFactorsNew: function (n) {
+        var int = parseInt(n);
+        var f = [];
+        for (let i = 1; i <= Math.floor(int / 2); i++) {
+            if (int % i === 0) f.push(i);
+        }
+        f.push(int);
+        return f;
+    },
     findFactorsProgress: function (n) {
         var int = parseInt(n);
         var f = [];
@@ -229,12 +238,12 @@ client.on('messageCreate', async message => {
             if (message.channel.id === '916919202105946142' && // dyno messages log
             // check if it's my message OR from a manager channel and then delete
             (message.embeds[0].footer.text.includes('252980043511234560') || (message.embeds[0].description.includes('751565931746033745')) || message.embeds[0].description.includes('806331336616706063'))) {
-                message.delete();
+                message.delete().catch(a => {});
             }
         } catch { }
     }
 
-    if (!bot.isStaff(message.author.id) && message.channel.id === '934571108198387753' && message.content.toLowerCase() !== 'f') message.delete();
+    if (!bot.isStaff(message.author.id) && message.channel.id === '934571108198387753' && message.content.toLowerCase() !== 'f') message.delete().catch(a => {});
 
     /*
     if (message.channel.id == '') {
@@ -243,17 +252,17 @@ client.on('messageCreate', async message => {
     }
 
     if (message.author.id == '') {
-        message.delete();
+        message.delete().catch(a => {});
     }
 
     if ((message.author.id == '572927730707071006' || message.author.id == '258265415770177536') && message.attachments.size > 0) {
-        message.delete();
+        message.delete().catch(a => {});
     }
     */
 });
 
 client.on('messageUpdate', async (oldMessage, message) => {
-    if (!bot.isStaff(message.author.id) && message.channel.id === '934571108198387753' && message.content.toLowerCase() !== 'f') message.delete();
+    if (!bot.isStaff(message.author.id) && message.channel.id === '934571108198387753' && message.content.toLowerCase() !== 'f') message.delete().catch(a => {});
 });
 
 client.on('interactionCreate', async interaction => {

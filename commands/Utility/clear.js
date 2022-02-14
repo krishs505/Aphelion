@@ -31,7 +31,7 @@ module.exports = {
                 if (isNaN(parseInt(args[ii]))) return message.channel.send(`Please specify a valid number of messages you would like to clear! Usage: \`${prefix}clear [number of messages] [number of messages] <optional member>\`.`);
                 if (parseInt(args[ii].trim()) > 100) return message.channel.send("I can only clear up to 100 messages!");
 
-                await message.delete();
+                await message.delete().catch(a => {});
                 await message.channel.messages.fetch({
                     limit: 100
                 }).then((messages) => {

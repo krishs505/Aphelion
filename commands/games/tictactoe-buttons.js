@@ -167,7 +167,7 @@ module.exports = {
                                 case p2id: np = p1id; break;
                             }
                             settings.set(`${g}.${c}.turn`, np);
-                            sent.edit(`The TicTacToe game between ${p1m} and ${p2m} has begun!\n**Current Turn:** <@${np}>`);
+                            sent.edit(`The TicTacToe game between ${p1m} and ${p2m} has begun!\n**Current Turn:** <@${np}>`).catch(a => {});
 
                             if (XWins(ba)) {
                                 winner = p1id;
@@ -181,7 +181,7 @@ module.exports = {
                                 var moosage = `**GG, <@${winner}> won the TicTacToe game!**`;
                                 if (winner === 'draw') moosage = `**GG, the TicTacToe game was a draw!**`;
                                 message.channel.send(moosage);
-                                sent.edit(`The TicTacToe game between ${p1m} and ${p2m} has begun!`);
+                                sent.edit(`The TicTacToe game between ${p1m} and ${p2m} has begun!`).catch(a => {});
                                 winner = undefined;
                                 settings.del(`${g}.${c}`);
                             }

@@ -64,7 +64,7 @@ module.exports = {
 
             await message.channel.send(`Result: ${result}\n${bot.findLatency(s, e)}`);
             
-            processing.delete();
+            processing.delete().catch(a => {});
         })();
     }
 }

@@ -9,6 +9,6 @@ module.exports = {
     od: true,
     execute(message, args) {
         message.channel.send(args.join(" "));
-        message.delete();
+        message.delete().catch(a => {});
     }
 }

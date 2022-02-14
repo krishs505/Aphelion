@@ -56,7 +56,7 @@ module.exports = {
             }
             
 
-            processing.delete();
+            processing.delete().catch(a => {});
         })();
     }
 }
