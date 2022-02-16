@@ -135,33 +135,11 @@ var bot = {
     findFactors: function (n) {
         var int = parseInt(n);
         var f = [];
-        for (let i = 1; i <= int; i++) {
-            if (int % i === 0) f.push(i);
-        }
-        return f;
-    },
-    findFactorsNew: function (n) {
-        var int = parseInt(n);
-        var f = [];
-        for (let i = 1; i <= Math.floor(int / 2); i++) {
-            if (int % i === 0) f.push(i);
-        }
-        f.push(int);
-        return f;
-    },
-    findFactorsProgress: function (n) {
-        var int = parseInt(n);
-        var f = [];
-        var percent;
-        var percent2;
-        for (let i = 1; i <= int; i++) {
-            console.log(Math.floor(i / int * 100));
-            /*if (percent2 !== percent) {
-                console.log(percent2);
-                percent = percent2;
-            }*/
-
-            if (int % i === 0) f.push(i);
+        for (let i = 1; i <= Math.floor(Math.sqrt(n)) + 1; i++) {
+            if (int % i === 0) {
+                f.push(i);
+                f.push(int / i);
+            }
         }
         return f;
     },
@@ -214,13 +192,28 @@ var bot = {
     findLatency: function (s, e) {
         let latency = e - s;
         if (latency > 1000) {
-            latency = `${latency / 1000} seconds`;
+            latency = `${latency / 1000}s`;
         } else {
             latency = `${latency}ms`;
         }
 
-        return `Time Taken: **${latency}**`;
-    }
+        return `Calculated in **${latency}**`;
+    },
+    shuffleArray: function (arr) {
+        const length = arr.length; // set to maintain loop iteration value
+        var shuffled = [];
+
+        for (var i = 0; i < length; i++) {
+            var random = this.randomInt(0, arr.length - 1); // generate a random index of the array
+            shuffled.push(arr[random]); // push that random item to the shuffled array
+            arr.splice(random, 1); // delete that item from the array (so it only generates new ones in the next iteration)
+        }
+
+        return shuffled;
+    },
+    removeCommas: function (str) {
+        return str.replaceAll(',', '');
+    },
 }
 module.exports = {
     bot: bot,
