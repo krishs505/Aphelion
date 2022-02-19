@@ -47,7 +47,7 @@ client.on('ready', async () => {
     }
 
     console.log(`${BotName} is online! ${client.ws.ping}ms`);
-    client.user.setPresence({ activities: [{ type: 'WATCHING', name: "Kihei's brain fry!" }], status: 'online' });
+    // client.user.setPresence({ activities: [{ type: 'WATCHING', name: "Kihei's brain fry!" }], status: 'online' });
 });
 
 var bot = {
