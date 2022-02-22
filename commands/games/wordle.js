@@ -9,8 +9,6 @@ module.exports = {
     od: true,
     execute(message, args) {
         (async () => {
-            settings.set('lol', 'yo')
-
             var included = args[0].split("");
             var excluded = args[1].split("");
             var greens = args;
