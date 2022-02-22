@@ -1,4 +1,4 @@
-const { bot } = require("../../index")
+const { bot } = require("../../index");
 let data_store = require('data-store');
 let settings = new data_store({ path: process.cwd() + '/connect4.json' });
 
