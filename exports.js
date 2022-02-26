@@ -173,7 +173,14 @@ module.exports = {
     bot: bot
 };
 
-const { devMode, dtoken } = require('./config.json');
-var token = dtoken;
-if (!devMode) token = process.env.TOKEN;
+const { devMode } = require('./config.json');
+
+var token;
+if (devMode) {
+    const { dtoken } = require('./dev-config.json');
+    token = dtoken;
+} else {
+    token = process.env.TOKEN;
+}
+
 client.login(token);

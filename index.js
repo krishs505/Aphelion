@@ -13,11 +13,15 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 
 const { bot } = require('./exports');
 
-const { devMode, connectToMongo, dtoken, dMONGO_URI } = require('./config.json');
-var token = dtoken;
-var MONGO_URI = dMONGO_URI;
-var prefix = "++";
+const { devMode, connectToMongo } = require('./config.json');
+var token;
+var MONGO_URI;
+var prefix;
 if (devMode) {
+    const { dtoken, dMONGO_URI } = require('./dev-config.json');
+    token = dtoken;
+    MONGO_URI = dMONGO_URI;
+    prefix = "++";
     BotName += " Dev";
 } else {
     token = process.env.TOKEN;
