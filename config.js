@@ -16,7 +16,7 @@ const BotSupportLink = 'https://discord.gg/';
 const { Client, Intents } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MEMBERS] });
 
-var token = "ODIyNDU2OTUzNTAxNjQ2ODQ5.YFSiug.vETBeiMehSK7HUCMaZr-R9tAvCk";
+var token = process.env.TOKEN;
 var prefix = "+";
 if (devMode) {
     token = "ODQ5Mjc2ODI4ODE5NzgzNjgx.YLY0rg.H4uez14B4pgh7oPOZZCfrf3NC8M";
