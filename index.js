@@ -1,8 +1,29 @@
+/*********************************************/
+
+const DJSVersion = '13.6';
+
+const BotDev = '252980043511234560';
+let BotName = 'Aphelion';
+const BotSupportLink = 'https://discord.gg/';
+
+/*********************************************/
+
 const { Client, Intents, Collection, MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MEMBERS] });
 
 const { bot } = require('./exports');
-const { token, prefix, BotName, devMode, connectToMongo, MONGO_URI } = require('./config.js');
+
+const { devMode, connectToMongo, dtoken, dMONGO_URI } = require('./config.json');
+var token = dtoken;
+var MONGO_URI = dMONGO_URI;
+var prefix = "++";
+if (devMode) {
+    BotName += " Dev";
+} else {
+    token = process.env.TOKEN;
+    MONGO_URI = process.env.MONGO_URI;
+    prefix = "+";
+}
 
 // require('./invisdetection');
 
@@ -37,8 +58,13 @@ client.on('ready', async () => {
 });
 
 module.exports = {
-    ws: client.ws
-} // literally just for ping command
+    ws: client.ws,
+    prefix: prefix,
+    BotName: BotName,
+    BotDev: BotDev,
+    BotSupportLink: BotSupportLink,
+    DJSVersion: DJSVersion
+}
 
 client.on('messageCreate', async message => {
     if (message.embeds.length !== 0) { // check if it's an embed

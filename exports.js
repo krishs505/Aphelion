@@ -5,9 +5,6 @@ const devTesters = ['252980043511234560'];
 const staff = ['252980043511234560', '258265415770177536', '572927730707071006'];
 
 var bot = {
-    loadSettings: function () {
-        settings = new data_store({ path: process.cwd() + '/settings.json' });
-    },
     isKihei: function (id) {
         if (id == '252980043511234560') {
             return true;
@@ -176,5 +173,7 @@ module.exports = {
     bot: bot
 };
 
-const { token } = require('./config.js');
+const { devMode, dtoken } = require('./config.json');
+var token = dtoken;
+if (!devMode) token = process.env.TOKEN;
 client.login(token);

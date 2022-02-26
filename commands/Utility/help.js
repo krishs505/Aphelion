@@ -1,4 +1,4 @@
-const { prefix } = require('../../config.js');
+const { prefix } = require('../../index');
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
 const Discord = require('discord.js')
 const { bot } = require('../../exports');
