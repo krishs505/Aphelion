@@ -1,4 +1,4 @@
-const { bot, client } = require("../../index")
+const { bot } = require("../../exports")
 const Discord = require('discord.js')
 
 module.exports = {
@@ -7,10 +7,9 @@ module.exports = {
     aliases: ['avatar', 'icon'],
     usage: '[user mention]',
     cooldown: 0,
+    od: true,
     execute(message) {
-        if (!bot.isKihei(message.author.id)) return
-
-        var servers = `**Aphelion is in **\`` + client.guilds.cache.size + `\`** servers!**`;
+        var servers = `**Aphelion is in **\`` + message.client.guilds.cache.size + `\`** servers!**`;
 
         client.guilds.cache.forEach((guild) => {
             servers = servers + `\n- ${guild.name} - ${guild.memberCount} members (${guild.id})`;

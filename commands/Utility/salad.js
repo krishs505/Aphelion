@@ -1,4 +1,4 @@
-const { bot } = require('../..');
+const { bot } = require('../../exports');
 const Discord = require('discord.js')
 
 const sSchema = require('../../schemas/salad-session-schema');

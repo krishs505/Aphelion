@@ -1,4 +1,4 @@
-const { bot } = require("../../index")
+const { bot } = require("../../exports")
 
 module.exports = {
     name: 'echo',

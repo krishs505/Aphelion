@@ -1,4 +1,4 @@
-const { bot } = require("../../index");
+const { bot } = require("../../exports");
 
 module.exports = {
     name: 'shufflearray',
@@ -9,9 +9,9 @@ module.exports = {
     execute(message, args) {
         (async () => {
 
-            var s = Date.now();
+            var s = performance.now();
             var shuffled = bot.shuffleArray(args);
-            var e = Date.now();
+            var e = performance.now();
             
             await message.channel.send(`${shuffled.join(" ")}\n${bot.findLatency(s, e)}`);
             

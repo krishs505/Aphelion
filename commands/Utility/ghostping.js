@@ -1,4 +1,4 @@
-const { bot } = require("../../index")
+const { bot } = require("../../exports")
 const wait = require('util').promisify(setTimeout);
 
 module.exports = {

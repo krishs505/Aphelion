@@ -1,6 +1,6 @@
 const {
     bot
-} = require("../../index")
+} = require("../../exports")
 let data_store = require('data-store');
 let settings = new data_store({ path: process.cwd() + '/ttt.json' });
 

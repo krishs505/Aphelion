@@ -1,5 +1,4 @@
-const { CommandInteraction } = require("discord.js");
-const { bot } = require("../../index");
+const { bot } = require("../../exports");
 
 module.exports = {
     name: 'root',

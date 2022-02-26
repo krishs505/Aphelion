@@ -1,4 +1,4 @@
-const { bot } = require("../../index")
+const { bot } = require("../../exports")
 
 module.exports = {
     name: 'simplifyfraction',
@@ -40,7 +40,7 @@ module.exports = {
 
             const processing = await message.channel.send('<a:loading_forever:822539925786329149> Processing...')
 
-            var s = Date.now();
+            var s = performance.now();
             for (let i = 1; i <= num; i++) {
                 if (num % i === 0) {
                     factors.push(i);
@@ -52,7 +52,7 @@ module.exports = {
                     cf.push(i);
                 }
             }
-            var e = Date.now();
+            var e = performance.now();
 
             var gcf = cf[cf.length - 1];
             var newNum = num / gcf;

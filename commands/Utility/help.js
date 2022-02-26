@@ -1,7 +1,7 @@
-const { prefix } = require('../../config.json');
+const { prefix } = require('../../config.js');
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
 const Discord = require('discord.js')
-const { bot } = require('../../index');
+const { bot } = require('../../exports');
 
 module.exports = {
 	name: 'help',

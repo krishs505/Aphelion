@@ -1,6 +1,6 @@
 const {
     bot
-} = require('../.././index.js')
+} = require('../../exports')
 
 module.exports = {
     name: 'fetchname',

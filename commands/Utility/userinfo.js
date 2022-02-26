@@ -1,4 +1,4 @@
-const { bot } = require('../../index.js');
+const { bot } = require('../../exports.js');
 const Discord = require('discord.js');
 
 module.exports = {

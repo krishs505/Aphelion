@@ -1,5 +1,5 @@
-const { bot } = require('../.././index.js')
-const { prefix } = require('../.././config.json');
+const { bot } = require('../../exports')
+const { prefix } = require('../../config.js');
 
 module.exports = {
     name: 'clear',

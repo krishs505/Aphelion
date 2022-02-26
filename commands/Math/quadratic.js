@@ -1,4 +1,4 @@
-const { bot } = require("../../index")
+const { bot } = require("../../exports")
 
 function median(values) {
     var half = Math.floor(values.length / 2);

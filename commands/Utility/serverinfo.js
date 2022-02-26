@@ -1,4 +1,4 @@
-const { bot } = require('../../index.js');
+const { bot } = require('../../exports');
 const Discord = require('discord.js');
 
 function month(int) {

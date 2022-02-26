@@ -1,20 +1,19 @@
-const { cw, bot } = require("../../index");
+const { bot } = require("../../exports");
+const { ws } = require("../../index");
 
 module.exports = {
     name: 'ping',
     description: 'Check the latency of the bot.',
     aliases: ['latency'],
     usage: ' ',
-    cooldown: 0,
+    cooldown: 2,
     execute(message) {
         (async () => {
-            var now = Date.now();
-            var l = Math.abs(message.createdTimestamp - now);
-
-            var m = `**Pong!** ${l.toString()}ms`;
-            if (bot.isLab(message)) m += `\nDAPI: ${cw.ping}ms`;
-            
-            await message.channel.send(m);
+            await message.channel.send("Calculating...").then(m => {
+                var msg = `**Pong!** ${m.createdTimestamp - message.createdTimestamp}ms`;
+                if (bot.isLab(message)) msg += `\nDAPI: ${ws.ping}ms`;
+                m.edit(msg);
+            });
         })();
     }
 }

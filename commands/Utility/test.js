@@ -1,4 +1,4 @@
-const { bot } = require("../../index");
+const { bot } = require("../../exports");
 let fs = require('fs');
 const path = require('path');
 
@@ -22,7 +22,7 @@ module.exports = {
             var factors2;
             var primes = [];
 
-            var s = Date.now();
+            var s = performance.now();
             for (var i = 0; i < f[0].length; i++) {
                 factors1 = bot.findFactors(f[0][i]);
                 factors2 = bot.findFactors(f[1][i]);
@@ -34,7 +34,7 @@ module.exports = {
                     primes.push(f[0][i] + ' ' + f[1][i]);
                 }
             }
-            var e = Date.now();
+            var e = performance.now();
 
             message.channel.send(primes.join(", ") + "\n" + bot.findLatency(s, e));
 

@@ -1,6 +1,6 @@
 const {
     bot
-} = require("../../index")
+} = require("../../exports")
 
 module.exports = {
     name: 'cf',

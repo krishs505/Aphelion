@@ -1,4 +1,4 @@
-const { bot } = require("../../index");
+const { bot } = require("../../exports");
 
 module.exports = {
     name: 'pseudorandom',
@@ -11,7 +11,6 @@ module.exports = {
         (async () => {
 
             // var input = parseInt(args[0]);
-            var s = Date.now();
             var now = Date.now().toString();
             var input = parseInt(now.substring(now.length - 3));
 

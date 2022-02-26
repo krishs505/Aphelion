@@ -1,4 +1,4 @@
-const { bot } = require("../../index")
+const { bot } = require("../../exports")
 
 function clean(text) {
     if (typeof (text) === "string")

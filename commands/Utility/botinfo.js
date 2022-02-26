@@ -1,4 +1,4 @@
-const { BotDev, BotName, DJSVersion, BotSupportLink, client } = require("../../index")
+const { BotDev, BotName, DJSVersion, BotSupportLink } = require("../../config.js")
 
 module.exports = {
     name: 'botinfo',

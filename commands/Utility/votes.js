@@ -1,4 +1,4 @@
-const { bot } = require("../../index");
+const { bot } = require("../../exports");
 const Discord = require('discord.js')
 
 let data_store = require('data-store');

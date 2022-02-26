@@ -1,4 +1,4 @@
-const { bot } = require("../../index")
+const { bot } = require("../../exports")
 
 module.exports = {
     name: 'factors',
@@ -18,11 +18,13 @@ module.exports = {
 
             var factors = [];
             var lat = 0;
+            
+            console.log(`Estimated time: ${bot.estimateFactorsTime(num)}`);
 
             // for (var i = 0; i < args[1]; i++) {
-                var s = Date.now();
+                var s = performance.now();
                 factors = bot.findFactors(num);
-                var e = Date.now();
+                var e = performance.now();
                 lat += (e - s);
             // }
             // console.log(`${args[1]} tests run in ${lat}ms.\nAverage speed: ${lat / parseInt(args[1])}ms`);

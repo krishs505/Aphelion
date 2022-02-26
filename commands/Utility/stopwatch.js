@@ -1,4 +1,4 @@
-const { bot } = require("../../index");
+const { bot } = require("../../exports");
 
 const swSchema = require('../../schemas/stopwatch-schema');
 const dID = "61fef7ccefe7184ded54ffcf";

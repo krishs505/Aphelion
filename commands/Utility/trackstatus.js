@@ -1,4 +1,4 @@
-const { bot } = require("../../index");
+const { bot } = require("../../exports");
 
 const Schema = require('../../schemas/settings-schema');
 const ID = '61d8b1ae44c5fc5637085070';

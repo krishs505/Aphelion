@@ -1,4 +1,4 @@
-const { bot } = require("../../index")
+const { bot } = require("../../exports")
 
 let data_store = require('data-store');
 let data = new data_store({ path: process.cwd() + '/bai_data.json' });
