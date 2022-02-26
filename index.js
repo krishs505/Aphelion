@@ -1,33 +1,29 @@
-/*********************************************/
-
-const DJSVersion = '13.6';
-
-const BotDev = '252980043511234560';
-let BotName = 'Aphelion';
-const BotSupportLink = 'https://discord.gg/';
-
-/*********************************************/
-
 const { Client, Intents, Collection, MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MEMBERS] });
 
-const { bot } = require('./exports');
+/*** Settings ***/
+let prefix = '+';
+let BotName = 'Aphelion';
+const DJSVersion = '13.6';
+const BotSupportLink = 'https://discord.gg/';
+const BotDev = '252980043511234560';
 
+/* Token Handler (devMode) */
 const { devMode, connectToMongo } = require('./config.json');
 var token;
 var MONGO_URI;
-var prefix;
 if (devMode) {
     const { dtoken, dMONGO_URI } = require('./dev-config.json');
     token = dtoken;
     MONGO_URI = dMONGO_URI;
-    prefix = "++";
+    prefix += prefix;
     BotName += " Dev";
 } else {
     token = process.env.TOKEN;
     MONGO_URI = process.env.MONGO_URI;
-    prefix = "+";
 }
+
+const { bot } = require('./exports');
 
 // require('./invisdetection');
 
@@ -483,6 +479,6 @@ client.on('messageCreate', async message => {
         console.log(error);
         message.channel.send('There was an error trying to execute that command!');
     }
-})
+});
 
 client.login(token);

@@ -19,7 +19,7 @@ module.exports = {
             var factors = [];
             var lat = 0;
             
-            console.log(`Estimated time: ${bot.estimateFactorsTime(num)}`);
+            // console.log(`Estimated time: ${bot.estimateFactorsTime(num)}`);
 
             // for (var i = 0; i < args[1]; i++) {
                 var s = performance.now();
