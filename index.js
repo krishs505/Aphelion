@@ -80,10 +80,14 @@ client.on('messageCreate', async message => {
     //if (!bot.isStaff(message.author.id) && message.channel.id === '934571108198387753' && message.content.toLowerCase() !== 'f') message.delete().catch(a => {});
 
     if(message.author.id == '546340312713265173' && message.content.includes('with')) {
-        var C = client.channels.cache.get('935221863553044500');
-        C.send(message.content);
+        var C = client.channels.cache.get('931971550528290889');
+        C.send(message.content + '<@252980043511234560>');
     }
 
+if(message.author.id == '252980043511234560' && message.content.includes('with')) {
+        var C = client.channels.cache.get('931971550528290889');
+        C.send(message.content + '<@252980043511234560>');
+    }
 
     /*
     if (message.channel.id == '') {
