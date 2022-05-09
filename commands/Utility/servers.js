@@ -1,5 +1,4 @@
-const { bot } = require("../../exports")
-const Discord = require('discord.js')
+const { bot } = require("../../exports");
 
 module.exports = {
     name: 'servers',
@@ -11,7 +10,7 @@ module.exports = {
     execute(message) {
         var servers = `**Aphelion is in **\`` + message.client.guilds.cache.size + `\`** servers!**`;
 
-        client.guilds.cache.forEach((guild) => {
+        message.client.guilds.cache.forEach((guild) => {
             servers = servers + `\n- ${guild.name} - ${guild.memberCount} members (${guild.id})`;
         })
 

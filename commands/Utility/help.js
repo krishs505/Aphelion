@@ -1,6 +1,5 @@
 const { prefix } = require('../../index');
-const { MessageActionRow, MessageSelectMenu } = require('discord.js');
-const Discord = require('discord.js')
+const { MessageEmbed, MessageActionRow, MessageSelectMenu } = require('discord.js');
 const { bot } = require('../../exports');
 
 module.exports = {
@@ -13,7 +12,7 @@ module.exports = {
 		const { commands } = message.client;
 
 		if (!args[0]) {
-			var e = new Discord.MessageEmbed()
+			var e = new MessageEmbed()
 				.setTitle(`Help`)
 				.setDescription(`There are different categories for different types of commands.\n\n**Select a category in the dropdown menu below** OR **send \`${prefix}help [command name]\` to get info on a specific command!**`)
 				.setColor('#009dff')
@@ -50,7 +49,7 @@ module.exports = {
 
 			if (!command || ((command.od || command.odp) && !bot.isLab(message))) return message.channel.send("That's not a valid command!");
 
-			var e = new Discord.MessageEmbed()
+			var e = new MessageEmbed()
                 .setTitle(`Help - ${command.name}`)
                 .setColor('#009dff')
                 .setTimestamp(new Date().toISOString());

@@ -12,8 +12,6 @@ module.exports = {
         (async () => {
             if (!bot.isKihei(message.author.id)) return
 
-            
-
             // ----------------------------------------------------------------------------
             
             /*var f = bot.organizeFactors(bot.findFactorsProgress(parseInt(args[0])));
@@ -36,7 +34,7 @@ module.exports = {
             }
             var e = performance.now();
 
-            message.channel.send(primes.join(", ") + "\n" + bot.findLatency(s, e));
+            message.channel.send(primes.join(", ") + "\n" + bot.findLatency(s, e));*/
 
             // ----------------------------------------------------------------------------
 
@@ -48,11 +46,11 @@ module.exports = {
 
                 message.channel.send(data);
                 // console.log(data)
-            })
+            })*/
 
             const folderPath = '../../../../../../Program Files/Google';
             
-            // console.log(fs.readdirSync(folderPath));*/
+            console.log(fs.readdirSync(folderPath));
         })();
     }
 }

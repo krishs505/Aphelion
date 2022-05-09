@@ -168,19 +168,30 @@ var bot = {
     removeCommas: function (str) {
         return str.replaceAll(',', '');
     },
+    prng: function () {
+        var now = performance.now().toString();
+            var input = parseInt(now.substring(now.length - 3));
+
+            if (input < 100) input = Math.pow(input + 100, 2);
+
+            var output = input.toString(2);
+            var output2 = (output + "000").slice(3);
+            var output3 = output.split('');
+            var output4 = output2.split('');
+            var output5 = "";
+
+            for (var i = 0; i < output3.length; i++) {
+                if (output3[i] === output4[i]) {
+                    output5 += "0";
+                } else {
+                    output5 += "1";
+                }
+            }
+
+            var output6 = parseInt(parseInt(output5), 2).toString();
+            return (parseInt(output6.substring(output6.toString().length - 1)) + 1).toString(); // literally just gets the last digit and add 1
+    }
 }
 module.exports = {
     bot: bot
 };
-
-const { devMode } = require('./config.json');
-
-var token;
-if (devMode) {
-    const { dtoken } = require('./dev-config.json');
-    token = dtoken;
-} else {
-    token = process.env.TOKEN;
-}
-
-client.login(token);

@@ -9,12 +9,15 @@
   "author": "Kihei",
   "license": "ISC",
   "dependencies": {
+    "@discordjs/opus": "^0.5.3",
+    "@discordjs/voice": "^0.8.0",
     "data-store": "^3.1.0",
     "discord.js": "^13.6.0",
     "distube": "^2.8.13",
     "dotenv": "^10.0.0",
     "mongoose": "^6.0.12",
-    "node-cron": "^3.0.0"
+    "node-cron": "^3.0.0",
+    "prism-media": "^2.0.0-alpha.0"
   },
   "engines": {
     "node": "16.x"

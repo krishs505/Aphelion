@@ -7,6 +7,15 @@ const stopwatchSchema = mongoose.Schema({
     startingTime: {
         type: Number
     },
+    phrase: {
+        type: [String]
+    },
+    user: {
+        type: String
+    },
+    channel: {
+        type: String
+    },
     pausedTime: {
         type: Number
     },

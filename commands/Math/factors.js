@@ -17,18 +17,25 @@ module.exports = {
             if (Number.isInteger(strNum)) return message.channel.send(args[0] + ' is not an integer!');
 
             var factors = [];
-            var lat = 0;
+            var tLat = 0;
             
             // console.log(`Estimated time: ${bot.estimateFactorsTime(num)}`);
-
-            // for (var i = 0; i < args[1]; i++) {
+            
+            var s = performance.now();
+            factors = bot.findFactors(num);
+            var e = performance.now();
+            
+            
+            // Multiple Tests
+            /*for (var i = 0; i < args[1]; i++) {
                 var s = performance.now();
                 factors = bot.findFactors(num);
                 var e = performance.now();
-                lat += (e - s);
-            // }
-            // console.log(`${args[1]} tests run in ${lat}ms.\nAverage speed: ${lat / parseInt(args[1])}ms`);
-            // console.log("--");
+                tLat += (e - s);
+            }
+            console.log(`${args[1]} tests run in ${tLat}ms.\nAverage speed: ${tLat / parseInt(args[1])}ms`);
+            console.log("--");*/
+            
 
             factors = factors.sort(function(a,b) { return a-b }).join(", ");
             var latency = "\n\n" + bot.findLatency(s, e);

@@ -9,13 +9,6 @@ module.exports = {
     od: true,
     execute(message, args) {
         (async () => {
-            /*
-            Todo:
-            - Create separate bot for this
-            - Allow users to use it in DMs (or only DMs)
-            - Open source code on GitHub (to ensure user privacy) and launch on Heroku
-            */
-
             var split = args.indexOf("min");
 
             var maj = [];

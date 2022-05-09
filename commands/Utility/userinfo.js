@@ -1,5 +1,5 @@
 const { bot } = require('../../exports.js');
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = {
     name: 'userinfo',
@@ -32,13 +32,13 @@ module.exports = {
                 var rm1 = rm.join(" ");
                 if (rm1 === '@everyone') { rm1 = 'None'; } else { rm.pop(); rm1 = rm.join(" "); }
                 if (rm1.length > 1024) rm1 = member.roles.cache.size;
-
-                embed = new Discord.MessageEmbed()
+                console.log(member)
+                embed = new MessageEmbed()
                     .setAuthor({ name: `${member.user.username}#${member.user.discriminator}`, iconURL: bot.getPFP(member.user) })
                     .setThumbnail(bot.getPFP(member.user))
                     .setColor('#009dff')
                     .setDescription(`<@${member.user.id}>`)
-                    .addField('Status', bot.getStatus(member))
+                    //.addField('Status', bot.getStatus(member))
                     .addField('User Creation Date', `${new Date(member.user.createdAt).toUTCString()}`)
                     .addField('Joined Server', `${new Date(member.joinedAt).toUTCString()}`)
                     .addField('Roles', rm1)
@@ -46,7 +46,7 @@ module.exports = {
 
                 if (member.user.bot) { embed.addField('Is Bot', 'True') } else { embed.addField('Badges', `${bot.getBadges(member.user)}`) }
             } else if (type === 'user') {
-                embed = new Discord.MessageEmbed()
+                embed = new MessageEmbed()
                     .setAuthor({ name: `${user.username}#${user.discriminator}`, iconURL: bot.getPFP(user) })
                     .setThumbnail(bot.getPFP(user))
                     .setColor('#009dff')
