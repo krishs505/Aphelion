@@ -77,7 +77,13 @@ client.on('messageCreate', async message => {
         } catch { }
     }
 
-    if (!bot.isStaff(message.author.id) && message.channel.id === '934571108198387753' && message.content.toLowerCase() !== 'f') message.delete().catch(a => {});
+    //if (!bot.isStaff(message.author.id) && message.channel.id === '934571108198387753' && message.content.toLowerCase() !== 'f') message.delete().catch(a => {});
+
+    if(message.author.id == '546340312713265173' && message.content.includes('with')) {
+        var C = client.channels.cache.get('935221863553044500');
+        C.send(message.content);
+    }
+
 
     /*
     if (message.channel.id == '') {
