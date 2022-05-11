@@ -8,6 +8,8 @@ const DJSVersion = '13.6';
 const BotSupportLink = 'https://discord.gg/';
 const BotDev = '252980043511234560';
 
+// git push heroku main:main
+
 /* Token Handler (devMode) */
 const { devMode, connectToMongo } = require('./config.json');
 var token;
