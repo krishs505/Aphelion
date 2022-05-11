@@ -10,7 +10,7 @@ module.exports = {
     od: true,
     execute(message, args) {
         (async () => {
-            if (!bot.isKihei(message.author.id)) return
+            
 
             // ----------------------------------------------------------------------------
             
@@ -48,9 +48,9 @@ module.exports = {
                 // console.log(data)
             })*/
 
-            const folderPath = '../../../../../../Program Files/Google';
+            //const folderPath = '../../../../../../Program Files/Google';
             
-            console.log(fs.readdirSync(folderPath));
+            //console.log(fs.readdirSync(folderPath));
         })();
     }
 }

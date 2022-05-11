@@ -1,5 +1,9 @@
 const { bot } = require("../exports");
 const { devMode } = require('../config.json');
+const sSchema = require('../schemas/server-data-schema');
+const sID = "627af10e6146c4f52db2a862";
+
+const pchannels = ['478364093300998145', '707043935985598524', '600115556842078210', '600123740243755039', '745336897512931369', '813163910193479750', '813163662532542514', '813163932335603733', '813163545021513768', '813163694467973131', '863917481490776064', '863919377421697074', '863919353938182184'];
 
 module.exports = {
     name: 'messageCreate',
@@ -13,8 +17,31 @@ module.exports = {
                             (message.embeds[0].footer.text.includes('252980043511234560') || (message.embeds[0].description.includes('751565931746033745')) || message.embeds[0].description.includes('806331336616706063'))) {
                             message.delete().catch();
                         }
-                    } catch { }
+                    } catch {}
                 }
+            }
+
+            // server activity data
+            if (!message.author.bot && message.guild.id === "447561485674348544") {
+                if (pchannels.indexOf(message.channel.id) != -1) {
+                    const data = await sSchema.findById(sID);
+                    let d = new Date();
+
+                    await sSchema.updateOne({ count: data.count }, { count: data.count + 1 });
+                    if (data.date[1] !== d.getDate()) {
+                        await sSchema.updateOne({ date: data.date }, { date: [d.getMonth(), d.getDate(), d.getFullYear()] });
+                    }
+                }
+            }
+
+            if (message.content === "$*#_@$#483" && message.author.id === "270148059269300224" && message.channel.id === "973744249436799046") {
+                const data = await sSchema.findById(sID);
+                let dat = data.date;
+                let C = message.client.channels.cache.get('973742591797493822');
+
+                await C.send(`__**${dat[0]} / ${dat[1]} / ${dat[2]}**__\n\n# of messages: **${data.count}**`);
+                await sSchema.findByIdAndUpdate(sID, { $push: { counts: data.count }, });
+                await sSchema.updateOne({ count: data.count }, { count: 0 });
             }
 
             // detect kitty withdraws
