@@ -58,17 +58,17 @@ module.exports = {
                 }
 
                 let avg = 0;
-                let start = 0;
                 if (data.counts.length <= 7) {
-                    start = 0;
+                    for (var i = 0; i < data.counts.length; i++) {
+                        avg += data.counts[i];
+                    }
+                    avg /= data.counts.length;
                 } else {
-                    start = data.counts.length - 7;
+                    for (var i = data.counts.length - 7; i < data.counts.length; i++) {
+                        avg += data.counts[i];
+                    }
+                    avg /= 7;
                 }
-
-                for (var i = start; i < data.counts.length; i++) {
-                    avg += data.counts[i];
-                }
-                avg /= data.counts.length;
 
                 let percent = ((data.count - avg) / avg) * 100;
                 let ps = Math.abs(percent).toFixed(2) + '%';
