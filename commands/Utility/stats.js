@@ -13,7 +13,7 @@ module.exports = {
             const data = await sSchema.findById(sID);
             let dat = data.date;
 
-            await message.channel.send(`__**${dat[0]} / ${dat[1]} / ${dat[2]}**__\n\n# of messages: **${data.count}**`);
+            await message.channel.send(`__**${dat[0]}/${dat[1]}/${dat[2]}**__\n\n# of messages: **${data.count}**`);
         })();
     }
 }

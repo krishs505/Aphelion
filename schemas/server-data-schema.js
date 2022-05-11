@@ -4,6 +4,12 @@ const serverDataSchema = mongoose.Schema({
     count: {
         type: Number
     },
+    users: {
+        type: [String]
+    },
+    usercounts: {
+        type: [Number]
+    },
     date: {
         type: [Number]
     },

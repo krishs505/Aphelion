@@ -29,19 +29,62 @@ module.exports = {
 
                     await sSchema.updateOne({ count: data.count }, { count: data.count + 1 });
                     if (data.date[1] !== d.getDate()) {
-                        await sSchema.updateOne({ date: data.date }, { date: [d.getMonth(), d.getDate(), d.getFullYear()] });
+                        await sSchema.updateOne({ date: data.date }, { date: [d.getMonth()+1, d.getDate(), d.getFullYear()] });
+                    }
+                    let loc = data.users.indexOf(message.author.id);
+                    if (loc === -1) {
+                        await sSchema.findByIdAndUpdate(sID, { $push: { users: message.author.id }, });
+                        await sSchema.findByIdAndUpdate(sID, { $push: { usercounts: 1 }, });
+                    } else {
+                        var temp = data.usercounts;
+                        temp[loc] ++;
+                        await sSchema.findByIdAndUpdate(sID, { $set: { usercounts: temp } });
                     }
                 }
             }
 
+            // publish data based on pylon cron task
             if (message.content === "$*#_@$#483" && message.author.id === "270148059269300224" && message.channel.id === "973744249436799046") {
                 const data = await sSchema.findById(sID);
                 let dat = data.date;
                 let C = message.client.channels.cache.get('973742591797493822');
+                let li;
+                let l = 0;
+                for (var i = 0; i < data.usercounts.length; i++) {
+                    if (data.usercounts[i] > l) {
+                        l = data.usercounts[i];
+                        li = i;
+                    }
+                }
 
-                await C.send(`__**${dat[0]} / ${dat[1]} / ${dat[2]}**__\n\n# of messages: **${data.count}**`);
+                let avg = 0;
+                if (data.counts.length < 7) {
+                    for (var i = 0; i < data.counts.length; i++) {
+                        avg += data.counts[i];
+                    }
+                    avg /= data.counts.length;
+                } else {
+
+                }
+
+                let percent = ((data.count - avg) / avg) * 100;
+                let ps = Math.abs(percent).toFixed(2) + '%';
+                let punc = "!";
+                if (percent >= 0) {
+                    ps = "up **" + ps + "**";
+                } else {
+                    ps = "down **" + ps + "**";
+                    punc = ". <:blobsad:848696280271421481>";
+                }
+
+                await C.send(`__**${dat[0]}/${dat[1]}/${dat[2]}**__\n\nTotal messages: **${data.count}**\nToday's message count was ${ps} from the week average${punc}\nMost active member: **<@${data.users[li]}>**`);
+
+                // save todays message count to array counts
                 await sSchema.findByIdAndUpdate(sID, { $push: { counts: data.count }, });
+                // reset counts and users for next day
                 await sSchema.updateOne({ count: data.count }, { count: 0 });
+                await sSchema.findByIdAndUpdate(sID, { $pullAll: { users: data.users } });
+                await sSchema.findByIdAndUpdate(sID, { $pullAll: { usercounts: data.usercounts } });
             }
 
             // detect kitty withdraws
