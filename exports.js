@@ -146,9 +146,9 @@ var bot = {
     findLatency: function (s, e) {
         let latency = e - s;
         if (latency > 1000) {
-            latency = `${latency / 1000}s`;
+            latency = `${(latency / 1000).toFixed(5)}s`;
         } else {
-            latency = `${latency}ms`;
+            latency = `${latency.toFixed(5)}ms`;
         }
 
         return `Calculated in **${latency}**`;
