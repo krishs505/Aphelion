@@ -15,6 +15,9 @@ const serverDataSchema = mongoose.Schema({
     },
     counts: {
         type: [Number]
+    },
+    dates: {
+        type: [String]
     }
 })
 

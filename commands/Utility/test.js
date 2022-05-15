@@ -1,6 +1,7 @@
 const { bot } = require("../../exports");
 let fs = require('fs');
 const path = require('path');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = {
     name: 'test',
@@ -10,7 +11,6 @@ module.exports = {
     od: true,
     execute(message, args) {
         (async () => {
-            
 
             // ----------------------------------------------------------------------------
             

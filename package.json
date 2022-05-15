@@ -17,7 +17,8 @@
     "dotenv": "^10.0.0",
     "mongoose": "^6.0.12",
     "node-cron": "^3.0.0",
-    "prism-media": "^2.0.0-alpha.0"
+    "prism-media": "^2.0.0-alpha.0",
+    "quickchart-js": "^3.0.1"
   },
   "engines": {
     "node": "16.x"

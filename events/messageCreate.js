@@ -1,5 +1,6 @@
 const { bot } = require("../exports");
 const { devMode } = require('../config.json');
+const QuickChart = require('quickchart-js');
 const sSchema = require('../schemas/server-data-schema');
 const sID = "627af10e6146c4f52db2a862";
 
@@ -22,7 +23,7 @@ module.exports = {
             }
 
             // server activity data
-            if (!message.author.bot && message.guild.id === "447561485674348544") {
+            if (!devMode && !message.author.bot && message.guild.id === "447561485674348544") {
                 if (pchannels.indexOf(message.channel.id) != -1) {
                     const data = await sSchema.findById(sID);
                     let d = new Date();
@@ -82,8 +83,9 @@ module.exports = {
 
                 await C.send(`__**${dat[0]}/${dat[1]}/${dat[2]}**__\n\nTotal messages: **${data.count}**\nToday's message count was ${ps} from the week average${punc}\nMost active member: **<@${data.users[li]}>**`);
 
-                // save todays message count to array counts
+                // save todays message count and date
                 await sSchema.findByIdAndUpdate(sID, { $push: { counts: data.count }, });
+                await sSchema.findByIdAndUpdate(sID, { $push: { dates: `${dat[0]}/${dat[1]}/${dat[2]}` }, });
                 // reset counts and users for next day
                 await sSchema.updateOne({ count: data.count }, { count: 0 });
                 await sSchema.findByIdAndUpdate(sID, { $pullAll: { users: data.users } });
