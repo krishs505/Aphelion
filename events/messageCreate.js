@@ -3,6 +3,7 @@ const { devMode } = require('../config.json');
 const QuickChart = require('quickchart-js');
 const sSchema = require('../schemas/server-data-schema');
 const sID = "627af10e6146c4f52db2a862";
+const { MessageEmbed } = require('discord.js');
 
 const pchannels = ['478364093300998145', '707043935985598524', '600115556842078210', '600123740243755039', '745336897512931369', '813163910193479750', '813163662532542514', '813163932335603733', '813163545021513768', '813163694467973131', '863917481490776064', '863919377421697074', '863919353938182184'];
 
@@ -48,32 +49,41 @@ module.exports = {
             if (message.content === "$*#_@$#483" && message.author.id === "270148059269300224" && message.channel.id === "973744249436799046") {
                 const data = await sSchema.findById(sID);
                 let dat = data.date;
-                let C = message.client.channels.cache.get('973742591797493822');
+                console.log
+                let C = message.client.channels.cache.get('973744249436799046');
+                let countsT = data.usercounts;
+                let usersT = data.users;
                 let li;
                 let l = 0;
-                for (var i = 0; i < data.usercounts.length; i++) {
-                    if (data.usercounts[i] > l) {
-                        l = data.usercounts[i];
-                        li = i;
+                var lb = [[], []];
+                for (var j = 0; j < 3; j++) {
+                    for (var i = 0; i < countsT.length; i++) {
+                        if (countsT[i] > l) {
+                            l = countsT[i];
+                            li = i;
+                        }
                     }
+                    lb[0].push(`<@${usersT[li]}>`);
+                    lb[1].push(l.toString());
+                    usersT.splice(li, 1);
+                    countsT.splice(li, 1);
+                    l = 0;
                 }
 
                 let avg = 0;
-                if (data.counts.length <= 7) {
-                    for (var i = 0; i < data.counts.length; i++) {
-                        avg += data.counts[i];
-                    }
-                    avg /= data.counts.length;
-                } else {
-                    for (var i = data.counts.length - 7; i < data.counts.length; i++) {
-                        avg += data.counts[i];
-                    }
-                    avg /= 7;
+                let days = 7;
+                if (data.counts.length < 7) {
+                    days = data.counts.length;
                 }
+
+                for (var i = data.counts.length - days; i < data.counts.length; i++) {
+                    avg += data.counts[i];
+                }
+                avg /= days;
 
                 let percent = ((data.count - avg) / avg) * 100;
                 let ps = Math.abs(percent).toFixed(2) + '%';
-                let punc = "!";
+                let punc = "! <a:sharkhi:975868390172414032>";
                 if (percent >= 0) {
                     ps = "up **" + ps + "**";
                 } else {
@@ -81,7 +91,13 @@ module.exports = {
                     punc = ". <:blobsad:848696280271421481>";
                 }
 
-                await C.send(`__**${dat[0]}/${dat[1]}/${dat[2]}**__\n\nTotal messages: **${data.count}**\nToday's message count was ${ps} from the week average${punc}\nMost active member: **<@${data.users[li]}>**`);
+                const e = new MessageEmbed()
+                    .setTitle(`${dat[0]}/${dat[1]}/${dat[2]}`)
+                    .setDescription(`**Total Messages**\n${data.count.toString()}\n\nToday's message count was ${ps} from this week's average${punc}\n\n**Top 3 Active Members:**\n1. ${lb[0][0]} - ${lb[1][0]}\n2. ${lb[0][1]} - ${lb[1][1]}\n3. ${lb[0][2]} - ${lb[1][2]}`)
+                    .setColor('#0099FF')
+                    .setTimestamp(new Date().toISOString());
+
+                await C.send({ embeds: [e] });
 
                 // save todays message count and date
                 await sSchema.findByIdAndUpdate(sID, { $push: { counts: data.count }, });
@@ -92,6 +108,7 @@ module.exports = {
                 await sSchema.findByIdAndUpdate(sID, { $pullAll: { usercounts: data.usercounts } });
             }
 
+            /*
             // detect kitty withdraws
             if (message.author.id === "546340312713265173" && message.content.includes("()with")) {
                 var q = message.content.slice(7);
@@ -103,6 +120,7 @@ module.exports = {
                 if (q === "all" || pq >= 500000) times = 5;
                 for (var i = 0; i < times; i++) message.client.channels.cache.get('931971550528290889').send(q + " <@252980043511234560>");
             }
+            */
 
             // f chain
             // if (!bot.isStaff(message.author.id) && message.channel.id === '934571108198387753' && message.content.toLowerCase() !== 'f') message.delete().catch();
