@@ -50,7 +50,7 @@ module.exports = {
                 const data = await sSchema.findById(sID);
                 let dat = data.date;
                 console.log
-                let C = message.client.channels.cache.get('973744249436799046');
+                let C = message.client.channels.cache.get('973742591797493822');
                 let countsT = data.usercounts;
                 let usersT = data.users;
                 let li;
