@@ -110,6 +110,7 @@ module.exports = {
 
             if (message.channel.id === '981609742101254245' && !message.author.bot) {
                 if (message.attachments.size === 0) {
+                    await message.delete().catch(a => {});
                     await message.channel.send(`<@${message.author.id}> Only images allowed here!`).then(m => {
                         setTimeout(() => {
                             m.delete().catch(a => {});
