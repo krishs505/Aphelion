@@ -108,6 +108,30 @@ module.exports = {
                 await sSchema.findByIdAndUpdate(sID, { $pullAll: { usercounts: data.usercounts } });
             }
 
+            if (message.channel.id === '981609742101254245' && !message.author.bot) {
+                if (message.attachments.size === 0) {
+                    await message.channel.send(`<@${message.author.id}> Only images allowed here!`).then(m => {
+                        setTimeout(() => {
+                            m.delete().catch(a => {});
+                        }, 5000);
+                    })
+                    return;
+                }
+
+                let member = message.guild.members.cache.get(message.author.id);
+                let roles = member.roles.cache.map(r => r).join(" ");
+                let first = message.guild.roles.cache.get('981651907753955430');
+                let second = message.guild.roles.cache.get('981651919921639504');
+
+                if (!roles.includes('981651907753955430')) {
+                    await member.roles.add(first); await message.react("👍").catch(a => {});
+                } else if (!roles.includes('981651919921639504')) {
+                    await member.roles.add(second); await message.react("👍").catch(a => {});
+                } else {
+                    await message.delete();
+                }
+            }
+
             /*
             // detect kitty withdraws
             if (message.author.id === "546340312713265173" && message.content.includes("()with")) {
