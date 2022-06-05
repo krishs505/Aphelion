@@ -126,7 +126,7 @@ module.exports = {
 
                 if (problems === true) {
                     await message.channel.send("<:uhh:821063623882571787>");
-                    await message.channel.send("<@252980043511234560> Error(s) found with today's data! Please check console.");
+                    await message.channel.send(":x: <@252980043511234560> Error(s) found with today's data! Please check console.");
                     await message.channel.send("(I advise not to take today's data seriously as Kihei is an idiot)");
                 } else {
                     await message.channel.send("No errors found, today's data looks accurate to me and was saved! :thumbsup:")
