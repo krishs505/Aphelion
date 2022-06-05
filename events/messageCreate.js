@@ -49,13 +49,14 @@ module.exports = {
             if (message.content === "$*#_@$#483" && message.author.id === "270148059269300224" && message.channel.id === "973744249436799046") {
                 const data = await sSchema.findById(sID);
                 let dat = data.date;
-                console.log
                 let C = message.client.channels.cache.get('973742591797493822');
                 let countsT = data.usercounts;
                 let usersT = data.users;
-                let li;
-                let l = 0;
-                var lb = [[], []];
+                let li; // index of user with largest count
+                let l = 0; // largest count
+                var lb = [[], []]; // 2d array of leaderboard
+
+                // finds top 3 users
                 for (var j = 0; j < 3; j++) {
                     for (var i = 0; i < countsT.length; i++) {
                         if (countsT[i] > l) {
@@ -91,6 +92,30 @@ module.exports = {
                     punc = ". <:blobsad:848696280271421481>";
                 }
 
+                // Debugging
+                var problems = false;
+
+                if (data.usercounts.length !== data.users.length) {
+                    problems = true;
+                    console.log("Mismatched users and usercounts lengths!");
+                    console.log(`users: ${data.users.length}\nusercounts: ${data.usercounts.length}`);
+                }
+                
+                let total = 0;
+                for (var i = 0; i < data.usercounts.length; i++) {
+                    total += data.usercounts[i];
+                }
+
+                if (total !== data.count) {
+                    problems = true;
+                    console.log("User counts don't add up to the total message count!");
+
+                    for (var i = 0; i < data.users.length; i++) {
+                        console.log(data.users[i] + ": " + data.usercounts[i]);
+                    }
+                }
+                
+
                 const e = new MessageEmbed()
                     .setTitle(`${dat[0]}/${dat[1]}/${dat[2]}`)
                     .setDescription(`**Total Messages**\n${data.count.toString()}\n\nToday's message count was ${ps} from this week's average${punc}\n\n**Top 3 Active Members:**\n1. ${lb[0][0]} - ${lb[1][0]}\n2. ${lb[0][1]} - ${lb[1][1]}\n3. ${lb[0][2]} - ${lb[1][2]}`)
@@ -99,15 +124,25 @@ module.exports = {
 
                 await C.send({ embeds: [e] });
 
-                // save todays message count and date
-                await sSchema.findByIdAndUpdate(sID, { $push: { counts: data.count }, });
-                await sSchema.findByIdAndUpdate(sID, { $push: { dates: `${dat[0]}/${dat[1]}/${dat[2]}` }, });
+                if (problems === true) {
+                    await message.channel.send("<:uhh:821063623882571787>");
+                    await message.channel.send("<@252980043511234560> Error(s) found with today's data! Please check console.");
+                    await message.channel.send("(I advise not to take today's data seriously as Kihei is an idiot)");
+                } else {
+                    await message.channel.send("No errors found, today's data looks accurate to me and was saved! :thumbsup:")
+
+                    // save todays message count and date
+                    await sSchema.findByIdAndUpdate(sID, { $push: { counts: data.count }, });
+                    await sSchema.findByIdAndUpdate(sID, { $push: { dates: `${dat[0]}/${dat[1]}/${dat[2]}` }, });
+                }
+
                 // reset counts and users for next day
                 await sSchema.updateOne({ count: data.count }, { count: 0 });
                 await sSchema.findByIdAndUpdate(sID, { $pullAll: { users: data.users } });
                 await sSchema.findByIdAndUpdate(sID, { $pullAll: { usercounts: data.usercounts } });
             }
 
+            // 2 image limit
             if (message.channel.id === '981609742101254245' && !message.author.bot) {
                 if (message.attachments.size === 0) {
                     await message.delete().catch(a => {});
