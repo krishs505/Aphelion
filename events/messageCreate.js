@@ -125,11 +125,11 @@ module.exports = {
                 await C.send({ embeds: [e] });
 
                 if (problems === true) {
-                    await message.channel.send("<:uhh:821063623882571787>");
-                    await message.channel.send(":x: <@252980043511234560> Error(s) found with today's data! Please check console.");
-                    await message.channel.send("(I advise not to take today's data seriously as Kihei is an idiot)");
+                    await C.send("<:uhh:821063623882571787>");
+                    await C.send(":x: <@252980043511234560> Error(s) found with today's data! Please check console.");
+                    await C.send("(I advise not to take today's data seriously as Kihei is an idiot)");
                 } else {
-                    await message.channel.send("No errors found, today's data looks accurate to me and was saved! :thumbsup:")
+                    await C.send("No errors found, today's data looks accurate to me and was saved! :thumbsup:")
 
                     // save todays message count and date
                     await sSchema.findByIdAndUpdate(sID, { $push: { counts: data.count }, });
