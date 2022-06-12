@@ -17,7 +17,7 @@ module.exports = {
                         if (message.channel.id === '916919202105946142' && // dyno messages log
                             // check if it's my message OR from a manager channel and then delete
                             (message.embeds[0].footer.text.includes('252980043511234560') || (message.embeds[0].description.includes('751565931746033745')) || message.embeds[0].description.includes('806331336616706063'))) {
-                            message.delete().catch();
+                            await message.delete().catch(a => {});
                         }
                     } catch {}
                 }

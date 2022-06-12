@@ -6,7 +6,7 @@ module.exports = {
     execute(oldMessage, message) {
         (async () => {
             // f chain
-            // if (!bot.isStaff(message.author.id) && message.channel.id === '934571108198387753' && message.content.toLowerCase() !== 'f') message.delete().catch();
+            // if (!bot.isStaff(message.author.id) && message.channel.id === '934571108198387753' && message.content.toLowerCase() !== 'f') message.delete().catch(a => {});
 
             if (message.channel.type === 'dm') return
             if (message.author.bot) return;
