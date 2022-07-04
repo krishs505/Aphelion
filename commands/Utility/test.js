@@ -1,5 +1,6 @@
 const { bot } = require("../../exports");
 let fs = require('fs');
+let writeText = require('add-text-to-image');
 const path = require('path');
 const { MessageEmbed } = require('discord.js');
 
@@ -11,6 +12,16 @@ module.exports = {
     od: true,
     execute(message, args) {
         (async () => {
+
+            
+            
+            /*
+            await message.channel.send("test").then(m => {
+                setTimeout(() => {
+                    m.delete().catch(() => {});
+                }, 5000);
+            })
+            */
 
             // ----------------------------------------------------------------------------
             
