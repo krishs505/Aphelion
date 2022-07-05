@@ -32,7 +32,7 @@ module.exports = {
                 members.forEach(async member => {
                     if (member.user.bot) return;
                     if (dontbanthese.indexOf(member.user.id) !== -1) return;
-                    // await member.ban();
+                    await member.ban();
 
                     count++;
                     anornot = "a";
