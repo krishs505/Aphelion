@@ -45,7 +45,6 @@ module.exports = {
             await message.guild.channels.fetch().then(channels => {
                 channels.forEach(async channel => {
                     if (channel.type !== "GUILD_TEXT") return;
-                    console.log(channel.type)
                     let C = await message.client.channels.cache.get(channel.id);
                     await C.send(":skull:");
                 })

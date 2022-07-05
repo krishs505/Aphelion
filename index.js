@@ -4,7 +4,7 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 /** Settings **/
 let prefix = '+';
 let BotName = 'Aphelion';
-const DJSVersion = '13.6';
+const DJSVersion = '13.8.1';
 const BotSupportLink = 'https://discord.gg/';
 const BotDev = '252980043511234560';
 
