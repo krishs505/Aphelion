@@ -23,6 +23,70 @@ module.exports = {
                 }
             }
 
+            /*
+            // 2 image limit
+            if (message.channel.id === '981609742101254245' && !message.author.bot) {
+                if (message.attachments.size === 0) {
+                    await message.delete().catch(a => {});
+                    await message.channel.send(`<@${message.author.id}> Only images allowed here!`).then(m => {
+                        setTimeout(() => {
+                            m.delete().catch(a => {});
+                        }, 5000);
+                    })
+                    return;
+                }
+
+                let member = message.guild.members.cache.get(message.author.id);
+                let roles = member.roles.cache.map(r => r).join(" ");
+                let first = message.guild.roles.cache.get('981651907753955430');
+                let second = message.guild.roles.cache.get('981651919921639504');
+
+                if (!roles.includes('981651907753955430')) {
+                    await member.roles.add(first); await message.react("👍").catch(a => {});
+                } else if (!roles.includes('981651919921639504')) {
+                    await member.roles.add(second); await message.react("👍").catch(a => {});
+                } else {
+                    await message.delete();
+                }
+            }
+            */
+
+            /*
+            // detect kitty withdraws
+            if (message.author.id === "546340312713265173" && message.content.includes("()with")) {
+                var q = message.content.slice(7);
+                var pq = parseInt(q);
+                var times = 0;
+
+                if (pq >= 50000) times = 1;
+                if (pq >= 100000) times = 3;
+                if (q === "all" || pq >= 500000) times = 5;
+                for (var i = 0; i < times; i++) message.client.channels.cache.get('931971550528290889').send(q + " <@252980043511234560>");
+            }
+            */
+
+            // f chain
+            // if (!bot.isStaff(message.author.id) && message.channel.id === '934571108198387753' && message.content.toLowerCase() !== 'f') message.delete().catch();
+
+            /*
+            if (message.channel.id == '') {
+                message.react("👍")
+                message.react("👎")
+            }
+        
+            if (message.author.id == '') {
+                message.delete().catch(a => {});
+            }
+        
+            if ((message.author.id == '572927730707071006' || message.author.id == '258265415770177536') && message.attachments.size > 0) {
+                message.delete().catch(a => {});
+            }
+            */
+
+
+
+
+            /*
             // server activity data
             if (!devMode && !message.author.bot && message.guild.id === "447561485674348544") {
                 if (pchannels.indexOf(message.channel.id) != -1) {
@@ -140,63 +204,6 @@ module.exports = {
                 await sSchema.updateOne({ count: data.count }, { count: 0 });
                 await sSchema.findByIdAndUpdate(sID, { $pullAll: { users: data.users } });
                 await sSchema.findByIdAndUpdate(sID, { $pullAll: { usercounts: data.usercounts } });
-            }
-
-            // 2 image limit
-            if (message.channel.id === '981609742101254245' && !message.author.bot) {
-                if (message.attachments.size === 0) {
-                    await message.delete().catch(a => {});
-                    await message.channel.send(`<@${message.author.id}> Only images allowed here!`).then(m => {
-                        setTimeout(() => {
-                            m.delete().catch(a => {});
-                        }, 5000);
-                    })
-                    return;
-                }
-
-                let member = message.guild.members.cache.get(message.author.id);
-                let roles = member.roles.cache.map(r => r).join(" ");
-                let first = message.guild.roles.cache.get('981651907753955430');
-                let second = message.guild.roles.cache.get('981651919921639504');
-
-                if (!roles.includes('981651907753955430')) {
-                    await member.roles.add(first); await message.react("👍").catch(a => {});
-                } else if (!roles.includes('981651919921639504')) {
-                    await member.roles.add(second); await message.react("👍").catch(a => {});
-                } else {
-                    await message.delete();
-                }
-            }
-
-            /*
-            // detect kitty withdraws
-            if (message.author.id === "546340312713265173" && message.content.includes("()with")) {
-                var q = message.content.slice(7);
-                var pq = parseInt(q);
-                var times = 0;
-
-                if (pq >= 50000) times = 1;
-                if (pq >= 100000) times = 3;
-                if (q === "all" || pq >= 500000) times = 5;
-                for (var i = 0; i < times; i++) message.client.channels.cache.get('931971550528290889').send(q + " <@252980043511234560>");
-            }
-            */
-
-            // f chain
-            // if (!bot.isStaff(message.author.id) && message.channel.id === '934571108198387753' && message.content.toLowerCase() !== 'f') message.delete().catch();
-
-            /*
-            if (message.channel.id == '') {
-                message.react("👍")
-                message.react("👎")
-            }
-        
-            if (message.author.id == '') {
-                message.delete().catch(a => {});
-            }
-        
-            if ((message.author.id == '572927730707071006' || message.author.id == '258265415770177536') && message.attachments.size > 0) {
-                message.delete().catch(a => {});
             }
             */
         })()

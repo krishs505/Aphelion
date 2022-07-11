@@ -190,6 +190,9 @@ var bot = {
 
             var output6 = parseInt(parseInt(output5), 2).toString();
             return (parseInt(output6.substring(output6.toString().length - 1)) + 1).toString(); // literally just gets the last digit and add 1
+    },
+    foil: function (a, b, c, d) {
+        return [a*c, ] 
     }
 }
 module.exports = {
