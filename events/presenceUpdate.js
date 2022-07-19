@@ -1,7 +1,6 @@
 const { bot } = require("../exports");
 const { devMode } = require('../config.json');
 const Schema = require('../schemas/settings-schema');
-const { ogg } = require("prism-media");
 const sID = '61d8b1ae44c5fc5637085070';
 
 function dateFormat(d) {
@@ -19,7 +18,7 @@ module.exports = {
     name: 'presenceUpdate',
     execute(oldPresence, newPresence) {
         (async () => {
-            //if (devMode) return
+            if (devMode) return
 
             if (newPresence.guild.id === '777982758311034950') { // crypto tracker
 
