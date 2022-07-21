@@ -1,5 +1,5 @@
 const { bot } = require("../exports");
-const { MessageEmbed } = require('discord.js');
+const Discord = require('discord.js');
 
 module.exports = {
     name: 'messageUpdate',
@@ -22,13 +22,13 @@ module.exports = {
 
             if (message.author.id === '252980043511234560' || message.channel.id === '751565931746033745' || message.channel.id === '806331336616706063') ns = true;
 
-            const embed = new MessageEmbed()
+            const embed = new Discord.EmbedBuilder()
                 .setAuthor({ name: `${message.author.username}#${message.author.discriminator}`, iconURL: message.author.avatarURL() })
                 .setColor('#b029ff')
                 .setDescription(
                     `**Message sent by <@${message.author.id}> edited in <#${message.channel.id}>**: [Jump to Message](https://discord.com/channels/${message.guild.id}/${message.channel.id}/${message.id})`
                 )
-                .addFields({
+                .addFields([{
                     name: 'Before:',
                     value: oldMessage.content,
                     inline: false,
@@ -36,8 +36,8 @@ module.exports = {
                     name: 'After:',
                     value: message.content,
                     inline: false,
-                })
-                .setTimestamp(new Date().toISOString()).setFooter({ text: `Message ID: ${message.id}` });
+                }])
+                .setTimestamp().setFooter({ text: `Message ID: ${message.id}` });
 
             MLC.send({ embeds: [embed] }).catch(a => { });
             if (ns === false) MLC2.send({ embeds: [embed] }).catch(a => { });

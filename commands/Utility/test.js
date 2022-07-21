@@ -2,12 +2,12 @@ const { bot } = require("../../exports");
 let fs = require('fs');
 let writeText = require('add-text-to-image');
 const path = require('path');
-const { MessageEmbed } = require('discord.js');
+const Discord = require('discord.js');
 
 module.exports = {
     name: 'test',
-    description: " ",
-    usage: ' ',
+    description: "",
+    usage: '',
     cooldown: 0,
     od: true,
     execute(message, args) {

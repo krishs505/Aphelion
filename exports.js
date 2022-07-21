@@ -1,6 +1,3 @@
-const { Client, Intents } = require('discord.js');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MEMBERS] });
-
 const devTesters = ['252980043511234560'];
 const staff = ['252980043511234560', '258265415770177536', '572927730707071006'];
 
@@ -46,34 +43,39 @@ var bot = {
         }
     },
     getBadges: function (user) {
-        var flags;
-        var flags1 = '';
+        var flags = null;
+        var flags1 = "";
         try {
-            flags = user.flags.toArray().join(', ');
+            flags = user.flags.toArray().join(' ');
         } catch {
             flags1 = 'None';
         }
-        if (!flags) flags1 = 'None';
-
-        if (flags1 !== 'None') {
-            if (flags.includes('HOUSE_BRAVERY')) flags1 = flags1 + '<:Bravery:849751729674125312> ';
-            if (flags.includes('HOUSE_BRILLIANCE')) flags1 = flags1 + '<:Brilliance:849751729754341427> ';
-            if (flags.includes('HOUSE_BALANCE')) flags1 = flags1 + '<:Balance:849751729536761918> ';
-            if (flags.includes('HYPESQUAD_EVENTS')) flags1 = flags1 + '<:Hypesquad_Events:849753779116441611> ';
-            if (flags.includes('BUGHUNTER')) flags1 = flags1 + '<:BugHunter:849752606493507604> ';
-            if (flags.includes('EARLY_VERIFIED_DEVELOPER') || flags.includes('VERIFIED_DEVELOPER')) flags1 = flags1 + '<:Early_Developer:849761396912291892> ';
-            if (flags.includes('EARLY_SUPPORTER')) flags1 = flags1 + '<:Early_Supporter:849754395579121694> ';
+        if (!flags || flags === null) {
+            flags1 = 'None';
+        } else if (flags1 !== 'None') {
+            if (flags.includes('HypeSquadOnlineHouse1')) flags1 += '<:Bravery:999455581280686181>' ;
+            if (flags.includes('HypeSquadOnlineHouse2')) flags1 += '<:Brilliance:999455581960159314>' ;
+            if (flags.includes('HypeSquadOnlineHouse3')) flags1 += '<:Balance:999455580487958649>' ;
+            if (flags.includes('BugHunterLevel')) flags1 += '<:BugHunter:999455579707805746>' ;
+            if (flags.includes('Staff')) flags1 += '<:Discord_Staff:999455578931867719> ';
+            if (flags.includes('VerifiedDeveloper')) flags1 += '<:Early_Developer:999455578097189025>' ;
+            if (flags.includes('PremiumEarlySupporter')) flags1 += '<:EarlySupporter:999455577451274290>' ;
+            if (flags.includes('Hypesquad')) flags1 += '<:HypesquadEvents:999455576645976094>' ;
+            if (flags.includes('Partner')) flags1 += '<:Partnered_Server_Owner:999455574808875170>' ;
         }
-        if (user.displayAvatarURL({ dynamic: true }).endsWith('.gif') || user.discriminator < 5 || user.disciminator > 9990) flags1 = flags1 + '<:Nitro_Subscriber:849757959306608681>';
+        if (user.displayAvatarURL({ dynamic: true }).endsWith('.gif') || user.discriminator < 5 || user.disciminator > 9990) {
+            flags1 += '<:Nitro_Subscriber:849757959306608681>';
+        }
 
         return flags1;
     },
     getStatus: function (status) {
         switch (status) {
-            case 'online': status = '<:online:912099878275022860>'; break;
-            case 'offline': status = '<:offline:912099878111424583>'; break;
-            case 'idle': status = '<:idle:912099878174359582>'; break;
-            case 'dnd': status = '<:dnd:912099878140801074>'; break;
+            case 'online': status = '<:online:999477878796337233> Online'; break;
+            case 'idle': status = '<:idle:999477877768728647> Idle'; break;
+            case 'dnd': status = '<:dnd:999477876862758993> Do Not Disturb'; break;
+            case 'offline': status = '<:offline:999477875428298752> Offline / Invisible'; break;
+            case undefined: status = '<:offline:999477875428298752> Offline / Invisible'; break;
         }
         return status;
     },

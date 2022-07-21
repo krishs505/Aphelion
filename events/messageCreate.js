@@ -3,7 +3,7 @@ const { devMode } = require('../config.json');
 const QuickChart = require('quickchart-js');
 const sSchema = require('../schemas/server-data-schema');
 const sID = "627af10e6146c4f52db2a862";
-const { MessageEmbed } = require('discord.js');
+const Discord = require('discord.js');
 
 const pchannels = ['478364093300998145', '600115556842078210', '600123740243755039', '745336897512931369', '813163910193479750', '813163662532542514', '813163932335603733', '813163545021513768', '813163694467973131'];
 
@@ -180,11 +180,11 @@ module.exports = {
                 }
                 
 
-                const e = new MessageEmbed()
+                const e = new Discord.EmbedBuilder()
                     .setTitle(`${dat[0]}/${dat[1]}/${dat[2]}`)
                     .setDescription(`**Total Messages**\n${data.count.toString()}\n\nToday's message count was ${ps} from this week's average${punc}\n\n**Top 3 Active Members:**\n1. ${lb[0][0]} - ${lb[1][0]}\n2. ${lb[0][1]} - ${lb[1][1]}\n3. ${lb[0][2]} - ${lb[1][2]}`)
                     .setColor('#0099FF')
-                    .setTimestamp(new Date().toISOString());
+                    .setTimestamp();
 
                 await C.send({ embeds: [e] });
 

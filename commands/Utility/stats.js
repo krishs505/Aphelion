@@ -2,7 +2,7 @@ const { bot } = require("../../exports");
 const sSchema = require('../../schemas/server-data-schema');
 const sID = "627af10e6146c4f52db2a862";
 const QuickChart = require('quickchart-js');
-const { MessageEmbed } = require('discord.js');
+const Discord = require('discord.js');
 
 module.exports = {
     name: 'stats',
@@ -42,12 +42,12 @@ module.exports = {
                 data: { labels: dates, datasets: [{ label: '# messages', data: counts }] },
             });
 
-            const e = new MessageEmbed()
+            const e = new Discord.EmbedBuilder()
                 .setTitle(`Server Activity in the last ${days} days`)
                 .setImage(chart.getUrl())
-                .addField("Avg messages/day", avg.toString())
+                .addFields([{ name: 'Avg messages/day', value: avg.toString() }])
                 .setColor('#0099FF')
-                .setTimestamp(new Date().toISOString());
+                .setTimestamp();
             
             
             await message.channel.send({ embeds: [e] });

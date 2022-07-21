@@ -4,8 +4,8 @@ const fs = require('fs');
 
 module.exports = {
     name: 'bjdata',
-    description: ' ',
-    usage: ' ',
+    description: '',
+    usage: '',
     cooldown: 0,
     od: true,
     execute(message, args) {

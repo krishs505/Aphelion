@@ -4,7 +4,7 @@ module.exports = {
     name: 'botinfo',
     description: 'Displays some information about the bot.',
     aliases: ['info'],
-    usage: ' ',
+    usage: '',
     cooldown: 0,
     execute(message) {
         (async () => {

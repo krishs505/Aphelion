@@ -1,20 +1,21 @@
 const { bot } = require("../../exports");
 
-const fs = require('fs');
-const { EndBehaviorType, VoiceReceiver } = require( '@discordjs/voice');
-const { User } = require('discord.js');
-const { createWriteStream } = require('node:fs');
-const prism = require('prism-media');
-const { pipeline } = require('node:stream');
+// const fs = require('fs');
+// const { EndBehaviorType, VoiceReceiver } = require( '@discordjs/voice');
+// const { User } = require('discord.js');
+// const { createWriteStream } = require('node:fs');
+// const prism = require('prism-media');
+// const { pipeline } = require('node:stream');
 
 module.exports = {
     name: 'enter',
     description: 'UHH',
-    usage: ' ',
+    usage: '',
     cooldown: 0,
     od: true,
     execute(message, args) {
 
+        /*
         const voiceChannel = message.member.voice.channel;
         
         const voiceConnection = joinVoiceChannel({
@@ -57,5 +58,7 @@ module.exports = {
                 console.log(`✅ Recorded ${filename}`);
             }
         });
+
+        */
     }
 }

@@ -10,7 +10,7 @@ function clean(text) {
 module.exports = {
     name: 'eval',
     description: 'UHH',
-    usage: ' ',
+    usage: '',
     cooldown: 0,
     od: true,
     execute(message, args) {

@@ -148,12 +148,12 @@ module.exports = {
                     if (d.getDate) dtsD[i] = dts[i].split(' ');
                 }
 
-                const embed = new Discord.MessageEmbed()
+                const embed = new Discord.EmbedBuilder()
                     .setAuthor({ name: `Salad Stats`, iconURL: 'https://avatars.githubusercontent.com/u/42049504?s=200&v=4' })
                     .setColor('#b029ff')
-                    .addField('Average money/hour:', `$${(mphT/mph.length).toFixed(2)}`)
-                    .addField('Average session length', `${(hrsT/hrs.length).toFixed(1)} hours`)
-                    .setTimestamp(new Date().toISOString())
+                    .addFields([{ name: 'Average money/hour:', value: `$${(mphT/mph.length).toFixed(2)}` }])
+                    .addFields([{ name: 'Average session length', value: `${(hrsT/hrs.length).toFixed(1)} hours` }])
+                    .setTimestamp()
                 
                 console.log(dtsD);
                 await message.channel.send({ embeds: [embed] });

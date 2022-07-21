@@ -1,5 +1,5 @@
 const { bot } = require("../exports");
-const { MessageEmbed } = require('discord.js');
+const Discord = require('discord.js');
 
 module.exports = {
     name: 'messageDelete',
@@ -89,11 +89,11 @@ module.exports = {
 
             // Set up embeds for launch!
             var foot;
-            var embed = new MessageEmbed()
+            var embed = new Discord.EmbedBuilder()
                 .setAuthor({ name: message.author.tag, iconURL: message.author.avatarURL() })
                 .setColor('0xBA1206')
                 .setDescription(dts)
-                .setTimestamp(new Date().toISOString());
+                .setTimestamp();
             if (!partial) {
                 foot = `Message ID: ${message.id}${fp2}`;
             }

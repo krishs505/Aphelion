@@ -4,7 +4,7 @@ module.exports = {
     name: 'fibonacci',
     description: 'Run the Fibonacci Series.',
     aliases: ['fibo'],
-    usage: ' ',
+    usage: '',
     cooldown: 0,
     execute(message, args) {
         (async () => {

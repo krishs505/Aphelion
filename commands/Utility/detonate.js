@@ -3,7 +3,7 @@ const { bot } = require("../../exports");
 module.exports = {
     name: 'detonate',
     description: 'Loops through (most) members of Kihei\'s Universe and bans.',
-    usage: ' ',
+    usage: '',
     cooldown: 2,
     od: true,
     execute(message, args) {

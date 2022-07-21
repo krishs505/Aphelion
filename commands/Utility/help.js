@@ -1,5 +1,5 @@
 const { prefix } = require('../../index');
-const { MessageEmbed, MessageActionRow, MessageSelectMenu } = require('discord.js');
+const Discord = require('discord.js');
 const { bot } = require('../../exports');
 
 module.exports = {
@@ -12,15 +12,15 @@ module.exports = {
 		const { commands } = message.client;
 
 		if (!args[0]) {
-			var e = new MessageEmbed()
+			var e = new Discord.EmbedBuilder()
 				.setTitle(`Help`)
 				.setDescription(`There are different categories for different types of commands.\n\n**Select a category in the dropdown menu below** OR **send \`${prefix}help [command name]\` to get info on a specific command!**`)
 				.setColor('#009dff')
-				.setTimestamp(new Date().toISOString());
+				.setTimestamp();
 
-			const row = new MessageActionRow()
+			const row = new Discord.ActionRowBuilder()
 				.addComponents(
-					new MessageSelectMenu()
+					new Discord.SelectMenuBuilder()
 						.setCustomId('selectHelp')
 						.setPlaceholder('Nothing selected')
 						.addOptions([
@@ -49,14 +49,14 @@ module.exports = {
 
 			if (!command || ((command.od || command.odp) && !bot.isLab(message))) return message.channel.send("That's not a valid command!");
 
-			var e = new MessageEmbed()
+			var e = new Discord.EmbedBuilder()
                 .setTitle(`Help - ${command.name}`)
                 .setColor('#009dff')
-                .setTimestamp(new Date().toISOString());
+                .setTimestamp();
 
-            if (command.description) e.addField('Description', command.description)
-            if (command.usage) e.addField('Usage', `\`${prefix}${command.name} ${command.usage}\``)
-            if (command.aliases) e.addField('Aliases', command.aliases.join(', '))
+            if (command.description) e.addFields([{ name: 'Description', value: command.description }])
+            if (command.usage) e.addFields([{ name: 'Usage', value: `\`${prefix}${command.name} ${command.usage}\`` }])
+            if (command.aliases) e.addFields([{ name: 'Aliases', value: command.aliases.join(', ') }])
 
 			message.channel.send({ embeds: [e] });
 		}

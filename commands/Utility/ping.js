@@ -5,7 +5,7 @@ module.exports = {
     name: 'ping',
     description: 'Check the latency of the bot.',
     aliases: ['latency'],
-    usage: ' ',
+    usage: '',
     cooldown: 2,
     execute(message) {
         (async () => {

@@ -1,9 +1,6 @@
 const { bot } = require("../../exports");
 let fs = require('fs');
 
-const { Client, Intents } = require('discord.js');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MEMBERS] });
-
 const ttSchema = require('../../schemas/typing-tests-schema');
 const dID = "621e9e2647e2f613fba1deaa";
 
@@ -11,7 +8,7 @@ module.exports = {
     name: 'typingtest',
     description: 'Test your typing speed!',
     aliases: ['tt'],
-    usage: ' ',
+    usage: '',
     cooldown: 0,
     od: true,
     execute(message) {

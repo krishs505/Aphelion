@@ -1,5 +1,5 @@
 const { bot } = require('../../exports.js');
-const { MessageEmbed } = require('discord.js');
+const Discord = require('discord.js');
 
 module.exports = {
     name: 'userinfo',
@@ -32,29 +32,39 @@ module.exports = {
                 var rm1 = rm.join(" ");
                 if (rm1 === '@everyone') { rm1 = 'None'; } else { rm.pop(); rm1 = rm.join(" "); }
                 if (rm1.length > 1024) rm1 = member.roles.cache.size;
-                console.log(member)
-                embed = new MessageEmbed()
+
+                embed = new Discord.EmbedBuilder()
                     .setAuthor({ name: `${member.user.username}#${member.user.discriminator}`, iconURL: bot.getPFP(member.user) })
                     .setThumbnail(bot.getPFP(member.user))
                     .setColor('#009dff')
                     .setDescription(`<@${member.user.id}>`)
-                    //.addField('Status', bot.getStatus(member))
-                    .addField('User Creation Date', `${new Date(member.user.createdAt).toUTCString()}`)
-                    .addField('Joined Server', `${new Date(member.joinedAt).toUTCString()}`)
-                    .addField('Roles', rm1)
-                    .setTimestamp(new Date().toISOString()).setFooter({ text: `User ID: ${member.id}` });
+                    .addFields([
+                        { name: 'Status', value: bot.getStatus(member.presence?.status) },
+                        { name: 'User Creation Date', value: `${new Date(member.user.createdAt).toUTCString()}` },
+                        { name: 'Joined Server', value: `${new Date(member.joinedAt).toUTCString()}` },
+                        { name: 'Roles', value: rm1 }
+                    ])
+                    .setTimestamp().setFooter({ text: `User ID: ${member.id}` });
 
-                if (member.user.bot) { embed.addField('Is Bot', 'True') } else { embed.addField('Badges', `${bot.getBadges(member.user)}`) }
+                if (member.user.bot) {
+                    embed.addFields([{ name: 'Is Bot', value: 'True' }])
+                } else {
+                    embed.addFields([{ name: 'Badges', value: `${bot.getBadges(member.user)}` }])
+                }
             } else if (type === 'user') {
-                embed = new MessageEmbed()
+                embed = new Discord.EmbedBuilder()
                     .setAuthor({ name: `${user.username}#${user.discriminator}`, iconURL: bot.getPFP(user) })
                     .setThumbnail(bot.getPFP(user))
                     .setColor('#009dff')
                     .setDescription(`<@${user.id}>`)
-                    .addField('User Creation Date', `${new Date(user.createdAt).toUTCString()}`)
-                    .setTimestamp(new Date().toISOString()).setFooter({ text: `User ID: ${user.id}` });
+                    .addFields([{ name: 'User Creation Date', value: `${new Date(user.createdAt).toUTCString()}` }])
+                    .setTimestamp().setFooter({ text: `User ID: ${user.id}` });
 
-                if (user.bot) { embed.addField('Is Bot', 'True') } else { embed.addField('Badges', `${bot.getBadges(user)}`) }
+                if (user.bot) {
+                    embed.addFields([{ name: 'Is Bot', value: 'True' }])
+                } else {
+                    embed.addFields([{ name: 'Badges', value: `${bot.getBadges(user)}` }])
+                }
             }
 
             await message.channel.send({ embeds: [embed] })

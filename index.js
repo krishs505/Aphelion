@@ -1,14 +1,15 @@
-const { Client, Intents, Collection, MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_INVITES] });
+const { Client, GatewayIntentBits, Partials, Collection } = require('discord.js');
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildPresences, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildInvites, GatewayIntentBits.MessageContent], partials: [Partials.Channel] });
 
 /** Settings **/
 let prefix = '+';
 let BotName = 'Aphelion';
-const DJSVersion = '13.8.1';
+const DJSVersion = '14.0.2';
 const BotSupportLink = 'https://discord.gg/';
 const BotDev = '252980043511234560';
 
 // git push heroku main:main
+// heroku logs -n 50
 
 /* Token Handler (devMode) */
 const { devMode, connectToMongo } = require('./config.json');
@@ -53,7 +54,7 @@ client.on('ready', async () => {
     }
 
     console.log(`${BotName} is online! ${client.ws.ping}ms`);
-    client.user.setPresence({ activities: [{ type: 'WATCHING', name: "Kihei's brain fry!" }], status: 'online' });
+    client.user.setPresence({ activities: [{ type: 'WATCHING', name: "something" }], status: 'online' });
 });
 
 module.exports = {

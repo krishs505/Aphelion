@@ -1,40 +1,39 @@
 const { prefix } = require("../index");
 const { bot } = require("../exports");
-const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
+const Discord = require('discord.js');
 const fs = require('fs');
 
 module.exports = {
     name: 'interactionCreate',
     execute(interaction) {
         (async () => {
-            console.log('test');
             const { commands } = interaction.client;
             const categoryCommands = [];
 
             var IL = bot.isLab(interaction);
 
             function row(d1, d2, d3, d4) {
-                return new MessageActionRow()
+                return new Discord.ActionRowBuilder()
                     .addComponents(
-                        new MessageButton()
+                        new Discord.ButtonBuilder()
                             .setCustomId('leftMHelp')
                             .setLabel('⏮️')
-                            .setStyle('PRIMARY')
+                            .setStyle('Primary')
                             .setDisabled(d1),
-                        new MessageButton()
+                        new Discord.ButtonBuilder()
                             .setCustomId('leftHelp')
                             .setLabel('⬅️')
-                            .setStyle('PRIMARY')
+                            .setStyle('Primary')
                             .setDisabled(d2),
-                        new MessageButton()
+                        new Discord.ButtonBuilder()
                             .setCustomId('rightHelp')
                             .setLabel('➡️')
-                            .setStyle('PRIMARY')
+                            .setStyle('Primary')
                             .setDisabled(d3),
-                        new MessageButton()
+                        new Discord.ButtonBuilder()
                             .setCustomId('rightMHelp')
                             .setLabel('⏭️')
-                            .setStyle('PRIMARY')
+                            .setStyle('Primary')
                             .setDisabled(d4)
                     )
             }
@@ -50,14 +49,14 @@ module.exports = {
 
                 var command = categoryCommands[0];
 
-                var e = new MessageEmbed()
+                var e = new Discord.EmbedBuilder()
                     .setTitle(`${interaction.values[0]} - ${command.name}`)
                     .setColor('#009dff')
                     .setFooter({ text: `1/${categoryCommands.length}` });
 
-                if (command.description) e.addField('Description', command.description)
-                if (command.usage) e.addField('Usage', `\`${prefix}${command.name} ${command.usage}\``)
-                if (command.aliases) e.addField('Aliases', command.aliases.join(', '))
+                if (command.description) e.addFields([ { name: 'Description', value: command.description }])
+                if (command.usage) e.addFields([{ name: 'Usage', value: `\`${prefix}${command.name} ${command.usage}\`` }])
+                if (command.aliases) e.addFields([{ name: 'Aliases', value: command.aliases.join(', ') }])
 
                 await interaction.update({ embeds: [e], components: [row(true, true, false, false)] });
 
@@ -74,29 +73,29 @@ module.exports = {
                         categoryCommands.push(cmd);
                     });
 
-                    var lcn; // LAST COMMAND'S NUMBER
+                    var lcn = null; // LAST COMMAND'S NUMBER
                     var e;
 
-                    if (interaction.customId === 'rightHelp') {
-                        lcn = parseInt(interaction.message.embeds[0].footer.text.split('/')[0]);
-                    } else if (interaction.customId === 'leftHelp') {
-                        lcn = parseInt(interaction.message.embeds[0].footer.text.split('/')[0]) - 2;
-                    } else if (interaction.customId === 'leftMHelp') {
-                        lcn = 0;
-                    } else if (interaction.customId === 'rightMHelp') {
-                        lcn = categoryCommands.length - 1;
-                    } else return;
+                    switch (interaction.customId) {
+                        case 'rightHelp': lcn = parseInt(interaction.message.embeds[0].footer.text.split('/')[0]); break;
+                        case 'leftHelp': lcn = parseInt(interaction.message.embeds[0].footer.text.split('/')[0]) - 2; break;
+                        case 'leftMHelp': lcn = 0; break;
+                        case 'rightMHelp': lcn = categoryCommands.length - 1; break;
+                    }
+                    if (lcn === null) return;
 
                     var command = categoryCommands[lcn];
 
-                    e = new MessageEmbed()
+                    e = new Discord.EmbedBuilder()
                         .setTitle(`${interaction.message.embeds[0].title.split(' ')[0]} - ${command.name}`)
                         .setColor('#009dff')
                         .setFooter({ text: `${lcn + 1}/${categoryCommands.length}` });
 
-                    if (command.description) e.addField('Description', command.description)
-                    if (command.usage) e.addField('Usage', `\`${prefix}${command.name} ${command.usage}\``)
-                    if (command.aliases) e.addField('Aliases', command.aliases.join(', '))
+                    
+                    if (command.description) e.addFields([ { name: 'Description', value: command.description }])
+                    if (command.usage) e.addFields([{ name: 'Usage', value: `\`${prefix}${command.name} ${command.usage}\`` }])
+                    if (command.aliases) e.addFields([{ name: 'Aliases', value: command.aliases.join(', ') }])
+                    
 
                     var bts = row(false, false, false, false);
                     if (lcn + 1 === categoryCommands.length) bts = row(false, false, true, true);

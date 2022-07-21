@@ -3,7 +3,7 @@ const { bot } = require("../../exports");
 module.exports = {
     name: 'findprimes',
     description: "Find large prime numbers.",
-    usage: ' ',
+    usage: '',
     cooldown: 0,
     od: true,
     execute(message, args) {

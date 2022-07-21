@@ -4,7 +4,7 @@ module.exports = {
     name: 'grades',
     description: 'Calculate your grade.',
     aliases: ['grade'],
-    usage: ' ',
+    usage: '',
     cooldown: 0,
     od: true,
     execute(message, args) {

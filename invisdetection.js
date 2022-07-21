@@ -1,5 +1,5 @@
 // needs to be updated - doesn't use event handler
-
+/*
 const Discord = require('discord.js');
 const { Client, Intents } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
@@ -18,7 +18,7 @@ function ICAE(user, description, info) { // Invis Check and Execute
         iu.set(user.id, user.username);
         var d = `<@${user.id}> **${description}** while invisible!`;
         if (info) d += `\n\n${info}`;
-        client.channels.cache.get(C).send(new Discord.MessageEmbed().setTitle('Invisible User Detected!').setThumbnail(pfp(user)).setColor('#a1a1a1').setDescription(d));
+        client.channels.cache.get(C).send(new Discord.EmbedBuilder().setTitle('Invisible User Detected!').setThumbnail(pfp(user)).setColor('#a1a1a1').setDescription(d));
     }
 }
 
@@ -26,7 +26,7 @@ client.on('presenceUpdate', async (oldPresence, newPresence) => {
     var { user } = newPresence;
     if (iu.hasOwn(user.id) && newPresence.status !== "invisible") {
         iu.del(user.id);
-        client.channels.cache.get(C).send(new Discord.MessageEmbed().setThumbnail(pfp(user)).setColor('#a1a1a1').setDescription(`<@${user.id}> is no longer invisible!`));
+        client.channels.cache.get(C).send(new Discord.EmbedBuilder().setThumbnail(pfp(user)).setColor('#a1a1a1').setDescription(`<@${user.id}> is no longer invisible!`));
     }
 })
 
@@ -70,3 +70,4 @@ client.on('guildMemberRemove', async member => {
 
 const { token } = require('./config.json');
 // client.login(token);
+*/

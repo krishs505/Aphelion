@@ -22,7 +22,7 @@ function month(int) {
 
 module.exports = {
     name: 'serverinfo',
-    usage: ' ',
+    usage: '',
     aliases: ['serverstats', 'guildinfo', 'guildstats', 'server', 'guild'],
     cooldown: 2,
     description: 'Get information about the server the command is sent in.',
@@ -42,8 +42,6 @@ module.exports = {
                 // message.channel.send(guild.name)
             } else {
                 guild = message.guild;
-
-                
             }
 
             try {
@@ -59,11 +57,26 @@ module.exports = {
                 if (rm1 === '@everyone') { rm1 = 0; } else { rm.pop(); rm1 = rm.join(" "); }
                 if (rm1.length > 1024) rm1 = guild.roles.cache.size;
 
-                embed = new Discord.MessageEmbed()
+                embed = new Discord.EmbedBuilder()
                     .setTitle(guild.name)
                     .setThumbnail(`${avurl}.${fot}`)
                     .setColor('#009dff')
-                    /*.addField('Member Count', guild.memberCount, true)
+                    .addFields([
+                        { name: 'Member Count', value: guild.memberCount },
+                        { name: 'User Count', value: guild.memberCount - bc },
+                        { name: 'Bot Count', value: bc },
+                        { name: 'Server Owner', value: `<@${guild.ownerID}>` },
+                        { name: 'Server Created', value: `${month(cA.getMonth())} ${cA.getDate()}, ${cA.getFullYear()}` },
+                        { name: 'Region', value: guild.region },
+                        { name: 'Text Channels', value: guild.channels.cache.filter((c) => c.type === "text").size },
+                        { name: 'Voice Channels', value: guild.channels.cache.filter((c) => c.type === "voice").size },
+                        { name: 'Categories', value: guild.channels.cache.filter((c) => c.type === "category").size },
+                        { name: 'Online Users', value: guild.members.cache.filter(m => m.presence.status !== 'offline').size - guild.members.cache.filter(m => m.user.bot && m.presence.status !== 'offline').size },
+                        { name: 'Server Boosts', value: guild.premiumSubscriptionCount },
+                        { name: 'Roles', value: rm1 },
+                    ])
+                    /*
+                    .addField('Member Count', guild.memberCount, true)
                     .addField('User Count', guild.memberCount - bc, true)
                     .addField('Bot Count', bc, true)
                     .addField('Server Owner', `<@${guild.ownerID}>`, true)
@@ -74,8 +87,9 @@ module.exports = {
                     .addField('Categories', guild.channels.cache.filter((c) => c.type === "category").size, true)
                     .addField('Online Users', guild.members.cache.filter(m => m.presence.status !== 'offline').size - guild.members.cache.filter(m => m.user.bot && m.presence.status !== 'offline').size, true)
                     .addField('Server Boosts', guild.premiumSubscriptionCount, true)
-                    .addField('Roles', rm1)*/
-                    .setTimestamp(new Date().toISOString()).setFooter({ text: `Guild ID: ${guild.id}` });
+                    .addField('Roles', rm1)
+                    */
+                    .setTimestamp().setFooter({ text: `Guild ID: ${guild.id}` });
             } catch (error) {
                 console.log(`${guild.name} just had an error running serverinfo!`)
                 console.log(error);
