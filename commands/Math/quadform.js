@@ -27,34 +27,27 @@ module.exports = {
         // if (discrim < 0) return message.channel.send('ERROR: **Negative Square Root detected!**\nDiscriminator -> Imaginary number: **' + discrim * -1 + 'i**')
 
         if (discrim < 0) {
-            var s = Math.sqrt(discrim / -1);
-            var t = 2 * a;
+            var n1 = -1 * b;
+            var n2 = bot.simplRoot(Math.abs(discrim));
+            var d = 2 * a;
 
-            var f1 = bot.findFactors(Math.abs(b));
-            var f2 = bot.findFactors(s);
-            var f3 = bot.findFactors(Math.abs(t));
-            var cf;
-            
-            for (var i = 0; i <= f1.length; i++) {
-                if (f2.indexOf(f1[i]) != -1 && f3.indexOf(f1[i]) != -1) {
-                    cf = f1[i];
-                }
-            }
-            console.log(cf);
+            console.log(discrim)
+            console.log(n1)
+            console.log(n2)
+            console.log(d)
 
-            if (cf) {
-                t = t / cf;
+            var gcf = bot.gcf(Math.abs(n1), n2[0], Math.abs(d));
+            console.log(gcf);
 
-                result = `${(-1 * b) / cf} ± ${s / cf}i / ${t}`;
-
-                result = `${(-1 * b) / cf} ± ${s / cf}i`;
-                if (t / cf === 1) {
-                    result = `${(-1 * b) / cf} ± ${s / cf}i`;
+            if (gcf !== null) {
+                if (n2[0] / gcf === 1) {
+                    result = `${n1 / gcf} ± sqrt(${n2[1]})i`;
                 } else {
-                    result = `${(-1 * b) / cf} ± ${s / cf}i / ${(t) / cf}`;
+                    result = `${n1 / gcf} ± ${n2[0] / gcf}sqrt(${n2[1]})i`;
                 }
-            } else {
-                result = `${-1 * b} ± ${s}i / ${t}`;
+                if (d / gcf !== 1) {
+                    result += ` / ${d / gcf}`;
+                }
             }
         } else if (!Number.isInteger(Math.sqrt(discrim))) {
             result = `${-1 * b} ± ${discrim} / ${2 * a}`;

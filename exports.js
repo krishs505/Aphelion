@@ -53,15 +53,15 @@ var bot = {
         if (!flags || flags === null) {
             flags1 = 'None';
         } else if (flags1 !== 'None') {
-            if (flags.includes('HypeSquadOnlineHouse1')) flags1 += '<:Bravery:999455581280686181>' ;
-            if (flags.includes('HypeSquadOnlineHouse2')) flags1 += '<:Brilliance:999455581960159314>' ;
-            if (flags.includes('HypeSquadOnlineHouse3')) flags1 += '<:Balance:999455580487958649>' ;
-            if (flags.includes('BugHunterLevel')) flags1 += '<:BugHunter:999455579707805746>' ;
+            if (flags.includes('HypeSquadOnlineHouse1')) flags1 += '<:Bravery:999455581280686181>';
+            if (flags.includes('HypeSquadOnlineHouse2')) flags1 += '<:Brilliance:999455581960159314>';
+            if (flags.includes('HypeSquadOnlineHouse3')) flags1 += '<:Balance:999455580487958649>';
+            if (flags.includes('BugHunterLevel')) flags1 += '<:BugHunter:999455579707805746>';
             if (flags.includes('Staff')) flags1 += '<:Discord_Staff:999455578931867719> ';
-            if (flags.includes('VerifiedDeveloper')) flags1 += '<:Early_Developer:999455578097189025>' ;
-            if (flags.includes('PremiumEarlySupporter')) flags1 += '<:EarlySupporter:999455577451274290>' ;
-            if (flags.includes('Hypesquad')) flags1 += '<:HypesquadEvents:999455576645976094>' ;
-            if (flags.includes('Partner')) flags1 += '<:Partnered_Server_Owner:999455574808875170>' ;
+            if (flags.includes('VerifiedDeveloper')) flags1 += '<:Early_Developer:999455578097189025>';
+            if (flags.includes('PremiumEarlySupporter')) flags1 += '<:EarlySupporter:999455577451274290>';
+            if (flags.includes('Hypesquad')) flags1 += '<:HypesquadEvents:999455576645976094>';
+            if (flags.includes('Partner')) flags1 += '<:Partnered_Server_Owner:999455574808875170>';
         }
         if (user.displayAvatarURL({ dynamic: true }).endsWith('.gif') || user.discriminator < 5 || user.disciminator > 9990) {
             flags1 += '<:Nitro_Subscriber:849757959306608681>';
@@ -88,7 +88,7 @@ var bot = {
     findFactors: function (n) {
         var int = parseInt(n);
         var f = [];
-        for (let i = 1; i <= Math.floor(Math.sqrt(n)) + 1; i++) {
+        for (let i = 1; i <= Math.floor(Math.sqrt(n)); i++) {
             if (int % i === 0) {
                 f.push(i);
                 f.push(int / i);
@@ -172,29 +172,72 @@ var bot = {
     },
     prng: function () {
         var now = performance.now().toString();
-            var input = parseInt(now.substring(now.length - 3));
+        var input = parseInt(now.substring(now.length - 3));
 
-            if (input < 100) input = Math.pow(input + 100, 2);
+        if (input < 100) input = Math.pow(input + 100, 2);
 
-            var output = input.toString(2);
-            var output2 = (output + "000").slice(3);
-            var output3 = output.split('');
-            var output4 = output2.split('');
-            var output5 = "";
+        var output = input.toString(2);
+        var output2 = (output + "000").slice(3);
+        var output3 = output.split('');
+        var output4 = output2.split('');
+        var output5 = "";
 
-            for (var i = 0; i < output3.length; i++) {
-                if (output3[i] === output4[i]) {
-                    output5 += "0";
-                } else {
-                    output5 += "1";
+        for (var i = 0; i < output3.length; i++) {
+            if (output3[i] === output4[i]) {
+                output5 += "0";
+            } else {
+                output5 += "1";
+            }
+        }
+
+        var output6 = parseInt(parseInt(output5), 2).toString();
+        return (parseInt(output6.substring(output6.toString().length - 1)) + 1).toString(); // literally just gets the last digit and add 1
+    },
+    foil: function (a, b, c, d) {
+        return [a * c, a * d, b * c, c * d]
+    },
+    simplRoot: function (n) {
+        if (Number.isInteger(Math.sqrt(n))) {
+            return [Math.sqrt(n)];
+        } else {
+            var f = this.findFactors(n);
+            f = f.sort(function (a, b) { return a - b });
+
+            var perfsq = null;
+            var sqrt;
+
+            for (var i = f.length - 1; i >= 1; i--) {
+                sqrt = Math.sqrt(f[i])
+                if (Number.isInteger(sqrt)) {
+                    perfsq = sqrt;
+                    break;
                 }
             }
 
-            var output6 = parseInt(parseInt(output5), 2).toString();
-            return (parseInt(output6.substring(output6.toString().length - 1)) + 1).toString(); // literally just gets the last digit and add 1
+            if (perfsq !== null) {
+                return [perfsq, n / Math.pow(perfsq, 2)]
+            } else {
+                return [n];
+            }
+        }
     },
-    foil: function (a, b, c, d) {
-        return [a*c, ] 
+    gcf: function (n1, n2, n3) {
+        var f1 = bot.findFactors(n1);
+        var f2 = bot.findFactors(n2);
+        var f3 = bot.findFactors(n3);
+        var gcf = null;
+            
+        for (var i = f1.length - 1; i >= 1; i--) {
+            if (f2.includes(f1[i]) && f3.includes(f1[i])) {
+                gcf = f1[i];
+                break;
+            }
+        }
+
+        return gcf;
+    },
+    in: function (s) {
+        return parseInt(s);
     }
 }
 module.exports = {

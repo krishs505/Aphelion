@@ -9,7 +9,8 @@ module.exports = {
     execute(message, args) {
         (async () => {
             if (!args[0]) return message.channel.send('Please include a number!');
-
+            console.log(args[0])
+            console.log(bot.removeCommas(",erqwr,q"))
             var strNum = bot.removeCommas(args[0]);
             var num = parseInt(strNum);
 
