@@ -14,6 +14,7 @@ module.exports = {
     cooldown: 0,
     od: true,
     execute(message, args) {
+        (async () => {
         if (message.author.id !== '252980043511234560') return;
 
         try {
@@ -25,5 +26,6 @@ module.exports = {
         } catch (err) {
             message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
         }
+    })();
     }
 }

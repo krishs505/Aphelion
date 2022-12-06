@@ -7,9 +7,12 @@ let BotName = 'Aphelion';
 const DJSVersion = '14.0.2';
 const BotSupportLink = 'https://discord.gg/';
 const BotDev = '252980043511234560';
-//
-// git push heroku main:main
-// heroku logs -n 50
+/*
+    git push heroku main:main
+    heroku logs -n 50
+
+    devMode: 0 = main, 1 = dev
+*/
 
 /* Token Handler (devMode) */
 const { devMode, connectToMongo } = require('./config.json');
