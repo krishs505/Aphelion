@@ -1,4 +1,4 @@
 {
     "devMode": 0,
-    "connectToMongo": 1
+    "connectToMongo": 0
 }

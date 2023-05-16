@@ -1,6 +1,8 @@
 const { bot } = require("../../exports");
 const { ws } = require("../../index");
 
+const { SlashCommandBuilder } = require('discord.js');
+
 module.exports = {
     name: 'ping',
     description: 'Check the latency of the bot.',

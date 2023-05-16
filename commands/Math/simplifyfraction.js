@@ -2,7 +2,7 @@ const { bot } = require("../../exports")
 
 module.exports = {
     name: 'simplifyfraction',
-    description: 'Calculate the common factors between two numbers.',
+    description: 'Simplify a fraction.',
     aliases: ['simplifyfrac', 'simplify', 'sf'],
     usage: '<numerator>/<denominator>',
     cooldown: 0,

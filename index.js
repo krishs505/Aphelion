@@ -25,8 +25,16 @@ if (devMode) {
     prefix += prefix;
     BotName += " Dev";
 } else {
+    // for running Aphelion on Heroku
+    /*
     token = process.env.TOKEN;
     MONGO_URI = process.env.MONGO_URI;
+    */
+   
+    // for running Aphelion on PC
+    const { mtoken, dMONGO_URI } = require('./dev-config.json');
+    token = mtoken;
+    MONGO_URI = dMONGO_URI;
 }
 
 const { bot } = require('./exports');
@@ -57,7 +65,7 @@ client.on('ready', async () => {
     }
 
     console.log(`${BotName} is online! ${client.ws.ping}ms`);
-    client.user.setPresence({ activities: [{ type: 'WATCHING', name: "something" }], status: 'online' });
+    client.user.setPresence({ activities: [{ type: 'WATCHING', name: "something" }], status: 'invisible' });
 });
 
 module.exports = {

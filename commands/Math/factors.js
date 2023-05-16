@@ -9,12 +9,11 @@ module.exports = {
     execute(message, args) {
         (async () => {
             if (!args[0]) return message.channel.send('Please include a number!');
-            console.log(args[0])
-            console.log(bot.removeCommas(",erqwr,q"))
             var strNum = bot.removeCommas(args[0]);
             var num = parseInt(strNum);
 
-            if (num > 10000000000 && !bot.isKihei(message.author.id)) return message.channel.send('Numbers above 10,000,000,000 are not permitted to be calculated!');
+            dfq = bot.disallowFactorsOfQuadrillion(num, message);
+            if (dfq) return;
             if (Number.isInteger(strNum)) return message.channel.send(args[0] + ' is not an integer!');
 
             var factors = [];
@@ -43,7 +42,7 @@ module.exports = {
 
             var msg = `Factors of **${strNum}**:\n${factors}${latency}`;
             if (msg.length >= 2000) {
-                await message.channel.send(`Factors of **${strNum}**:\nExceeds Discord message length limit!${latency}`);
+                await message.channel.send(`Factors of **${strNum}**:\nExceeds Discord message length limit! Factors were logged in console. ${latency}`);
                 console.log(`Factors of **${strNum}**:\n${factors}${latency}`);
             } else {
                 await message.channel.send(msg);

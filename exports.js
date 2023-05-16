@@ -100,6 +100,8 @@ var bot = {
         return (Math.floor(Math.sqrt(n)) + 1) / 103391164 * 1000;
     },
     organizeFactors: function (arr) {
+        arr = arr.sort(function(a,b) { return a-b });
+
         var Um = Math.floor(arr.length / 2); // upper median OR center if odd set
         var Lm; // lower median OR center if odd set
         var f = [[], []];
@@ -156,7 +158,7 @@ var bot = {
         return `Calculated in **${latency}**`;
     },
     shuffleArray: function (arr) {
-        const length = arr.length; // set to maintain loop iteration value
+        const length = arr.length; // const to maintain loop iteration value
         var shuffled = [];
 
         for (var i = 0; i < length; i++) {
@@ -238,6 +240,40 @@ var bot = {
     },
     in: function (s) {
         return parseInt(s);
+    },
+    quadform: function(a, b, c) {
+        var discrim = Math.pow(b, 2) - 4 * a * c;
+        if (discrim < 0) return ["imaginary"]
+        return [(-1*b + Math.sqrt(discrim)) / (2*a), (-1*b - Math.sqrt(discrim)) / (2*a)]
+    },
+    quadratic: function(a, b, c) {
+        var oFac = bot.organizeFactors(bot.findFactors(Math.abs(c)));
+        var f1 = oFac[0];
+        var f2 = oFac[1];
+
+        var x;
+        var y;
+
+        for (var i = 0; i < f1.length; i++) {
+            x = f1[i];
+            y = f2[i];
+            if (c > 0 && x + y == Math.abs(b)) {
+                if (b > 0) return [-1*x, -1*y];
+                if (b < 0) return [x, y];
+            } else if (c < 0) {
+                if (x - y == b) return [-1*x, y];
+                if (y - x == b) return [-1*y, x];
+            }
+        }
+        return ["imaginary"];
+    },
+    disallowFactorsOfQuadrillion: function(n, m) {
+        if (n > 1000000000000000 && this.isKihei(m.author.id)) {
+            m.channel.send('Sorry, but numbers above 1,000,000,000,000,000 are not permitted to be calculated as they slow down Aphelion for longer periods of time!');
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 module.exports = {

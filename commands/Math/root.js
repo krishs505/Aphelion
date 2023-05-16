@@ -3,7 +3,7 @@ const { bot } = require("../../exports");
 module.exports = {
     name: 'root',
     description: 'Calculate the _th root of a number.',
-    usage: '<root> <integer>',
+    usage: '<index> <radicand>',
     cooldown: 0,
     execute(message, args) {
         (async () => {
