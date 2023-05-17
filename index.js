@@ -4,7 +4,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBit
 /** Settings **/
 let prefix = '+';
 let BotName = 'Aphelion';
-const DJSVersion = '14.0.2';
+const DJSVersion = '14.11.0';
 const BotSupportLink = 'https://discord.gg/';
 const BotDev = '252980043511234560';
 /*
@@ -65,7 +65,7 @@ client.on('ready', async () => {
     }
 
     console.log(`${BotName} is online! ${client.ws.ping}ms`);
-    client.user.setPresence({ activities: [{ type: 'WATCHING', name: "something" }], status: 'invisible' });
+    client.user.setPresence({ activities: [{ type: 'WATCHING', name: "spliffey" }], status: 'online' });
 });
 
 module.exports = {

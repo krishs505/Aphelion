@@ -1,9 +1,9 @@
 const { bot } = require("../exports");
 const { devMode } = require('../config.json');
-const QuickChart = require('quickchart-js');
-const sSchema = require('../schemas/server-data-schema');
-const sID = "627af10e6146c4f52db2a862";
-const Discord = require('discord.js');
+//const QuickChart = require('quickchart-js');
+//const sSchema = require('../schemas/server-data-schema');
+//const sID = "627af10e6146c4f52db2a862";
+//const Discord = require('discord.js');
 
 const pchannels = ['478364093300998145', '600115556842078210', '600123740243755039', '745336897512931369', '813163910193479750', '813163662532542514', '813163932335603733', '813163545021513768', '813163694467973131'];
 
@@ -11,13 +11,11 @@ module.exports = {
     name: 'messageCreate',
     execute(message) {
         (async () => {
-            if (!devMode) { // only hosted bot should try to delete or theyre gonna race for it and have error :skull:
+            if (devMode == 0) { // only hosted bot should try to delete or theyre gonna race for it and have error :skull:
                 if (message.embeds.length !== 0) { // check if it's an embed
                     try {
-                        if (message.channel.id === '916919202105946142' && // dyno messages log
-                            // check if it's my message OR from a manager channel and then delete
-                            (message.embeds[0].footer.text.includes('252980043511234560') || (message.embeds[0].description.includes('751565931746033745')) || message.embeds[0].description.includes('806331336616706063'))) {
-                            await message.delete().catch(a => {});
+                        if (message.channel.id === '1096059940461887499' && (message.embeds[0].footer.text.includes('252980043511234560'))) {
+                            //await message.delete().catch(a => {});
                         }
                     } catch {}
                 }
