@@ -12,7 +12,7 @@ module.exports = {
             var strNum = bot.removeCommas(args[0]);
             var num = parseInt(strNum);
 
-            dfq = bot.disallowFactorsOfQuadrillion(num, message);
+            var dfq = bot.disallowFactorsOfQuadrillion(num, message);
             if (dfq) return;
             if (Number.isInteger(strNum)) return message.channel.send(args[0] + ' is not an integer!');
 

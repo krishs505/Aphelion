@@ -32,39 +32,57 @@ module.exports = {
             num = parseInt(num);
             den = parseInt(den);
 
-            if (num + den > 100000000 && !bot.isKihei(message.author.id)) return message.channel.send('Fractions (numerator + denominator) above 100,000,000 are not permitted to be calculated as they slow down Aphelion for longer periods of time!');
+            var dfq = bot.disallowFactorsOfQuadrillion(num + den, message);
+            if (dfq) return
             if (num % den === 0) return message.channel.send(`Result: **${num / den}**`);
 
-            var factors = [];
-            var cf = [];
-
-            const processing = await message.channel.send('<a:loading_forever:822539925786329149> Processing...')
-
+            //const processing = await message.channel.send('<a:loading_forever:822539925786329149> Processing...')
             var s = performance.now();
-            for (let i = 1; i <= num; i++) {
-                if (num % i === 0) {
-                    factors.push(i);
-                }
-            }
 
-            for (let i = 1; i <= den; i++) {
-                if (den % i === 0 && factors.indexOf(i) !== -1) {
-                    cf.push(i);
-                }
-            }
+            //for (var i = 0; i < bot.in(args[1]); i++) {
+                var result = bot.simplifyFraction(num, den);
+            //}
+
             var e = performance.now();
 
-            var gcf = cf[cf.length - 1];
+            /*
+            var factorsN = bot.findFactors(num).sort(function(a,b) { return a-b });
+            var factorsD = bot.findFactors(den).sort(function(a,b) { return a-b });
+            let gcf = -1;
+
+            if (num < den) {
+                for (let i = factorsN.length - 1; i >= 0; i--) {
+                    if (factorsD.includes(factorsN[i])) {
+                        gcf = factorsN[i];
+                        break;
+                    }
+                }
+            } else {
+                for (let i = factorsD.length - 1; i >= 0; i--) {
+                    if (factorsN.includes(factorsD[i])) {
+                        gcf = factorsD[i];
+                        break;
+                    }
+                }
+            }
+            
+            //console.log("gcf: " + gcf)
+            //console.log(factorsN)
+            //console.log(factorsD)
+
+            var e = performance.now();
+
             var newNum = num / gcf;
             var newDen = den / gcf;
             var result = `**${newNum}/${newDen}**`;
             if (newNum / newDen > 1) {
                 result = `**${newNum}/${newDen}** or **${Math.round(newNum / newDen)} ${newNum % newDen}/${newDen}**`;
             }
-
+            */
             await message.channel.send(`Result: ${result}\n${bot.findLatency(s, e)}`);
+            //console.log((e - s) / bot.in(args[1]))
             
-            processing.delete().catch(a => {});
+            //processing.delete().catch(a => {});
         })();
     }
 }

@@ -13,7 +13,29 @@ module.exports = {
     execute(message, args) {
         (async () => {
 
-            
+            /*let lol = 'qwertyuiopasdfghjklzxcvbnm1234567890!@#$%^&*()_+-=[]|;":,./<>?';
+            let msg = "";
+
+            for (var i = 0; i < 30; i++) {
+                for (var j = 0; j < 30; j++) {
+                    msg += lol[bot.randomInt(0, lol.length - 1)];
+                }
+                msg += "\n";
+            }*/
+
+            ///////
+
+            let lol = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890________________";
+            let msg = "";
+
+            for (var i = 0; i < 10; i++) {
+                for (var j = 0; j < 50; j++) {
+                    msg += lol[bot.randomInt(0, lol.length - 1)];
+                }
+                msg += "\n";
+            }
+
+            message.channel.send("```" + msg + "```")
             
             /*
             await message.channel.send("test").then(m => {

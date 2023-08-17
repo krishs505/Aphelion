@@ -71,11 +71,11 @@ var bot = {
     },
     getStatus: function (status) {
         switch (status) {
-            case 'online': status = '<:online:999477878796337233> Online'; break;
-            case 'idle': status = '<:idle:999477877768728647> Idle'; break;
-            case 'dnd': status = '<:dnd:999477876862758993> Do Not Disturb'; break;
-            case 'offline': status = '<:offline:999477875428298752> Offline / Invisible'; break;
-            case undefined: status = '<:offline:999477875428298752> Offline / Invisible'; break;
+            case 'online': status = '<:online:999477878796337233>'; break;
+            case 'idle': status = '<:idle:999477877768728647>'; break;
+            case 'dnd': status = '<:dnd:999477876862758993>'; break;
+            case 'offline': status = '<:offline:999477875428298752>'; break;
+            case undefined: status = '<:offline:999477875428298752>'; break;
         }
         return status;
     },
@@ -122,22 +122,28 @@ var bot = {
         return f;
     },
     simplifyFraction: function (num, den) {
-        var factors = [];
-        var cf = [];
+        if (bot.in(num) === bot.in(den)) return `**1**`;
 
-        for (let i = 1; i <= num; i++) {
-            if (num % i === 0) {
-                factors.push(i);
+        var factorsN = bot.findFactors(num).sort(function(a,b) { return a-b });
+        var factorsD = bot.findFactors(den).sort(function(a,b) { return a-b });
+        let gcf = -1;
+
+        if (num < den) {
+            for (let i = factorsN.length - 1; i >= 0; i--) {
+                if (factorsD.includes(factorsN[i])) {
+                    gcf = factorsN[i];
+                    break;
+                }
+            }
+        } else {
+            for (let i = factorsD.length - 1; i >= 0; i--) {
+                if (factorsN.includes(factorsD[i])) {
+                    gcf = factorsD[i];
+                    break;
+                }
             }
         }
 
-        for (let i = 1; i <= den; i++) {
-            if (den % i === 0 && factors.indexOf(i) !== -1) {
-                cf.push(i);
-            }
-        }
-
-        var gcf = cf[cf.length - 1];
         var newNum = num / gcf;
         var newDen = den / gcf;
         var result = `**${newNum}/${newDen}**`;

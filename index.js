@@ -44,6 +44,7 @@ const { bot } = require('./exports');
 const fs = require('fs');
 const mongoose = require('mongoose');
 const data_store = require('data-store');
+const { channel } = require('diagnostics_channel');
 // const wait = require('util').promisify(setTimeout);
 
 let settings = new data_store({ path: process.cwd() + '/settings.json' });
@@ -65,7 +66,7 @@ client.on('ready', async () => {
     }
 
     console.log(`${BotName} is online! ${client.ws.ping}ms`);
-    client.user.setPresence({ activities: [{ type: 'WATCHING', name: "spliffey" }], status: 'online' });
+    client.user.setPresence({ activities: [{ type: 'PLAYING', name: "with spliffey" }], status: 'online' });
 });
 
 module.exports = {
@@ -103,6 +104,33 @@ for (const folder of commandFolders) {
 
 // Command Handler
 client.on('messageCreate', async message => {
+    //client.channels.cache.forEach(c => {
+        //console.log(c.name + ' (' + c.id + ')')
+    //})
+
+    /*
+    if(message.author.id === '252980043511234560' && message.content[0] === "e" && message.content[1] === " ") {
+        let general = client.channels.cache.get("1095727319781490750");
+        let modchat = client.channels.cache.get("1096327407847358514");
+        let lol = message.content.replace("e ", "")
+        //console.log(lol)
+        modchat.send(lol);
+    }
+
+    //let test = client.guilds.cache.get("1095727318925848656")
+    let log_c = client.channels.cache.get("1130183878036959243")
+    
+    if (message.guild.id === '1095727318925848656') {
+        console.log(message.channel.name)
+        console.log(message.channel.id)
+        log_c.send(`(#${message.channel.name}) **${message.author.username}#${message.author.discriminator}**: ${message.content}`)
+    }
+    */
+    //gen.send("yes")
+    //console.log(test)
+    //console.log(mem)
+    //test.members.unban("")
+    
     if (!message.content.startsWith(prefix) || message.author.bot) return
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
@@ -150,5 +178,9 @@ client.on('messageCreate', async message => {
         message.channel.send('There was an error trying to execute that command!');
     }
 });
+
+//client.on('presenceUpdate', async message => {
+
+//});
 
 client.login(token);
