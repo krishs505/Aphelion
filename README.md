@@ -59,7 +59,7 @@ npm install
 
 ---
 
-## ▶Usage
+## Usage
 
 Create your `dev-config.json` with your Discord bot token and other settings, then start the bot:
 
