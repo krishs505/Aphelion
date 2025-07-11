@@ -32,12 +32,12 @@
 - **Data Handling & Analysis**  
   JSON, TXT, and CSV files (e.g., `bjdata.csv`, `bjdata.txt`, `invisusers.json`) are used for logging, configuration, and custom data parsing.
 
-- ⚙️ **Custom Configuration**  
+- **Custom Configuration**  
   Easily adjustable settings via `config.json`.
 
 ---
 
-## 🧠 Technologies Used
+## Technologies Used
 
 - **Node.js**
 - **Discord.js**
@@ -46,7 +46,7 @@
 
 ---
 
-## 📦 Installation
+## Installation
 
 ```bash
 # Clone the repo
@@ -59,7 +59,7 @@ npm install
 
 ---
 
-## ▶️ Usage
+## ▶Usage
 
 Create your `dev-config.json` with your Discord bot token and other settings, then start the bot:
 
