@@ -1,6 +1,6 @@
 # Aphelion
 
-**Aphelion** is a multi-functional Discord.js bot designed with a wide range of features, commands, and advanced mathematical algorithms. Whether you're managing a server, analyzing games, or exploring math tools, Aphelion brings it all into one extensible package.
+**Aphelion** is a multi-functional Discord.js bot designed with a wide range of features, commands, and advanced mathematical algorithms. Whether you're managing a server, analyzing games, or exploring math tools, Aphelion brings it all into one package.
 
 ---
 
@@ -9,7 +9,6 @@
 - **Utility Commands**  
   Aphelion includes a variety of utility commands to improve interactivity, diagnostics, moderation, and fun. Some highlights include:
 
-  • `pseudorandom` – Pseudorandom number generator using binary bitwise XOR operations  
   • `userinfo`, `serverinfo` – View Discord user and server stats  
   • `stats`, `ping`, `servers` – Server/bot/user diagnostics  
   • `clear`, `echo` – Useful moderation tools  
