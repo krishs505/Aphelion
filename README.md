@@ -6,32 +6,34 @@
 
 ## Features
 
- - **Utility Commands**
+- **Utility Commands**  
   Aphelion includes a variety of utility commands to improve interactivity, diagnostics, moderation, and fun. Some highlights include:
-  - `userinfo`, `serverinfo` – View Discord user and server stats  
-  - `stats`, `ping`, `userinfo`, `servers` – Server/bot/user diagnostics  
-  - `clear`, `echo` – Useful moderation tools  
-  - `findprimes`, `shufflearray` – Math and logic operations
-  - `avatar`, `stopwatch`, `grades`, `callsign` – Fun, yet functional tools
-  - `eval` – Live JS evaluation (dev-only, secure carefully)  
-  - `salad` - Input and analyze Salad crypto mining data to determine profits
-  - ... and many more!
+
+  • `pseudorandom` – Pseudorandom number generator using binary bitwise XOR operations  
+  • `userinfo`, `serverinfo` – View Discord user and server stats  
+  • `stats`, `ping`, `servers` – Server/bot/user diagnostics  
+  • `clear`, `echo` – Useful moderation tools  
+  • `avatar`, `stopwatch`, `grades`, `callsign` – Fun, yet functional tools  
+  • `eval` – Live JS evaluation (dev-only, secure carefully)  
+  • `salad` – Input and analyze Salad crypto mining data to determine profits  
+  • … and many more!
 
 - **Advanced Math Utilities**  
   It also includes a variety of mathematical algorithms and commands, including:
-  - `psuedorandom` - Pseudorandom number generator using binary bitwise XOR operations
-  - `factors` - Calculate factors of numbers using efficient algorithms
-  - `root` - Calculate __th root of numbers
-  - `quadform` – Calculate roots of quadratic functions
-  - `fibonacci` – Generate numbers of the Fibonacci sequence
-  - `expressions` - Solve expressions following order of operations
-  - `pi` – Calculate digits of π using efficient algorithms
-  - ... and many more.
 
-- **Data Handling & Analysis**
+  • `pseudorandom` – Pseudorandom number generator using binary bitwise XOR operations  
+  • `factors` – Calculate factors of numbers using efficient algorithms  
+  • `root` – Calculate _n_th root of numbers  
+  • `quadform` – Calculate roots of quadratic functions  
+  • `fibonacci` – Generate numbers of the Fibonacci sequence  
+  • `expressions` – Solve expressions following order of operations  
+  • `pi` – Calculate digits of π using efficient algorithms  
+  • … and many more.
+
+- **Data Handling & Analysis**  
   JSON, TXT, and CSV files (e.g., `bjdata.csv`, `bjdata.txt`, `invisusers.json`) are used for logging, configuration, and custom data parsing.
 
-- ⚙️ **Custom Configuration**
+- ⚙️ **Custom Configuration**  
   Easily adjustable settings via `config.json`.
 
 ---
