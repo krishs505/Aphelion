@@ -6,41 +6,33 @@
 
 ## Features
 
-- **Game Analysis & Tools**  
-  Includes built-in support for classic games like:
-  - Connect Four (`connect4.json`)
-  - Tic Tac Toe (`ttt.json`)
-  - Wordle (`wordle.json`)
+ - **Utility Commands**
+  Aphelion includes a variety of utility commands to improve interactivity, diagnostics, moderation, and fun. Some highlights include:
+  - `userinfo`, `serverinfo` – View Discord user and server stats  
+  - `stats`, `ping`, `userinfo`, `servers` – Server/bot/user diagnostics  
+  - `clear`, `echo` – Useful moderation tools  
+  - `findprimes`, `shufflearray` – Math and logic operations
+  - `avatar`, `stopwatch`, `grades`, `callsign` – Fun, yet functional tools
+  - `eval` – Live JS evaluation (dev-only, secure carefully)  
+  - `salad` - Input and analyze Salad crypto mining data to determine profits
+  - ... and many more!
 
 - **Advanced Math Utilities**  
-  Located in the `commands/Math/` directory, these modules include:
-  - Pseudorandom number generation
-  - Square roots, cube roots, and root simplification
-  - Factorization and common factors
-  - Equation solving (including quadratic formulas)
-  - Calculating digits of π
-  - Coordinate geometry (distance, midpoint, slope)
+  It also includes a variety of mathematical algorithms and commands, including:
+  - `psuedorandom` - Pseudorandom number generator using binary bitwise XOR operations
+  - `factors` - Calculate factors of numbers using efficient algorithms
+  - `root` - Calculate __th root of numbers
+  - `quadform` – Calculate roots of quadratic functions
+  - `fibonacci` – Generate numbers of the Fibonacci sequence
+  - `expressions` - Solve expressions following order of operations
+  - `pi` – Calculate digits of π using efficient algorithms
+  - ... and many more.
 
 - **Data Handling & Analysis**
   JSON, TXT, and CSV files (e.g., `bjdata.csv`, `bjdata.txt`, `invisusers.json`) are used for logging, configuration, and custom data parsing.
 
 - ⚙️ **Custom Configuration**
-  Easily adjustable settings via `config.json`, `settings.json`, and other structured files.
-
----
-
-## 📁 Project Structure (Simplified)
-
-```
-aphelion-main/
-├── index.js                # Main bot entry point
-├── package.json            # Node.js metadata and dependencies
-├── commands/Math/          # Core mathematical command modules
-├── *.json                  # Game data, config, invis users, etc.
-├── exports.js              # Exports or utilities
-├── Procfile                # Heroku deployment config
-└── .gitignore              # Git exclusions
-```
+  Easily adjustable settings via `config.json`.
 
 ---
 
@@ -53,16 +45,25 @@ aphelion-main/
 
 ---
 
-## 🧮 Math Commands Highlights
+## 📦 Installation
 
-Each command in `commands/Math/` can be invoked by users to perform quick and accurate mathematical computations, such as:
+```bash
+# Clone the repo
+git clone https://github.com/krishs505/aphelion.git
+cd aphelion
 
-- `quadform` – Solve quadratic equations
-- `fibonacci` – Generate numbers of the Fibonacci sequence
-- `factors` - Calculate factors of a number using efficient algorithms
-- `simplifyfraction` – Simplify fractions
-- `repeatingtofrac` – Convert repeating decimals to fractions  
-- `pi` – Return digits of π
-- ... and many more.
+# Install dependencies
+npm install
+```
+
+---
+
+## ▶️ Usage
+
+Create your `dev-config.json` with your Discord bot token and other settings, then start the bot:
+
+```bash
+node index.js
+```
 
 ---
